@@ -1,30 +1,29 @@
-import React from "react";
+import React, { StatelessComponent } from "react"
+import Address from "./components/Address"
 
-const ETHER_ADDRESS = "0x35bEhjq93n7BB4230FCB86Df41e8B502E96hjd7en";
-const ETHER_BALANCE = 10;
-const MXC_TOKENS = 10;
-const LOCKED_MXC = 3;
-const REDEEM_MXC = 7;
-
-const Address = ({ address }: { address: string }) => <div>{address}</div>;
+const ETHER_ADDRESS = "0x35bEhjq93n7BB4230FCB86Df41e8B502E96hjd7en"
+const ETHER_BALANCE = 10
+const MXC_TOKENS = 10
+const LOCKED_MXC = 3
+const REDEEM_MXC = 7
 
 const EthBalance = ({ ethBalance }: { ethBalance: number }) => (
   <div>{`${ethBalance} ETH`}</div>
-);
+)
 
 const MxcTokens = ({ mxcTokens }: { mxcTokens: number }) => (
   <div>{`${mxcTokens} MXC`}</div>
-);
+)
 
 const LockedMxcTokens = ({ lockedMXCTokens }: { lockedMXCTokens: number }) => (
   <div>{lockedMXCTokens}</div>
-);
+)
 
 const RedeemableMxcTokens = ({
   redeemableMXCTokens
 }: {
-  redeemableMXCTokens: number;
-}) => <div>{redeemableMXCTokens}</div>;
+  redeemableMXCTokens: number
+}) => <div>{redeemableMXCTokens}</div>
 
 const InputAddress = () => (
   <input
@@ -32,7 +31,28 @@ const InputAddress = () => (
     name="filter-transactions"
     placeholder="Recieving address"
   />
-);
+)
+
+const Row = ({
+  caption,
+  Content,
+  Button
+}: {
+  caption: string
+  Content: StatelessComponent
+  Button?: StatelessComponent
+}) => (
+  <tr>
+    <td>
+      <h2>{caption}</h2>
+    </td>
+    <td>
+      <Content />
+    </td>
+    {Button ? <Button /> : null}
+    <td />
+  </tr>
+)
 
 export default () => (
   <div className="content">
@@ -40,15 +60,7 @@ export default () => (
       <div className="content-box content-transactions">
         <table className="table-cards  table-transactions">
           <tbody>
-            <tr>
-              <td>
-                <h2>Your Address:</h2>
-              </td>
-              <td>
-                <Address address={ETHER_ADDRESS} />
-              </td>
-              <td />
-            </tr>
+            <Row caption="Your Address:" Content={Address} />
             <tr>
               <td>
                 <h2>Ether Balance:</h2>
@@ -114,4 +126,4 @@ export default () => (
       </div>
     </div>
   </div>
-);
+)

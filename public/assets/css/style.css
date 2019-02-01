@@ -1,0 +1,161 @@
+/*DEV*/
+.content-wallet, .content-accounts, .content-transactions, .content-contracts {
+  /*display:none;*/
+}
+
+
+/*LAYOUT*/
+body {}
+.inline-block {
+  display: inline-block;
+}
+p {
+  max-width:600px;
+}
+hr {
+  border-color: rgba(255,255,255,0.1);
+  margin: 5rem 0;
+}
+
+
+.header > .box-inner, .content > .box-inner {
+  /* padding-right: 100px; */
+}
+
+
+
+
+/*TYPO*/
+h3, .balanceStatus {
+  font-size: 1.2rem;
+  line-height: 1.4;
+}
+
+.t-s-bold {
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-top: 4rem;
+}
+.t-light {
+  font-weight: 300;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+input,
+input[type="text"] {
+  width: 100%;
+  background: transparent;
+  color: white;
+}
+input[type="text"] {
+  border-width: 0 0 2px 0;
+  padding-bottom: 0.4em;
+  font-size: 1.2rem;
+  font-family: Montserrat;
+  margin: 1rem 0;
+}
+input[type="text"]:focus {
+  box-shadow: none;
+  outline: none;
+  border-bottom-color: #00ffd9;
+}
+
+
+
+table {
+  width: 100%;
+}
+
+table.table-zebra tr:nth-child(even) {
+  background-color: #222;
+}
+
+
+
+table.table-transactions tr td {
+  vertical-align: middle !important;
+  padding-top: 0.1rem;
+  padding-bottom: 0.15rem;
+}
+table.table-transactions tr td:first-child {
+  text-align: center;
+  vertical-align: middle;
+  opacity: 0.3;
+  border-right: 1px solid white;
+}
+table.table-transactions tr td:last-child * {
+    opacity: 1;
+}
+
+
+
+
+
+
+
+
+table.table-accounts tr td:first-child, table.table-transactions tr td:first-child, table.table-contracts-tokens tr td:first-child {
+  width: calc(50px + 1.5rem);
+}
+
+.identicon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  display: inherit;
+  position: absolute;
+}
+
+@media screen and (min-width: 1200px) {
+  .header > .box-inner, .content > .box-inner {
+    width: calc(100% - 100px);
+    margin: auto;
+    max-width: 1000px;
+    padding-right: 100px;
+  }
+
+  table {
+    width: calc(100% + 100px);
+    transform: translateX(calc(-50px - 3rem));
+  }
+}
+
+@media screen and (max-width: 980px) {
+  .menuRouter {
+    left: -255px;
+    font-size: 2rem;
+    width: 370px;
+  }
+  .menuRouter ul li a span {opacity: 0;}
+  .menuRouter ul li a#burger {
+    pointer-events: all;
+    opacity: 1;
+  }
+  .menuRouter.active {
+    left: 0;
+  }
+  .menuRouter.active span {
+    opacity: 1;
+  }
+  .header, .content {
+    padding-left: 190px;
+  }
+}
+
+
+
+

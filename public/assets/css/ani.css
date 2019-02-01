@@ -1,0 +1,54 @@
+.blur-ball:nth-child(1) {
+	opacity: 1;
+	animation: bb1 30s infinite;
+}
+.blur-ball:nth-child(2) {
+	opacity: 1;
+	animation: bb2 30s infinite;
+}
+.blur-ball:nth-child(3) {
+	opacity: 1;
+	animation: bb3 30s infinite;
+}
+@keyframes bb1 {
+	3% {
+		top: 0;
+		right: 0.5rem;
+	}
+	8% {
+		right: 70%;	
+	}
+	9% {
+		top: 40%;
+	}
+	10% {
+		right: 23px;
+      	top: 18px;
+	}
+}
+@keyframes bb2 {
+	3 {
+		right: 1.5rem;
+	}
+	5% {
+		right: 30px;
+	}
+	10% {
+		right: 27px;
+	}
+}
+@keyframes bb3 {
+	3% {
+		right: 1.5rem;
+	}
+	5% {
+		right: 55px;
+	}
+	7% {
+		top: 5px;
+	}
+	10%{
+		right: 20px;
+		top: 36px;
+	}
+}

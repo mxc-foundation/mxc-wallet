@@ -16,6 +16,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "docker": "docker-compose run --rm test yarn run",
+    "test:solidity": "truffle test",
+    "docker:prepare": "docker-compose run --rm test yarn install --pure-lockfile",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -26,5 +29,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "truffle-core": "^5.0.3"
+  }
 }

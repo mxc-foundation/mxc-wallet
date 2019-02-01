@@ -1,79 +1,112 @@
 import React from "react";
 
+const ETHER_ADDRESS = "0x35bEhjq93n7BB4230FCB86Df41e8B502E96hjd7en";
+const ETHER_BALANCE = 10;
+const MXC_TOKENS = 10;
+const LOCKED_MXC = 3;
+const REDEEM_MXC = 7;
+
+const Address = ({ address }: { address: string }) => <div>{address}</div>;
+
+const EthBalance = ({ ethBalance }: { ethBalance: number }) => (
+  <div>{`${ethBalance} ETH`}</div>
+);
+
+const MxcTokens = ({ mxcTokens }: { mxcTokens: number }) => (
+  <div>{`${mxcTokens} MXC`}</div>
+);
+
+const LockedMxcTokens = ({ lockedMXCTokens }: { lockedMXCTokens: number }) => (
+  <div>{lockedMXCTokens}</div>
+);
+
+const RedeemableMxcTokens = ({
+  redeemableMXCTokens
+}: {
+  redeemableMXCTokens: number;
+}) => <div>{redeemableMXCTokens}</div>;
+
+const InputAddress = () => (
+  <input
+    type="text"
+    name="filter-transactions"
+    placeholder="Recieving address"
+  />
+);
+
 export default () => (
   <div className="content">
     <div className="box-inner">
       <div className="content-box content-transactions">
-        <h1 className="walletName">
-          <span className="t-light">Latest</span> Transactions
-        </h1>
-        <input
-          type="text"
-          name="filter-transactions"
-          placeholder="Filter transactions"
-        />
-
-        <button className="btn-framed">Incomming</button>
-        <button className="btn-framed">Recieved</button>
-
-        <table className="table-cards table-zebra table-transactions">
+        <table className="table-cards  table-transactions">
           <tbody>
             <tr>
-              <td className="">
-                <h2>Jan 26</h2>
+              <td>
+                <h2>Your Address:</h2>
               </td>
               <td>
-                <h3>Recieved</h3>
-                <p>
-                  <span>0x35bEF8bB57BB4230FCB86Df41e8B502E96d90dD9</span>
-                  <span>→</span>
-                  <span>0xnx7EF8bB57BB4230FCB86Df41e8B502E9nd62m9</span>
-                </p>
+                <Address address={ETHER_ADDRESS} />
               </td>
-              <td>0.1ETH</td>
-              <td>
-                <a href="">
-                  <i className="icon icon-arrow-left" />
-                </a>
-              </td>
-            </tr>
-
-            <tr>
-              <td className="">
-                <h2>Jan 26</h2>
-              </td>
-              <td>
-                <h3>Sent</h3>
-                <p>
-                  <span>0x35bEF8bB57BB4kjdhkshh6Df41e8B502E96d90d</span>
-                  <span>→</span>
-                  <span>0xnx7EF8bB57BB4kjdhkshh6Df41e8B502nd62md</span>
-                </p>
-              </td>
-              <td>0.1ETH</td>
-              <td>
-                <a href="">
-                  <i className="icon icon-arrow-right" />
-                </a>
-              </td>
+              <td />
             </tr>
             <tr>
-              <td className="">
-                <h2>Jan 26</h2>
+              <td>
+                <h2>Ether Balance:</h2>
               </td>
               <td>
-                <h3>Transfer between accounts</h3>
-                <p>
-                  <span>0x35bEhjq93n7BB4230FCB86Df41e8B502E96hjd7en</span>
-                  <span>→</span>
-                  <span>0xnx7Ehjq93n7BB4230FCB86Df41e8B502E9nd62mn</span>
-                </p>
+                <EthBalance ethBalance={ETHER_BALANCE} />
               </td>
-              <td>0.1ETH</td>
+              <td />
+            </tr>
+            <tr>
               <td>
-                <a href="">
-                  <i className="icon icon-arrow-right" />
-                </a>
+                <h2>MXC Tokens:</h2>
+              </td>
+              <td>
+                <MxcTokens mxcTokens={MXC_TOKENS} />
+              </td>
+              <td />
+            </tr>
+            <tr>
+              <td>
+                <h2>Locked MXC Tokens:</h2>
+              </td>
+              <td>
+                <LockedMxcTokens lockedMXCTokens={LOCKED_MXC} />
+              </td>
+              <td />
+            </tr>
+            <tr>
+              <td>
+                <h2>Redeemable MXC Tokens:</h2>
+              </td>
+              <td>
+                <RedeemableMxcTokens redeemableMXCTokens={REDEEM_MXC} />
+              </td>
+              <td>
+                <button className="btn-framed">Redeem</button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h2>Send Tokens:</h2>
+              </td>
+              <td>
+                <InputAddress />
+              </td>
+              <td>
+                <button className="btn-framed">Send</button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h2>Send Ether:</h2>
+              </td>
+              <td>
+                <InputAddress />
+              </td>
+              <td>
+                <button className="btn-framed">Send</button>
               </td>
             </tr>
           </tbody>

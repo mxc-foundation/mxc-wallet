@@ -1,11 +1,11 @@
-import React, { StatelessComponent } from "react";
-import Address from "./components/Address";
-import EthBalance from "./components/EthBalance";
-import MxcTokens from "./components/MxcTokens";
-import LockedMxcTokens from "./components/LockedMxcTokens";
-import RedeemableMxcTokens from "./components/RedeemableMxcTokens";
-import SendButton from "./components/SendButton";
-import RedeemButton from "./components/RedeemButton";
+import React, { StatelessComponent } from "react"
+import { Address } from "../wallet/components"
+import EthBalance from "./components/EthBalance"
+import MxcTokens from "./components/MxcTokens"
+import LockedMxcTokens from "./components/LockedMxcTokens"
+import RedeemableMxcTokens from "./components/RedeemableMxcTokens"
+import SendButton from "./components/SendButton"
+import RedeemButton from "./components/RedeemButton"
 
 const InputAddress = () => (
   <input
@@ -13,16 +13,16 @@ const InputAddress = () => (
     name="filter-transactions"
     placeholder="Recieving address"
   />
-);
+)
 
 const Row = ({
   caption,
   Content,
   Button
 }: {
-  caption: string;
-  Content: StatelessComponent;
-  Button?: StatelessComponent;
+  caption: string
+  Content: any
+  Button?: StatelessComponent
 }) => (
   <tr>
     <td>
@@ -34,7 +34,7 @@ const Row = ({
     {Button ? <Button /> : null}
     <td />
   </tr>
-);
+)
 
 export default () => (
   <div className="content">
@@ -66,4 +66,4 @@ export default () => (
       </div>
     </div>
   </div>
-);
+)

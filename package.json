@@ -32,10 +32,12 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "TS_NODE_FILES=true truffle test",
     "docker": "docker-compose run --rm test yarn run",
     "test:solidity": "TS_NODE_FILES=true TS_NODE_PROJECT=tsconfig.truffle.json truffle test",
     "docker:prepare": "docker-compose run --rm test yarn install --pure-lockfile",
+    "check:code": "tsc --noEmit",
+    "lint": "tslint '{,!(node_modules)/**/}*.{ts,tsx}'",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

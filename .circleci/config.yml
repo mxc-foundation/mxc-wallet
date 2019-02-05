@@ -1,0 +1,89 @@
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
+
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: node:8
+restore_prepared_repo: &restore_prepared_repo
+  - attach_workspace:
+      at: ~/repo    
+
+version: 2
+jobs:
+  prepare_repo:
+    <<: *defaults
+    steps:
+      - checkout
+      # Download and cache dependencies
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install Dependencies
+          command: yarn install --frozen-lockfile
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn  
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - '*'
+
+ 
+  smart_contracts:test:
+    working_directory: ~/repo
+    docker:
+      - image: node:8
+      - image: trufflesuite/ganache-cli:v6.1.6
+        command: [-h=0.0.0.0]
+        name: ganache
+    steps:
+      - <<: *restore_prepared_repo
+      - run:
+          name: install dockerize
+          command: wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+          environment:
+            DOCKERIZE_VERSION: v0.3.0
+      - run:
+          name: Wait for ganache
+          command: dockerize -wait tcp://ganache:8545 -timeout 1m
+      - run:
+          name: Run tests for smart contracts
+          command: yarn test:solidity
+  
+  web_app:lint:
+    <<: *defaults
+    steps:
+      - <<: *restore_prepared_repo
+      - run:
+          name: Lint web app
+          command: yarn run lint
+
+  web_app:check:code:
+    <<: *defaults
+    steps:
+      - <<: *restore_prepared_repo
+      - run:
+          name: Check code of web app
+          command: yarn run check:code                    
+          
+workflows:
+  version: 2
+  ci:
+    jobs:
+      - prepare_repo
+      - web_app:lint:
+          requires:
+            - prepare_repo  
+      
+      - smart_contracts:test:
+          requires:
+            - prepare_repo  
+                                
+

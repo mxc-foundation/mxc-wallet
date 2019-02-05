@@ -36,7 +36,7 @@ jobs:
             - '*'
 
  
-  smart_contracts:test:
+  smart_contract:test:
     working_directory: ~/repo
     docker:
       - image: node:8
@@ -57,7 +57,7 @@ jobs:
           name: Run tests for smart contracts
           command: yarn test:solidity
   
-  web_app:lint:
+  lint:
     <<: *defaults
     steps:
       - <<: *restore_prepared_repo
@@ -65,24 +65,17 @@ jobs:
           name: Lint web app
           command: yarn run lint
 
-  web_app:check:code:
-    <<: *defaults
-    steps:
-      - <<: *restore_prepared_repo
-      - run:
-          name: Check code of web app
-          command: yarn run check:code                    
-          
+         
 workflows:
   version: 2
   ci:
     jobs:
       - prepare_repo
-      - web_app:lint:
+      - lint:
           requires:
             - prepare_repo  
       
-      - smart_contracts:test:
+      - smart_contract:test:
           requires:
             - prepare_repo  
                                 

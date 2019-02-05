@@ -1,11 +1,9 @@
-import React, { StatelessComponent } from "react"
-import { Address } from "../wallet/components"
-import EthBalance from "./components/EthBalance"
-import MxcTokens from "./components/MxcTokens"
-import LockedMxcTokens from "./components/LockedMxcTokens"
-import RedeemableMxcTokens from "./components/RedeemableMxcTokens"
-import SendButton from "./components/SendButton"
-import RedeemButton from "./components/RedeemButton"
+import React, { StatelessComponent } from 'react'
+import { Address, EtherBalance, TokenBalance } from '../wallet/components'
+import LockedMxcTokens from './components/LockedMxcTokens'
+import RedeemableMxcTokens from './components/RedeemableMxcTokens'
+import RedeemButton from './components/RedeemButton'
+import SendButton from './components/SendButton'
 
 const InputAddress = () => (
   <input
@@ -18,11 +16,11 @@ const InputAddress = () => (
 const Row = ({
   caption,
   Content,
-  Button
+  Button,
 }: {
-  caption: string
-  Content: any
-  Button?: StatelessComponent
+  caption: string;
+  Content: any;
+  Button?: StatelessComponent;
 }) => (
   <tr>
     <td>
@@ -43,8 +41,8 @@ export default () => (
         <table className="table-cards  table-transactions">
           <tbody>
             <Row caption="Your Address:" Content={Address} />
-            <Row caption="Ether Balance:" Content={EthBalance} />
-            <Row caption="MXC Tokens:" Content={MxcTokens} />
+            <Row caption="Ether Balance:" Content={EtherBalance} />
+            <Row caption="MXC Tokens:" Content={TokenBalance} />
             <Row caption="Locked MXC Tokens:" Content={LockedMxcTokens} />
             <Row
               caption="Redeemable MXC Tokens:"

@@ -1,12 +1,12 @@
-import { all } from "redux-saga/effects"
-import { Blockchain } from "../utils/blockchain"
-import { createErrorRecoverSagas } from "./errors/sagas"
-import createWalletWatcherSaga from "./wallet/sagas"
+import { all } from 'redux-saga/effects'
+import { Blockchain } from '../utils/blockchain'
+import { createErrorRecoverSagas } from './errors/sagas'
+import createWalletWatcherSaga from './wallet/sagas'
 export const createSagas = (blockchain: Blockchain) =>
   function* defaultSaga() {
     yield all([
       createWalletWatcherSaga(blockchain)(),
-      createErrorRecoverSagas(blockchain).recoverErrorsSaga()
+      createErrorRecoverSagas(blockchain).recoverErrorsSaga(),
     ])
   }
 

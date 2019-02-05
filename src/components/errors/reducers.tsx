@@ -1,6 +1,6 @@
-import * as R from "ramda"
-import { ActionType, getType } from "typesafe-actions"
-import * as errorActions from "./actions"
+import * as R from 'ramda'
+import { ActionType, getType } from 'typesafe-actions'
+import * as errorActions from './actions'
 
 export type ErrorsAction = ActionType<typeof errorActions>
 
@@ -14,7 +14,7 @@ export default (
   state: ErrorsState = {
     metaMaskLocked: false,
     metaMaskNotInstalled: false,
-    unsupportedNetwork: false
+    unsupportedNetwork: false,
   },
   action: ErrorsAction
 ): ErrorsState => {
@@ -23,42 +23,42 @@ export default (
       // below action type is narrowed to: { type: "todos/ADD"; payload: Todo; }
       return {
         ...state,
-        ["metaMaskLocked"]: true
+        ['metaMaskLocked']: true,
       }
     case getType(errorActions.unsetMetmaskLocked):
       return {
         ...state,
-        ["metaMaskLocked"]: false
+        ['metaMaskLocked']: false,
       }
     case getType(errorActions.setMissingMetaMask):
       return {
         ...state,
-        ["metaMaskNotInstalled"]: true
+        ['metaMaskNotInstalled']: true,
       }
     case getType(errorActions.unsetMissingMetaMask):
       return {
         ...state,
-        ["metaMaskNotInstalled"]: false
+        ['metaMaskNotInstalled']: false,
       }
     case getType(errorActions.setUnsupportedNetwork):
       return {
         ...state,
-        ["unsupportedNetwork"]: true
+        ['unsupportedNetwork']: true,
       }
     case getType(errorActions.unsetUnsupportedNetwork):
       return {
         ...state,
-        ["unsupportedNetwork"]: false
+        ['unsupportedNetwork']: false,
       }
     default:
       return {
-        ...state
+        ...state,
       }
   }
 }
 
 export const getMetmaskLockedError: (state: ErrorsState) => boolean = R.prop(
-  "metaMaskLocked"
+  'metaMaskLocked'
 )
 export const getHasMainError: (state: ErrorsState) => boolean = R.pipe(
   R.toPairs as any,

@@ -10,8 +10,8 @@ import { createErrorRecoverSagas } from './sagas'
 
 const blockchain = createTestBlockchain()
 
-test('Error Recover Sagas', (t) => {
-  t.test('recover from unsupported network', (assert) => {
+test('Error Recover Sagas', t => {
+  t.test('recover from unsupported network', assert => {
     assert.plan(4)
     const { recoverUnsupportedNetwork } = createErrorRecoverSagas(blockchain)
     const generator = recoverUnsupportedNetwork()
@@ -35,7 +35,7 @@ test('Error Recover Sagas', (t) => {
     assert.true(generator.next().done, 'generator is at end')
   })
 
-  t.test('recover from unsupported network saga', (assert) => {
+  t.test('recover from unsupported network saga', assert => {
     assert.plan(1)
     const {
       recoverUnsupportedNetworkSaga,
@@ -53,7 +53,7 @@ test('Error Recover Sagas', (t) => {
     )
   })
 
-  t.test('recover from metaMaskLocked', (assert) => {
+  t.test('recover from metaMaskLocked', assert => {
     assert.plan(3)
     const { recoverLockedMetaMask } = createErrorRecoverSagas(blockchain)
     const generator = recoverLockedMetaMask()
@@ -80,7 +80,7 @@ test('Error Recover Sagas', (t) => {
     )
   })
 
-  t.test('recover from locked MetaMask saga', (assert) => {
+  t.test('recover from locked MetaMask saga', assert => {
     assert.plan(1)
     const {
       recoverLockedMetaMask,

@@ -1,16 +1,18 @@
-import { BigNumber } from "bignumber.js"
-import { applySpec, path, pipe, prop } from "ramda"
-import * as R from "ramda"
-import { combineReducers } from "redux"
-import { getType } from "typesafe-actions"
-import * as FnBigNumber from "../../../utils/fnBignumber"
-import { idToNetwork, Network } from "../../errors/networkList"
-import * as actions from "../actions"
-import etherBalance from "./etherBalance"
-export const getAddress = prop("address")
+import BigNumber from 'bn.js'
+import { applySpec, path, pipe, prop } from 'ramda'
+import * as R from 'ramda'
+import { combineReducers } from 'redux'
+import { getType } from 'typesafe-actions'
+import * as FnBigNumber from '../../../utils/fnBignumber'
+import { idToNetwork, Network } from '../../errors/networkList'
+import * as actions from '../actions'
+import etherBalance from './etherBalance'
+import tokenBalance from './tokenBalance'
+export const getAddress = prop('address')
 
 const balances = combineReducers({
-  ether: etherBalance
+  ether: etherBalance,
+  token: tokenBalance,
 })
 
 interface BalanceState {
@@ -40,11 +42,11 @@ const network = (
 
 const address = (
   state: string | null = null,
-  { type, payload: address }: { type: any; payload: string }
+  { type, payload: newAddress }: { type: any; payload: string }
 ) => {
   switch (type) {
     case getType(actions.setAddress):
-      return address
+      return newAddress
     default:
       return state
   }
@@ -53,18 +55,18 @@ const address = (
 const reducer = combineReducers({
   address,
   balances,
-  network
+  network,
 })
 
-type BalanceType = "ether" | "token"
+type BalanceType = 'ether' | 'token'
 
 export const selectBalance: (
   type: BalanceType
 ) => (state: WalletState) => BalanceState = (type: BalanceType) =>
-  path(["balances", type]) as (walletState: WalletState) => BalanceState
+  path(['balances', type]) as (walletState: WalletState) => BalanceState
 
 export const getNetwork: (state: WalletState) => Network = R.pipe(
-  R.prop("network"),
+  R.prop('network'),
   idToNetwork
 )
 
@@ -73,7 +75,7 @@ export const getBalanceValue: (
 ) => (state: WalletState) => BigNumber = (type: BalanceType) =>
   pipe(
     selectBalance(type),
-    prop("value"),
+    prop('value'),
     FnBigNumber.create
   )
 
@@ -86,11 +88,15 @@ const getBalance: (
   type: BalanceType
 ) => (state: WalletState) => Balance = type =>
   applySpec({
-    value: getBalanceValue(type)
+    value: getBalanceValue(type),
   })
 
 export const getEtherBalance: (state: WalletState) => Balance = getBalance(
-  "ether"
+  'ether'
+)
+
+export const getTokenBalance: (state: WalletState) => Balance = getBalance(
+  'token'
 )
 
 export default reducer

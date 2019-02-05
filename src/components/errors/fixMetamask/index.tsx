@@ -1,6 +1,6 @@
-import * as React from "react"
-import { Col, Container, Jumbotron, Row } from "reactstrap"
-import * as metamaskBanner from "../../../static/metamask.png"
+import * as React from 'react'
+import { Col, Container, Jumbotron, Row } from 'reactstrap'
+import * as metamaskBanner from '../../../static/metamask.png'
 
 export const InstallMetamaskCTA = () => (
   <Container>

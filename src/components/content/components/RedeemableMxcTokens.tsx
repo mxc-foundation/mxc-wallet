@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react'
 
-const REDEEMABLE_MXC_TOKENS = 7;
+const REDEEMABLE_MXC_TOKENS = 7
 
 const RedeemableMxcTokensComponent = ({
-  redeemableMXCTokens
+  redeemableMXCTokens,
 }: {
   redeemableMXCTokens: number;
-}) => <div>{redeemableMXCTokens}</div>;
+}) => <div>{redeemableMXCTokens}</div>
 
 export default () => (
   <RedeemableMxcTokensComponent redeemableMXCTokens={REDEEMABLE_MXC_TOKENS} />
-);
+)

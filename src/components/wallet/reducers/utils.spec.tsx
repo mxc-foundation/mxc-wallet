@@ -1,9 +1,9 @@
-import { BigNumber } from 'bignumber.js'
+import BigNumber from 'bn.js'
 import test from 'tape'
 import { create, toNumber } from '../../../utils/fnBignumber'
 
-test('Functional Programming utils Tests', (t) => {
-  t.test('it should by successfully', (assert) => {
+test('Functional Programming utils Tests', t => {
+  t.test('it should by successfully', assert => {
     const bigNumber = toNumber(new BigNumber(42))
     assert.equal(bigNumber, 42, 'to convert a BigNumber into a number')
 

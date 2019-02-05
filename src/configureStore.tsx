@@ -1,16 +1,16 @@
-import { routerMiddleware } from "connected-react-router"
-import { createBrowserHistory } from "history"
-import { applyMiddleware, createStore } from "redux"
-import { composeWithDevTools } from "redux-devtools-extension"
-import createSagaMiddleware from "redux-saga"
+import { routerMiddleware } from 'connected-react-router'
+import { createBrowserHistory } from 'history'
+import { applyMiddleware, createStore } from 'redux'
+import { composeWithDevTools } from 'redux-devtools-extension'
+import createSagaMiddleware from 'redux-saga'
 
-import * as errorActions from "./components/errors/actions"
-import createErrorsSaga from "./components/errors/sagas"
-import { createRootReducer } from "./reducers"
-import createBlockchain from "./utils/blockchain"
-import * as errors from "./utils/errors"
-import createWeb3 from "./utils/web3"
-import createWatcherSagas from "./sagas"
+import * as errorActions from './components/errors/actions'
+import createErrorsSaga from './components/errors/sagas'
+import { createRootReducer } from './reducers'
+import createWatcherSagas from './sagas'
+import createBlockchain from './utils/blockchain'
+import * as errors from './utils/errors'
+import createWeb3 from './utils/web3'
 
 export default () => {
   const history = createBrowserHistory()

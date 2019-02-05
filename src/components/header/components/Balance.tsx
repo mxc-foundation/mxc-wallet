@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react'
 
-const ETHER_BALANCE = 10;
-const MXC_BALANCE = 10;
+const ETHER_BALANCE = 10
+const MXC_BALANCE = 10
 
 const BalanceComponent = ({
   ethBalance,
-  mxcBalance
+  mxcBalance,
 }: {
   ethBalance: number;
   mxcBalance: number;
@@ -17,8 +17,8 @@ const BalanceComponent = ({
     <br />
     {`${ethBalance} ETH`}
   </div>
-);
+)
 
 export default () => (
   <BalanceComponent ethBalance={ETHER_BALANCE} mxcBalance={MXC_BALANCE} />
-); // TODO use connect to get the actual address
+) // TODO use connect to get the actual address

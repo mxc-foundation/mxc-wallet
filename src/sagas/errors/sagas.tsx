@@ -1,9 +1,9 @@
-import { all, call, put, takeLatest, delay } from "redux-saga/effects"
-import { getType } from "typesafe-actions"
-import * as actions from "../../components/errors/actions"
+import { all, call, delay, put, takeLatest } from 'redux-saga/effects'
+import { getType } from 'typesafe-actions'
+import * as actions from '../../components/errors/actions'
 
-import { Blockchain } from "../../utils/blockchain"
-import * as errors from "../../utils/errors"
+import { Blockchain } from '../../utils/blockchain'
+import * as errors from '../../utils/errors'
 
 export function* handleErrors(error: Error) {
   switch (error.message) {
@@ -60,7 +60,7 @@ export const createErrorRecoverSagas = (blockchain: Blockchain) => {
     recoverLockedMetaMask,
     recoverLockedMetaMaskSaga,
     recoverUnsupportedNetwork,
-    recoverUnsupportedNetworkSaga
+    recoverUnsupportedNetworkSaga,
   }
 }
 

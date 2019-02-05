@@ -1,46 +1,39 @@
-import { evolve, pipe } from "ramda"
-import * as React from "react"
-import { connect } from "react-redux"
-import { State } from "../../../selectors"
-import * as selectors from "../../../selectors"
-import * as FnBigNumber from "../../../utils/fnBignumber"
-import { formatCurrency } from "../../../utils/formatter"
-import { Balance as BalanceInterface } from "../reducers"
+import * as R from 'ramda'
+import * as React from 'react'
+import { connect } from 'react-redux'
+import { State } from '../../../selectors'
+import * as selectors from '../../../selectors'
+import * as FnBigNumber from '../../../utils/fnBignumber'
+import { formatCurrency } from '../../../utils/formatter'
+import { Balance as BalanceInterface } from '../reducers'
 
 export interface BalanceProps {
-  value: number
-  fiatValue: number
+  value: string
 }
 
-const formatPrice = (etherPrice: number | null): string =>
-  etherPrice ? `(${formatCurrency(etherPrice, "EUR")})` : ""
-
-const Balance = (props: BalanceProps) => (
-  <span>
-    {props.value} {formatPrice(props.fiatValue)}
-  </span>
-)
+const Balance = (props: BalanceProps) => <span>{props.value}</span>
 
 const balanceToBalanceProps: (
   tokenBalance: BalanceInterface
-) => BalanceProps = evolve({
-  animation: {
-    lastBalance: pipe(
-      FnBigNumber.fromWei,
-      FnBigNumber.toNumber
-    )
-  },
-  value: pipe(
-    FnBigNumber.fromWei,
-    FnBigNumber.toNumber
-  )
+) => BalanceProps = R.evolve({
+  value: FnBigNumber.fromWei,
 }) as (tokenBalance: BalanceInterface) => BalanceProps
 
-const mapStateToEtherBalanceProps: (state: State) => BalanceProps = pipe(
+const mapStateToEtherBalanceProps: (state: State) => BalanceProps = R.pipe(
   selectors.getEtherBalance,
+  balanceToBalanceProps
+)
+
+const mapStateToTokenBalanceProps: (state: State) => BalanceProps = R.pipe(
+  selectors.getTokenBalance,
   balanceToBalanceProps
 )
 
 const ConnectedEtherBalance = connect(mapStateToEtherBalanceProps)(Balance)
 
-export { ConnectedEtherBalance as EtherBalance }
+const ConnectedTokenBalance = connect(mapStateToTokenBalanceProps)(Balance)
+
+export {
+  ConnectedEtherBalance as EtherBalance,
+  ConnectedTokenBalance as TokenBalance
+}

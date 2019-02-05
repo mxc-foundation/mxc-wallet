@@ -1,13 +1,13 @@
-import { ConnectedRouter } from "connected-react-router"
-import * as React from "react"
-import { connect } from "react-redux"
-import { Route } from "react-router-dom"
-import Header from "./components/header"
-import Navbar from "./components/navbar"
-import Error from "./components/errors"
-import { getHasMainError, State } from "./selectors"
-import Content from "./components/content"
-import { History } from "history"
+import { ConnectedRouter } from 'connected-react-router'
+import { History } from 'history'
+import * as React from 'react'
+import { connect } from 'react-redux'
+import { Route } from 'react-router-dom'
+import Content from './components/content'
+import Error from './components/errors'
+import Header from './components/header'
+import Navbar from './components/navbar'
+import { getHasMainError, State } from './selectors'
 
 const AppContent = () => (
   <div>
@@ -30,7 +30,7 @@ const App = ({ mainError, history }: AppProps) => (
 )
 
 const mapStateToProps = (state: State) => ({
-  mainError: getHasMainError(state)
+  mainError: getHasMainError(state),
 })
 
 export default connect(mapStateToProps)(App)

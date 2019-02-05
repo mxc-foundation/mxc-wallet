@@ -1,6 +1,6 @@
-import { all, delay, put, call } from "redux-saga/effects"
-import Web3 from "web3"
-import * as actions from "./actions"
+import { all, call, delay, put } from 'redux-saga/effects'
+import Web3 from 'web3'
+import * as actions from './actions'
 
 const metamaskLocked = async (web3: Web3) => !(await web3.eth.getAccounts())[0]
 
@@ -9,7 +9,7 @@ const createSagas = (web3: Web3) => {
     let isLocked = true
     try {
       while (isLocked) {
-        const isLocked = yield call(metamaskLocked, web3)
+        isLocked = yield call(metamaskLocked, web3)
         if (isLocked) {
           yield put(actions.setMetamaskLocked())
           yield delay(1000)
@@ -24,7 +24,7 @@ const createSagas = (web3: Web3) => {
   }
   return {
     defaultSaga,
-    metamaskLockedSaga
+    metamaskLockedSaga,
   }
 }
 

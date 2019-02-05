@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react'
 
-const LOCKED_MXC_TOKENS = 3;
+const LOCKED_MXC_TOKENS = 3
 
 const LockedMxcTokensComponent = ({
-  lockedMXCTokens
+  lockedMXCTokens,
 }: {
   lockedMXCTokens: number;
-}) => <div>{lockedMXCTokens}</div>;
+}) => <div>{lockedMXCTokens}</div>
 
 export default () => (
   <LockedMxcTokensComponent lockedMXCTokens={LOCKED_MXC_TOKENS} />
-);
+)

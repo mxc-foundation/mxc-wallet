@@ -9,9 +9,9 @@
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "noEmit": true,
     "noImplicitAny": false,
-    "typeRoots": ["node_modules/@types", "types"] //                       /* List of folders to include type definitions from. */
+    "skipLibCheck": true,
+    "typeRoots": ["node_modules/@types", "types"] //                       /* List of folders to include type definitions from. */,
   },
-  "include": ["test", "types"]
+  "include": ["types", "migrations"]
 }

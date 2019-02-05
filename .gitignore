@@ -22,3 +22,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+migrations/*.js
+config/*.js
+src/typechain

@@ -1,4 +1,4 @@
-import BigNumber from 'bignumber.js'
+import BigNumber from 'bn.js'
 import { eventChannel } from 'redux-saga'
 import { put } from 'redux-saga/effects'
 import test from 'tape'
@@ -14,10 +14,10 @@ const createChannel = () => {
 
 const blockchain = createTestBlockchain()
 
-test('Watcher Sagas', (t) => {
+test('Watcher Sagas', t => {
   t.test(
     'First successful balance fetch should trigger SET_ETHER_BALANCE action',
-    (assert) => {
+    assert => {
       assert.plan(1)
       const { watchEtherBalanceSaga } = createWalletWatcherSagas(blockchain)
       const gen = watchEtherBalanceSaga()
@@ -35,7 +35,7 @@ test('Watcher Sagas', (t) => {
   )
   t.test(
     'Incoming Payment should trigger INCOMING_ETHER_PAYMENT nofitication',
-    (assert) => {
+    assert => {
       assert.plan(1)
       const { watchEtherBalanceSaga } = createWalletWatcherSagas(blockchain)
       const generator = watchEtherBalanceSaga()
@@ -54,7 +54,7 @@ test('Watcher Sagas', (t) => {
   )
   t.test(
     'Incoming Tokens should trigger INCOMING_TOKENS nofitication',
-    (assert) => {
+    assert => {
       assert.plan(1)
       const { watchTokenBalanceSaga } = createWalletWatcherSagas(blockchain)
       const generator = watchTokenBalanceSaga()

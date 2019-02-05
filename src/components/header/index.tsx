@@ -1,5 +1,5 @@
-import React from "react";
-import Balance from "./components/Balance";
+import React from 'react'
+import Balance from './components/Balance'
 
 export default () => (
   <div
@@ -11,4 +11,4 @@ export default () => (
       <Balance />
     </div>
   </div>
-);
+)

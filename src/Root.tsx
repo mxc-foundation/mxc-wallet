@@ -1,19 +1,19 @@
-import React, { Component } from "react"
-import "./App.css"
-import Content from "./components/content"
-import Header from "./components/header"
-import Navbar from "./components/navbar"
+import React, { Component } from 'react'
+import './App.css'
+import Content from './components/content'
+import Header from './components/header'
+import Navbar from './components/navbar'
 
-import { History } from "history"
-import { Provider } from "react-redux"
-import App from "./App"
-import { BlockchainProvider } from "./blockchainContext"
-import { Blockchain } from "./utils/blockchain"
+import { History } from 'history'
+import { Provider } from 'react-redux'
+import App from './App'
+import { BlockchainProvider } from './blockchainContext'
+import { Blockchain } from './utils/blockchain'
 
 const Root = ({
   store,
   history,
-  blockchain
+  blockchain,
 }: {
   store: any
   history: History

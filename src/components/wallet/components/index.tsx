@@ -1,3 +1,3 @@
-import Address from "./Address"
-import { EtherBalance } from "./Balances"
-export { Address, EtherBalance }
+import Address from './Address'
+import { EtherBalance, TokenBalance } from './Balances'
+export { Address, EtherBalance, TokenBalance }

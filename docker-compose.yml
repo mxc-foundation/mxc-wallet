@@ -9,11 +9,11 @@ services:
     volumes:
       - ./:/home/node
       - node_modules:/home/node/node_modules
-      - yarn_cache:/usr/local/share/.cache/yarn/v2
-      - build:/home/node/build
+      - yarn_cache:/usr/local/share/.cache
+      - truffle-build:/home/node/src/truffle-build
     depends_on:
       - ganache
 volumes:
   node_modules:
   yarn_cache:
-  build:
+  truffle-build:

@@ -1,19 +1,38 @@
-import { all, call, put, select, spawn, take, delay } from "redux-saga/effects"
-import * as walletActions from "../../components/wallet/actions"
-import * as selectors from "../../selectors"
-import { Blockchain } from "../../utils/blockchain"
-import { handleErrors } from "../errors/sagas"
-import BigNumber from "bignumber.js"
+import BigNumber from 'bn.js'
+import { all, call, delay, put, select, spawn, take } from 'redux-saga/effects'
+import * as walletActions from '../../components/wallet/actions'
+import * as selectors from '../../selectors'
+import { Blockchain } from '../../utils/blockchain'
+import { handleErrors } from '../errors/sagas'
 
 export function* watchEtherBalanceSaga(
   getEtherBalance: () => Promise<BigNumber>
 ) {
   while (true) {
     try {
-      const { value: oldBalance } = yield select(selectors.getEtherBalance)
+      const { value: oldBalance }: { value: BigNumber } = yield select(
+        selectors.getEtherBalance
+      )
       const newBalance: BigNumber = yield call(getEtherBalance)
-      if (!oldBalance.isEqualTo(newBalance)) {
-        yield put(walletActions.setEtherBalance(newBalance))
+      if (!oldBalance.eq(newBalance)) {
+        yield put(walletActions.setEtherBalance(newBalance.toString(10)))
+      }
+    } catch (error) {
+      yield spawn(handleErrors, error)
+    }
+    yield delay(1000)
+  }
+}
+
+export function* watchTokenBalanceSaga(
+  getTokenBalance: () => Promise<BigNumber>
+) {
+  while (true) {
+    try {
+      const { value: oldBalance } = yield select(selectors.getTokenBalance)
+      const newBalance: BigNumber = yield call(getTokenBalance)
+      if (!oldBalance.eq(newBalance)) {
+        yield put(walletActions.setTokenBalance(newBalance.toString(10)))
       }
     } catch (error) {
       yield spawn(handleErrors, error)
@@ -27,7 +46,7 @@ export function* watchAddressSaga(getAddress: () => Promise<string>) {
     try {
       const oldAddress = yield select(selectors.getAddress)
       const newAddress = yield call(getAddress)
-      if (oldAddress != newAddress) {
+      if (oldAddress !== newAddress) {
         yield put(walletActions.setAddress(newAddress))
       }
     } catch (error) {
@@ -41,7 +60,8 @@ const createSaga = (blockchain: Blockchain) => {
   return function* defaultSaga() {
     yield all([
       watchEtherBalanceSaga(blockchain.getEtherBalance),
-      watchAddressSaga(blockchain.getAddress)
+      watchAddressSaga(blockchain.getAddress),
+      watchTokenBalanceSaga(blockchain.getTokenBalance),
     ])
   }
 }

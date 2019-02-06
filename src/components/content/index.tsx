@@ -18,9 +18,9 @@ const Row = ({
   Content,
   Button,
 }: {
-  caption: string;
-  Content: any;
-  Button?: StatelessComponent;
+  caption: string
+  Content: any
+  Button?: any
 }) => (
   <tr>
     <td>

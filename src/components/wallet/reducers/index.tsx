@@ -1,17 +1,19 @@
 import BigNumber from 'bn.js'
-import { applySpec, path, pipe, prop } from 'ramda'
 import * as R from 'ramda'
+import { applySpec, path, pipe, prop } from 'ramda'
 import { combineReducers } from 'redux'
 import { getType } from 'typesafe-actions'
 import * as FnBigNumber from '../../../utils/fnBignumber'
 import { idToNetwork, Network } from '../../errors/networkList'
 import * as actions from '../actions'
 import etherBalance from './etherBalance'
+import lockedTokenBalance from './lockedTokensBalance'
 import tokenBalance from './tokenBalance'
 export const getAddress = prop('address')
 
 const balances = combineReducers({
   ether: etherBalance,
+  lockedTokens: lockedTokenBalance,
   token: tokenBalance,
 })
 
@@ -23,6 +25,7 @@ export interface WalletState {
   balances: {
     ether: BalanceState
     token: BalanceState
+    lockedTokens: string
   }
   address: string
   network: string
@@ -97,6 +100,12 @@ export const getEtherBalance: (state: WalletState) => Balance = getBalance(
 
 export const getTokenBalance: (state: WalletState) => Balance = getBalance(
   'token'
+)
+
+export const getLockedTokensBalance: (state: WalletState) => BigNumber = R.pipe(
+  R.path(['balances', 'lockedTokens']),
+  R.defaultTo('0') as any,
+  FnBigNumber.create
 )
 
 export default reducer

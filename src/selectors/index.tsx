@@ -11,8 +11,6 @@ import * as fromErrors from '../components/errors/reducers'
 import * as fromWallet from '../components/wallet/reducers'
 import { WalletState } from '../components/wallet/reducers'
 const walletSelector = prop('wallet')
-const accessSelector = prop('access')
-const adminPanelSelector = prop('admin')
 const errorSelector = prop('errors')
 
 export interface State {
@@ -39,6 +37,13 @@ export const getTokenBalance: (
 ) => fromWallet.Balance = createSelector(
   walletSelector,
   fromWallet.getTokenBalance
+)
+
+export const getLockedTokensBalance: (
+  state: State
+) => BigNumber = createSelector(
+  walletSelector,
+  fromWallet.getLockedTokensBalance
 )
 
 export const getNetwork: (state: State) => Network = createSelector(

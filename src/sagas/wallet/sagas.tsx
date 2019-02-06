@@ -41,6 +41,25 @@ export function* watchTokenBalanceSaga(
   }
 }
 
+export function* watchLockedTokensBalanceSaga(
+  getLockedTokensBalance: () => Promise<BigNumber>
+) {
+  while (true) {
+    try {
+      const oldBalance: BigNumber = yield select(
+        selectors.getLockedTokensBalance
+      )
+      const newBalance: BigNumber = yield call(getLockedTokensBalance)
+      if (!oldBalance.eq(newBalance)) {
+        yield put(walletActions.setLockedTokensBalance(newBalance.toString(10)))
+      }
+    } catch (error) {
+      yield spawn(handleErrors, error)
+    }
+    yield delay(1000)
+  }
+}
+
 export function* watchAddressSaga(getAddress: () => Promise<string>) {
   while (true) {
     try {
@@ -62,6 +81,7 @@ const createSaga = (blockchain: Blockchain) => {
       watchEtherBalanceSaga(blockchain.getEtherBalance),
       watchAddressSaga(blockchain.getAddress),
       watchTokenBalanceSaga(blockchain.getTokenBalance),
+      watchLockedTokensBalanceSaga(blockchain.getLockedTokens),
     ])
   }
 }

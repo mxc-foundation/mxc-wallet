@@ -1,13 +1,19 @@
+import * as R from 'ramda'
 import React from 'react'
-
-const LOCKED_MXC_TOKENS = 3
-
+import { connect } from 'react-redux'
+import * as selectors from '../../../selectors'
+import * as FnBigNumber from '../../../utils/fnBignumber'
 const LockedMxcTokensComponent = ({
   lockedMXCTokens,
 }: {
-  lockedMXCTokens: number;
+  lockedMXCTokens: string
 }) => <div>{lockedMXCTokens}</div>
 
-export default () => (
-  <LockedMxcTokensComponent lockedMXCTokens={LOCKED_MXC_TOKENS} />
-)
+const mapStateToProps = R.applySpec({
+  lockedMXCTokens: R.pipe(
+    selectors.getLockedTokensBalance,
+    FnBigNumber.fromWei
+  ),
+})
+
+export default connect(mapStateToProps)(LockedMxcTokensComponent)

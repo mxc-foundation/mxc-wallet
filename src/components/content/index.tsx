@@ -1,4 +1,4 @@
-import React, { StatelessComponent } from 'react'
+import React from 'react'
 import { Address, EtherBalance, TokenBalance } from '../wallet/components'
 import LockedMxcTokens from './components/LockedMxcTokens'
 import RedeemableMxcTokens from './components/RedeemableMxcTokens'

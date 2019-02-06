@@ -1,4 +1,3 @@
-import BigNumber from 'bn.js'
 import { createStandardAction } from 'typesafe-actions'
 
 export const setAddress = createStandardAction('wallet/SET_ADDRESS')<string>()

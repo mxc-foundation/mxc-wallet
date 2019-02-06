@@ -1,5 +1,5 @@
 import BigNumber from 'bn.js'
-import { all, call, delay, put, select, spawn, take } from 'redux-saga/effects'
+import { all, call, delay, put, select, spawn } from 'redux-saga/effects'
 import * as walletActions from '../../components/wallet/actions'
 import * as selectors from '../../selectors'
 import { Blockchain } from '../../utils/blockchain'

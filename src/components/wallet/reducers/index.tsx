@@ -1,30 +1,18 @@
 import BigNumber from 'bn.js'
 import * as R from 'ramda'
-import { applySpec, path, pipe, prop } from 'ramda'
+import { path, pipe, prop } from 'ramda'
 import { combineReducers } from 'redux'
 import { getType } from 'typesafe-actions'
 import * as FnBigNumber from '../../../utils/fnBignumber'
 import { idToNetwork, Network } from '../../errors/networkList'
 import * as actions from '../actions'
-import etherBalance from './etherBalance'
-import lockedTokenBalance from './lockedTokensBalance'
-import tokenBalance from './tokenBalance'
+import balances from './balances'
 export const getAddress = prop('address')
-
-const balances = combineReducers({
-  ether: etherBalance,
-  lockedTokens: lockedTokenBalance,
-  token: tokenBalance,
-})
-
-interface BalanceState {
-  value: string
-}
 
 export interface WalletState {
   balances: {
-    ether: BalanceState
-    token: BalanceState
+    ether: string
+    token: string
     lockedTokens: string
   }
   address: string
@@ -61,50 +49,38 @@ const reducer = combineReducers({
   network,
 })
 
-type BalanceType = 'ether' | 'token'
+type BalanceType = 'ether' | 'token' | 'lockedTokens'
 
 export const selectBalance: (
   type: BalanceType
-) => (state: WalletState) => BalanceState = (type: BalanceType) =>
-  path(['balances', type]) as (walletState: WalletState) => BalanceState
+) => (state: WalletState) => Balance = (type: BalanceType) =>
+  path(['balances', type]) as (walletState: WalletState) => Balance
 
 export const getNetwork: (state: WalletState) => Network = R.pipe(
   R.prop('network'),
   idToNetwork
 )
 
-export const getBalanceValue: (
+export const getBalance: (
   type: BalanceType
 ) => (state: WalletState) => BigNumber = (type: BalanceType) =>
   pipe(
     selectBalance(type),
-    prop('value'),
     FnBigNumber.create
   )
 
-export interface Balance {
-  value: BigNumber
-}
+export type Balance = string
 
-const getBalance: (
-  type: BalanceType
-) => (state: WalletState) => Balance = type =>
-  applySpec({
-    value: getBalanceValue(type),
-  })
-
-export const getEtherBalance: (state: WalletState) => Balance = getBalance(
+export const getEtherBalance: (state: WalletState) => BigNumber = getBalance(
   'ether'
 )
 
-export const getTokenBalance: (state: WalletState) => Balance = getBalance(
+export const getTokenBalance: (state: WalletState) => BigNumber = getBalance(
   'token'
 )
 
-export const getLockedTokensBalance: (state: WalletState) => BigNumber = R.pipe(
-  R.path(['balances', 'lockedTokens']),
-  R.defaultTo('0') as any,
-  FnBigNumber.create
-)
+export const getLockedTokensBalance: (
+  state: WalletState
+) => BigNumber = getBalance('lockedTokens')
 
 export default reducer

@@ -2,8 +2,8 @@ const MXCTokenTruffle = artifacts.require('./MXCToken.sol')
 import Web3 from 'web3'
 import { timeTravel } from './tools/blockchain'
 declare var web3: Web3
-import tokenJSON from '../truffle-build/contracts/MXCToken.json'
-import { MXCToken } from '../typechain/contracts/MXCToken'
+import tokenJSON from '../src/truffle-build/contracts/MXCToken.json'
+import { MXCToken } from '../src/typechain/contracts/MXCToken'
 import { assert } from './tools/chai'
 const INITIAL_AMOUNT = 1000000
 const BALANCE_AFTER_2_MONTHS = '2'

@@ -1,10 +1,7 @@
-import BigNumber from 'bn.js'
-import { pipe, prop } from 'ramda'
-import * as R from 'ramda'
+import { prop } from 'ramda'
 import { createSelector } from 'reselect'
 
 import { Router } from 'react-router'
-import { Form } from 'redux-form'
 
 import { Network } from '../components/errors/networkList'
 import * as fromErrors from '../components/errors/reducers'
@@ -15,7 +12,6 @@ const errorSelector = prop('errors')
 
 export interface State {
   errors: fromErrors.ErrorsState
-  notifications: Notification[]
   wallet: WalletState
   router?: Router
 }

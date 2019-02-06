@@ -84,7 +84,6 @@ export const getBalanceValue: (
 
 export interface Balance {
   value: BigNumber
-  fiatValue: BigNumber
 }
 
 const getBalance: (

@@ -14,7 +14,7 @@ test('Watcher Sagas', t => {
       assert.plan(1)
       const gen = watchEtherBalanceSaga(blockchain.getEtherBalance)
       gen.next()
-      gen.next({ value: FnBigNumber.create('0') })
+      gen.next(FnBigNumber.create('0'))
       assert.deepEqual(
         gen.next(FnBigNumber.create('1')).value,
         put(walletActions.setEtherBalance('1')),

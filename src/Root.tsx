@@ -1,8 +1,5 @@
-import React, { Component } from 'react'
+import React from 'react'
 import './App.css'
-import Content from './components/content'
-import Header from './components/header'
-import Navbar from './components/navbar'
 
 import { History } from 'history'
 import { Provider } from 'react-redux'

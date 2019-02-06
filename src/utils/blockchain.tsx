@@ -1,4 +1,5 @@
 import BigNumber from 'bn.js'
+import * as R from 'ramda'
 import Web3 from 'web3'
 import { isNetworkSupported } from '../components/errors/networkList'
 import TokenJson from '../truffle-build/contracts/MXCToken.json'
@@ -30,6 +31,8 @@ export interface Blockchain {
   getEtherBalance(): Promise<BigNumber>
   getTokenBalance(): Promise<BigNumber>
   getNetwork(): Promise<number>
+  redeemTokens(): Promise<void>
+  getLockedTokens(): Promise<BigNumber>
 }
 
 const createBlockchain = (web3: Web3): Blockchain => {
@@ -60,12 +63,31 @@ const createBlockchain = (web3: Web3): Blockchain => {
     const balanceString = await token.methods.balanceOf(address).call()
     return FnBigNumber.create(balanceString)
   }
+  const redeemTokens = async () => {
+    const token = await createToken(web3)
+    const address = await getAddress()
+    await token.methods.redeemVestableToken(address).send({ from: address })
+  }
+
+  const getLockedTokens = async () => {
+    const token = await createToken(web3)
+    const address = await getAddress()
+    const { amount, vestedAmount } = await token.methods
+      .vestBalanceOf(address)
+      .call()
+    return R.useWith(FnBigNumber.subtract, [
+      FnBigNumber.create,
+      FnBigNumber.create,
+    ])(vestedAmount, amount)
+  }
   return {
     checkNetwork,
     getAddress,
     getEtherBalance,
+    getLockedTokens,
     getNetwork: web3.eth.net.getId,
     getTokenBalance,
+    redeemTokens,
   }
 }
 export default createBlockchain

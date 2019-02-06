@@ -1,14 +1,9 @@
-import { eventChannel } from 'redux-saga'
 import { put } from 'redux-saga/effects'
 import test from 'tape'
 import * as walletActions from '../../components/wallet/actions'
 import { createTestBlockchain } from '../../tests/blockchain'
 import * as FnBigNumber from '../../utils/fnBignumber'
 import { watchEtherBalanceSaga } from './sagas'
-
-const createChannel = () => {
-  return eventChannel(() => () => undefined)
-}
 
 const blockchain = createTestBlockchain()
 

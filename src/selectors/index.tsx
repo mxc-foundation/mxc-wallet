@@ -1,7 +1,7 @@
+import BigNumber from 'bn.js'
 import { prop } from 'ramda'
-import { createSelector } from 'reselect'
-
 import { Router } from 'react-router'
+import { createSelector } from 'reselect'
 
 import { Network } from '../components/errors/networkList'
 import * as fromErrors from '../components/errors/reducers'
@@ -21,18 +21,21 @@ export const getAddress: (state: State) => string = createSelector(
   fromWallet.getAddress
 )
 
-export const getEtherBalance: (
-  state: State
-) => fromWallet.Balance = createSelector(
+export const getEtherBalance: (state: State) => BigNumber = createSelector(
   walletSelector,
   fromWallet.getEtherBalance
 )
 
-export const getTokenBalance: (
-  state: State
-) => fromWallet.Balance = createSelector(
+export const getTokenBalance: (state: State) => BigNumber = createSelector(
   walletSelector,
   fromWallet.getTokenBalance
+)
+
+export const getLockedTokensBalance: (
+  state: State
+) => BigNumber = createSelector(
+  walletSelector,
+  fromWallet.getLockedTokensBalance
 )
 
 export const getNetwork: (state: State) => Network = createSelector(

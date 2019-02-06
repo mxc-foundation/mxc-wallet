@@ -1,5 +1,4 @@
-import { delay } from 'redux-saga'
-import { call, put, takeLatest } from 'redux-saga/effects'
+import { call, delay, put, takeLatest } from 'redux-saga/effects'
 import test from 'tape'
 import { getType } from 'typesafe-actions'
 import * as actions from '../../components/errors/actions'
@@ -18,7 +17,7 @@ test('Error Recover Sagas', t => {
 
     assert.deepEqual(
       generator.next().value,
-      call(delay, 1000),
+      delay(1000),
       'test delay of 1 second'
     )
     assert.deepEqual(
@@ -60,7 +59,7 @@ test('Error Recover Sagas', t => {
 
     assert.deepEqual(
       generator.next().value,
-      call(delay, 1000),
+      delay(1000),
       'test delay of 1 second'
     )
     assert.deepEqual(

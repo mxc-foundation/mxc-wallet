@@ -64,6 +64,13 @@ jobs:
       - run:
           name: Lint web app
           command: yarn run lint
+  test:
+    <<: *defaults
+    steps:
+      - <<: *restore_prepared_repo
+      - run:
+          name: Test react code
+          command: yarn run test          
 
          
 workflows:
@@ -73,10 +80,12 @@ workflows:
       - prepare_repo
       - lint:
           requires:
-            - prepare_repo  
-      
+            - prepare_repo
       - smart_contract:test:
           requires:
             - prepare_repo  
+      - test:
+          requires:
+            - prepare_repo
                                 
 

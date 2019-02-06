@@ -10,9 +10,7 @@ export function* watchEtherBalanceSaga(
 ) {
   while (true) {
     try {
-      const { value: oldBalance }: { value: BigNumber } = yield select(
-        selectors.getEtherBalance
-      )
+      const oldBalance: BigNumber = yield select(selectors.getEtherBalance)
       const newBalance: BigNumber = yield call(getEtherBalance)
       if (!oldBalance.eq(newBalance)) {
         yield put(walletActions.setEtherBalance(newBalance.toString(10)))
@@ -29,7 +27,7 @@ export function* watchTokenBalanceSaga(
 ) {
   while (true) {
     try {
-      const { value: oldBalance } = yield select(selectors.getTokenBalance)
+      const oldBalance: BigNumber = yield select(selectors.getTokenBalance)
       const newBalance: BigNumber = yield call(getTokenBalance)
       if (!oldBalance.eq(newBalance)) {
         yield put(walletActions.setTokenBalance(newBalance.toString(10)))

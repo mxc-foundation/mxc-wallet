@@ -12,7 +12,8 @@ const LockedMxcTokensComponent = ({
 const mapStateToProps = R.applySpec({
   lockedMXCTokens: R.pipe(
     selectors.getLockedTokensBalance,
-    FnBigNumber.fromWei
+    FnBigNumber.fromWei,
+    FnBigNumber.toString
   ),
 })
 

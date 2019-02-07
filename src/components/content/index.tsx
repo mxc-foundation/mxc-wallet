@@ -1,9 +1,8 @@
 import React from 'react'
 import { Address, EtherBalance, TokenBalance } from '../wallet/components'
 import LockedMxcTokens from './components/LockedMxcTokens'
-import RedeemableMxcTokens from './components/RedeemableMxcTokens'
-import RedeemButton from './components/RedeemButton'
-import SendButton from './components/SendButton'
+import { RedeemTokensForm } from './components/RedeemTokensForm'
+import { SendTokensForm } from './components/SendTokensForm'
 
 const InputAddress = () => (
   <input
@@ -13,15 +12,7 @@ const InputAddress = () => (
   />
 )
 
-const Row = ({
-  caption,
-  Content,
-  Button,
-}: {
-  caption: string
-  Content: any
-  Button?: any
-}) => (
+const Row = ({ caption, Content }: { caption: string; Content: any }) => (
   <tr>
     <td>
       <h2>{caption}</h2>
@@ -29,7 +20,6 @@ const Row = ({
     <td>
       <Content />
     </td>
-    {Button ? <Button /> : null}
     <td />
   </tr>
 )
@@ -44,21 +34,9 @@ export default () => (
             <Row caption="Ether Balance:" Content={EtherBalance} />
             <Row caption="MXC Tokens:" Content={TokenBalance} />
             <Row caption="Locked MXC Tokens:" Content={LockedMxcTokens} />
-            <Row
-              caption="Redeemable MXC Tokens:"
-              Content={RedeemableMxcTokens}
-              Button={RedeemButton}
-            />
-            <Row
-              caption="Send Tokens:"
-              Content={InputAddress}
-              Button={SendButton}
-            />
-            <Row
-              caption="Send Ether:"
-              Content={InputAddress}
-              Button={SendButton}
-            />
+            <Row caption="Redeemable MXC Tokens:" Content={RedeemTokensForm} />
+            <Row caption="Send Tokens:" Content={SendTokensForm} />
+            <Row caption="Send Ether:" Content={InputAddress} />
           </tbody>
         </table>
       </div>

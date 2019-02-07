@@ -1,4 +1,4 @@
-import BigNumber from 'bn.js'
+import BigNumber from 'bignumber.js'
 import { all, call, delay, put, select, spawn } from 'redux-saga/effects'
 import * as walletActions from '../../components/wallet/actions'
 import * as selectors from '../../selectors'

@@ -1,4 +1,4 @@
-import BigNumber from 'bn.js'
+import BigNumber from 'bignumber.js'
 import { combineReducers } from 'redux'
 import { getType } from 'typesafe-actions'
 import * as FnBigNumber from '../../../utils/fnBignumber'

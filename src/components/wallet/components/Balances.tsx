@@ -1,4 +1,4 @@
-import BigNumber from 'bn.js'
+import BigNumber from 'bignumber.js'
 import * as R from 'ramda'
 import * as React from 'react'
 import { connect } from 'react-redux'
@@ -14,7 +14,10 @@ const Balance = (props: BalanceProps) => <span>{props.value}</span>
 const balanceToBalanceProps: (
   tokenBalance: BigNumber
 ) => BalanceProps = R.applySpec({
-  value: FnBigNumber.fromWei,
+  value: R.pipe(
+    FnBigNumber.fromWei,
+    FnBigNumber.toString
+  ),
 })
 
 const mapStateToEtherBalanceProps: (state: State) => BalanceProps = R.pipe(

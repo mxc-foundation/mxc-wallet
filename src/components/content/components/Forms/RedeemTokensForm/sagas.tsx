@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
 import { getType } from 'typesafe-actions'
-import { Blockchain } from '../../../../utils/blockchain'
+import { Blockchain } from '../../../../../utils/blockchain'
 import * as actions from './actions'
 
 const createRedeemTokensSaga = (redeemTokens: () => Promise<void>) =>

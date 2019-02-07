@@ -1,16 +1,9 @@
 import React from 'react'
 import { Address, EtherBalance, TokenBalance } from '../wallet/components'
+import { RedeemTokensForm } from './components/Forms/RedeemTokensForm'
+import { SendEtherForm } from './components/Forms/SendEtherForm'
+import { SendTokensForm } from './components/Forms/SendTokensForm'
 import LockedMxcTokens from './components/LockedMxcTokens'
-import { RedeemTokensForm } from './components/RedeemTokensForm'
-import { SendTokensForm } from './components/SendTokensForm'
-
-const InputAddress = () => (
-  <input
-    type="text"
-    name="filter-transactions"
-    placeholder="Recieving address"
-  />
-)
 
 const Row = ({ caption, Content }: { caption: string; Content: any }) => (
   <tr>
@@ -36,7 +29,7 @@ export default () => (
             <Row caption="Locked MXC Tokens:" Content={LockedMxcTokens} />
             <Row caption="Redeemable MXC Tokens:" Content={RedeemTokensForm} />
             <Row caption="Send Tokens:" Content={SendTokensForm} />
-            <Row caption="Send Ether:" Content={InputAddress} />
+            <Row caption="Send Ether:" Content={SendEtherForm} />
           </tbody>
         </table>
       </div>

@@ -2,21 +2,24 @@ import { ConnectedRouter } from 'connected-react-router'
 import { History } from 'history'
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { Route } from 'react-router-dom'
+import { Route } from 'react-router'
 import Content from './components/content'
 import Error from './components/errors'
 import Header from './components/header'
 import Navbar from './components/navbar'
+import { Transactions } from './components/Transactions'
 import { getHasMainError, State } from './selectors'
 
 const AppContent = () => (
   <div>
     <Header />
     <Navbar />
-    <Content />
+    <div>
+      <Route exact path="/" component={Content} />
+      <Route path="/transactions" component={Transactions} />
+    </div>
   </div>
 )
-const Router = () => <Route exact path="/" component={AppContent} />
 
 interface AppProps {
   mainError: boolean
@@ -25,7 +28,7 @@ interface AppProps {
 
 const App = ({ mainError, history }: AppProps) => (
   <ConnectedRouter history={history}>
-    {mainError ? <Error /> : <Router />}
+    {mainError ? <Error /> : <AppContent />}
   </ConnectedRouter>
 )
 

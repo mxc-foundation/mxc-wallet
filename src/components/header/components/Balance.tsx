@@ -1,24 +1,24 @@
 import React from 'react'
+import { EtherBalance, TokenBalance } from '../../wallet/components'
 
-const ETHER_BALANCE = 10
-const MXC_BALANCE = 10
+const HeaderBalance = ({ Content, asset }: any) => (
+  <span>
+    {' '}
+    <Content />
+    &nbsp;
+    <span>{asset}</span>
+  </span>
+)
 
-const BalanceComponent = ({
-  ethBalance,
-  mxcBalance,
-}: {
-  ethBalance: number;
-  mxcBalance: number;
-}) => (
+const BalanceComponent = () => (
   <div className="balanceStatus inline-block">
     <span className="t-s-bold">Balance</span>
     <br />
-    {`${mxcBalance} MXC`}
+    <HeaderBalance Content={TokenBalance} asset="MXC" />
     <br />
-    {`${ethBalance} ETH`}
+    <HeaderBalance Content={EtherBalance} asset="ETH" />
+    <br />
   </div>
 )
 
-export default () => (
-  <BalanceComponent ethBalance={ETHER_BALANCE} mxcBalance={MXC_BALANCE} />
-) // TODO use connect to get the actual address
+export default BalanceComponent

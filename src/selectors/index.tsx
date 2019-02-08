@@ -1,4 +1,4 @@
-import BigNumber from 'bn.js'
+import BigNumber from 'bignumber.js'
 import { prop } from 'ramda'
 import { Router } from 'react-router'
 import { createSelector } from 'reselect'

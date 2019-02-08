@@ -1,4 +1,4 @@
-import BigNumber from 'bn.js'
+import BigNumber from 'bignumber.js'
 import * as R from 'ramda'
 import { path, pipe, prop } from 'ramda'
 import { combineReducers } from 'redux'

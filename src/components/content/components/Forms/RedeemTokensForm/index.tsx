@@ -1,6 +1,8 @@
 import React from 'react'
 
 import { connect } from 'react-redux'
+import RedeemableMxcTokens from '../../RedeemableMxcTokens'
+import * as StyledComponents from '../StyledComponents'
 import * as actions from './actions'
 
 interface RedeemTokensButtonProps {
@@ -8,18 +10,19 @@ interface RedeemTokensButtonProps {
 }
 
 const RedeemTokensButton = ({ onClick }: RedeemTokensButtonProps) => (
-  <td>
+  <StyledComponents.SpreadHorizontally>
+    <RedeemableMxcTokens />
     <button className="btn-framed" onClick={onClick}>
       Redeem
     </button>
-  </td>
+  </StyledComponents.SpreadHorizontally>
 )
 
 const mapDispatchToProps = {
   onClick: actions.redeemTokens.request,
 }
 
-export default connect(
+export const RedeemTokensForm = connect(
   null,
   mapDispatchToProps
 )(RedeemTokensButton)

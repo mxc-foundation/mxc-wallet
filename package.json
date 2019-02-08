@@ -9,6 +9,7 @@
     "@types/reactstrap": "^7.1.1",
     "@types/redux-form": "^7",
     "@types/web3": "^1.0.18",
+    "bignumber.js": "^8.0.2",
     "bn.js": "^4.11.8",
     "connected-react-router": "^6.2.2",
     "history": "^4.7.2",

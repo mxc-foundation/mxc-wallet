@@ -1,4 +1,4 @@
-import BigNumber from 'bn.js'
+import BigNumber from 'bignumber.js'
 import test from 'tape'
 import Web3 from 'web3'
 import * as FnBigNumber from '../../../utils/fnBignumber'
@@ -14,9 +14,9 @@ import {
 const mockState: WalletState = Object.freeze({
   address: '0x46abcba22b03817fa23b6ab48db211029314fc00',
   balances: {
-    ether: Web3.utils.toWei(FnBigNumber.create(2), 'ether').toString(),
-    lockedTokens: Web3.utils.toWei(FnBigNumber.create(100), 'ether').toString(),
-    token: Web3.utils.toWei(FnBigNumber.create(100), 'ether').toString(),
+    ether: FnBigNumber.toWei(FnBigNumber.create(2)).toString(),
+    lockedTokens: FnBigNumber.toWei(FnBigNumber.create(100)).toString(),
+    token: FnBigNumber.toWei(FnBigNumber.create(100)).toString(),
   },
   network: '',
 })

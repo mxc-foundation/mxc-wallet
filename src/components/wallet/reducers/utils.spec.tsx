@@ -1,4 +1,4 @@
-import BigNumber from 'bn.js'
+import BigNumber from 'bignumber.js'
 import test from 'tape'
 import { create, toString } from '../../../utils/fnBignumber'
 

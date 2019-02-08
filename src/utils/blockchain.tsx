@@ -1,4 +1,4 @@
-import BigNumber from 'bn.js'
+import BigNumber from 'bignumber.js'
 import * as R from 'ramda'
 import Web3 from 'web3'
 import { isNetworkSupported } from '../components/errors/networkList'
@@ -33,6 +33,8 @@ export interface Blockchain {
   getNetwork(): Promise<number>
   redeemTokens(): Promise<void>
   getLockedTokens(): Promise<BigNumber>
+  sendTokens(amount: BigNumber, recipient: string): Promise<void>
+  sendEther(amount: BigNumber, recipient: string): Promise<void>
 }
 
 const createBlockchain = (web3: Web3): Blockchain => {
@@ -80,6 +82,24 @@ const createBlockchain = (web3: Web3): Blockchain => {
       FnBigNumber.create,
     ])(vestedAmount, amount)
   }
+
+  const sendTokens = async (amount: BigNumber, recipient: string) => {
+    const token = await createToken(web3)
+    const address = await getAddress()
+    await token.methods
+      .transfer(recipient, FnBigNumber.toString(amount))
+      .send({ from: address })
+  }
+
+  const sendEther = async (amount: BigNumber, recipient: string) => {
+    const address = await getAddress()
+    await web3.eth.sendTransaction({
+      from: address,
+      to: recipient,
+      value: FnBigNumber.toString(amount),
+    })
+  }
+
   return {
     checkNetwork,
     getAddress,
@@ -88,6 +108,8 @@ const createBlockchain = (web3: Web3): Blockchain => {
     getNetwork: web3.eth.net.getId,
     getTokenBalance,
     redeemTokens,
+    sendEther,
+    sendTokens,
   }
 }
 export default createBlockchain

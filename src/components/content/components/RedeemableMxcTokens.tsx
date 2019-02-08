@@ -5,7 +5,7 @@ const REDEEMABLE_MXC_TOKENS = 7
 const RedeemableMxcTokensComponent = ({
   redeemableMXCTokens,
 }: {
-  redeemableMXCTokens: number;
+  redeemableMXCTokens: number
 }) => <div>{redeemableMXCTokens}</div>
 
 export default () => (

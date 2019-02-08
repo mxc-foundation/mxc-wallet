@@ -1,7 +1,3 @@
 import React from 'react'
 
-export default () => (
-  <td>
-    <button className="btn-framed">Send</button>
-  </td>
-)
+export default () => <button className="btn-framed">Send</button>

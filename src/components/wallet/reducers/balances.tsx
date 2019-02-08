@@ -3,6 +3,7 @@ import { combineReducers } from 'redux'
 import { getType } from 'typesafe-actions'
 import * as FnBigNumber from '../../../utils/fnBignumber'
 import * as actions from '../actions'
+
 export const etherBalance = (
   state: string = '0',
   { type, payload: newBalance }: { type: any; payload: BigNumber }
@@ -27,6 +28,18 @@ export const lockedTokenBalance = (
   }
 }
 
+export const redeemableTokenBalance = (
+  state: string = '0',
+  { type, payload: newBalance }: { type: any; payload: BigNumber }
+) => {
+  switch (type) {
+    case getType(actions.setRedeemableTokensBalance):
+      return FnBigNumber.toString(newBalance)
+    default:
+      return state
+  }
+}
+
 const tokenBalance = (
   state: string = '0',
   { type, payload: newBalance }: { type: any; payload: BigNumber }
@@ -42,5 +55,6 @@ const tokenBalance = (
 export default combineReducers({
   ether: etherBalance,
   lockedTokens: lockedTokenBalance,
+  redeemableTokens: redeemableTokenBalance,
   token: tokenBalance,
 })

@@ -11,6 +11,7 @@
     "resolveJsonModule": true,
     "noImplicitAny": false,
     "skipLibCheck": true,
+    "jsx": "preserve",
     "typeRoots": ["node_modules/@types", "types"] //                       /* List of folders to include type definitions from. */,
   },
   "include": ["types", "migrations"]

@@ -38,6 +38,13 @@ export const getLockedTokensBalance: (
   fromWallet.getLockedTokensBalance
 )
 
+export const getRedeemableTokensBalance: (
+  state: State
+) => BigNumber = createSelector(
+  walletSelector,
+  fromWallet.getRedeemableTokensBalance
+)
+
 export const getNetwork: (state: State) => Network = createSelector(
   walletSelector,
   fromWallet.getNetwork

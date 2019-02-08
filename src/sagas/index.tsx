@@ -5,6 +5,7 @@ import { createSendTokensSaga } from '../components/content/components/Forms/Sen
 import { Blockchain } from '../utils/blockchain'
 import { createErrorRecoverSagas } from './errors/sagas'
 import createWalletWatcherSaga from './wallet/sagas'
+
 export const createSagas = (blockchain: Blockchain) =>
   function* defaultSaga() {
     yield all([

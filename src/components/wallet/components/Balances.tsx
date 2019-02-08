@@ -30,11 +30,21 @@ const mapStateToTokenBalanceProps: (state: State) => BalanceProps = R.pipe(
   balanceToBalanceProps
 )
 
+const mapStateToRedeemableBalanceProps: (state: State) => BalanceProps = R.pipe(
+  selectors.getRedeemableTokensBalance,
+  balanceToBalanceProps
+)
+
 const ConnectedEtherBalance = connect(mapStateToEtherBalanceProps)(Balance)
 
 const ConnectedTokenBalance = connect(mapStateToTokenBalanceProps)(Balance)
 
+const ConnectedRedeemableBalance = connect(mapStateToRedeemableBalanceProps)(
+  Balance
+)
+
 export {
   ConnectedEtherBalance as EtherBalance,
-  ConnectedTokenBalance as TokenBalance
+  ConnectedTokenBalance as TokenBalance,
+  ConnectedRedeemableBalance as RedeemableBalance
 }

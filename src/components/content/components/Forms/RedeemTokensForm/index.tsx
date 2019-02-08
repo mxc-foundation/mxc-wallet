@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { connect } from 'react-redux'
-import RedeemableMxcTokens from '../../RedeemableMxcTokens'
+import { RedeemableBalance } from '../../../../wallet/components/Balances'
 import * as StyledComponents from '../StyledComponents'
 import * as actions from './actions'
 
@@ -11,7 +11,7 @@ interface RedeemTokensButtonProps {
 
 const RedeemTokensButton = ({ onClick }: RedeemTokensButtonProps) => (
   <StyledComponents.SpreadHorizontally>
-    <RedeemableMxcTokens />
+    <RedeemableBalance />
     <button className="btn-framed" onClick={onClick}>
       Redeem
     </button>

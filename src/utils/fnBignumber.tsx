@@ -28,3 +28,7 @@ export const toWei: (value: BigNumber) => BigNumber = (value: BigNumber) =>
 export const subtract = R.curry(
   (num1: BigNumber, num2: BigNumber): BigNumber => num2.minus(num1)
 )
+
+export const gt = R.curry(
+  (num1: BigNumber, num2: BigNumber): boolean => num2.gt(num1)
+)

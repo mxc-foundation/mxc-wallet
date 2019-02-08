@@ -49,7 +49,7 @@ const reducer = combineReducers({
   network,
 })
 
-type BalanceType = 'ether' | 'token' | 'lockedTokens'
+type BalanceType = 'ether' | 'token' | 'lockedTokens' | 'redeemableTokens'
 
 export const selectBalance: (
   type: BalanceType
@@ -82,5 +82,9 @@ export const getTokenBalance: (state: WalletState) => BigNumber = getBalance(
 export const getLockedTokensBalance: (
   state: WalletState
 ) => BigNumber = getBalance('lockedTokens')
+
+export const getRedeemableTokensBalance: (
+  state: WalletState
+) => BigNumber = getBalance('redeemableTokens')
 
 export default reducer

@@ -36,7 +36,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "TS_NODE_PROJECT=tsconfig.test.json yarn tape -r ts-node/register './src/**/*.spec.tsx'",
+    "test": "TS_NODE_PROJECT=tsconfig.test.json yarn tape -r ts-node/register './src/**/*.spec.tsx' | tap-spec",
     "test:single": "TS_NODE_PROJECT=tsconfig.test.json yarn tape -r ts-node/register",
     "generate:typedefs": "typechain --target=web3-1.0.0 --outDir ./src/typechain/contracts ./src/truffle-build/contracts/MXCToken.json",
     "docker": "docker-compose run --rm test yarn run",
@@ -48,6 +48,7 @@
     "migrate": "TS_NODE_FILES=true TS_NODE_PROJECT=tsconfig.truffle.json truffle migrate",
     "check:code": "tsc --noEmit",
     "lint": "tslint '{,!(node_modules)/**/}*.{ts,tsx}'",
+    "watch:tests": "onchange 'src/**/*.tsx' -- yarn test",
     "postinstall": "yarn generate:typedefs"
   },
   "eslintConfig": {
@@ -73,6 +74,8 @@
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "dotenv": "^6.2.0",
+    "onchange": "^5.2.0",
+    "tap-spec": "^5.0.0",
     "tape": "^4.9.2",
     "truffle-hdwallet-provider": "1.0.2",
     "ts-node": "^8.0.2",

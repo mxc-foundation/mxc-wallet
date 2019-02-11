@@ -10,6 +10,12 @@ export const createTestBlockchain: () => Blockchain = () => ({
   getNetwork: () => Promise.resolve(1),
   getRedeemableTokensBalance: () => Promise.resolve(create(0)),
   getTokenBalance: () => Promise.resolve(create(0)),
+  grantTokens: (
+    recipient: string,
+    amount: BigNumber,
+    cliffPeriods: number,
+    vestingPeriods: number
+  ) => Promise.resolve(),
   redeemTokens: () => Promise.resolve(),
   sendEther: (amount: BigNumber, recipient: string) => Promise.resolve(),
   sendTokens: (amount: BigNumber, recipient: string) => Promise.resolve(),

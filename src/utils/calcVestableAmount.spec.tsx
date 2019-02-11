@@ -185,6 +185,31 @@ test('Calculation of vestable tokens', t => {
     )
     assert.end()
   })
+  t.test(
+    'Starting point is not zero. Current time is at cliff. Other period length',
+    assert => {
+      const TOTAL_AMOUNT = FnBigNumber.create('1000000')
+      const VESTED_AMOUNT = FnBigNumber.create('0')
+      const START = 100010
+      const CLIFF = 100070
+      const END = 100610
+      const NOW = 100130
+      const PERIOD_LENGTH = 60
+      assert.equal(
+        calcVestableAmount(
+          START,
+          END,
+          CLIFF,
+          TOTAL_AMOUNT,
+          VESTED_AMOUNT,
+          PERIOD_LENGTH,
+          NOW
+        ).toString(),
+        FnBigNumber.create(200000).toString()
+      )
+      assert.end()
+    }
+  )
   t.test('Less than one token per period.', assert => {
     const TOTAL_AMOUNT = FnBigNumber.create('400')
     const VESTED_AMOUNT = FnBigNumber.create('0')

@@ -45,6 +45,12 @@ export interface Blockchain {
   redeemTokens(): Promise<void>
   getLockedTokens(): Promise<BigNumber>
   getRedeemableTokensBalance(): Promise<BigNumber>
+  grantTokens(
+    recipient: string,
+    amount: BigNumber,
+    cliffPeriods: number,
+    vestingPeriods: number
+  ): Promise<void>
   sendTokens(amount: BigNumber, recipient: string): Promise<void>
   sendEther(amount: BigNumber, recipient: string): Promise<void>
 }
@@ -65,7 +71,23 @@ const createBlockchain = (web3: Web3): Blockchain => {
     }
     return address
   }
-
+  const grantTokens = async (
+    recipient: string,
+    amount: BigNumber,
+    cliffPeriods: number,
+    vestingPeriods: number
+  ) => {
+    const token = await createToken(web3)
+    const address = await getAddress()
+    await token.methods
+      .grantTokenStartNow(
+        recipient,
+        amount.toString(),
+        cliffPeriods,
+        vestingPeriods
+      )
+      .send({ from: address })
+  }
   const getEtherBalance = async () => {
     const address = await getAddress()
     const balanceString = await web3.eth.getBalance(address)
@@ -132,6 +154,7 @@ const createBlockchain = (web3: Web3): Blockchain => {
     getNetwork: web3.eth.net.getId,
     getRedeemableTokensBalance,
     getTokenBalance,
+    grantTokens,
     redeemTokens,
     sendEther,
     sendTokens,

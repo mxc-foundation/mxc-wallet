@@ -2,7 +2,10 @@ import Web3 from 'web3'
 import { createMXCToken, readTimeFromChain } from './blockchain'
 import calculateVestableAmount from './calcVestableAmount'
 import * as FnBigNumber from './fnBignumber'
-
+const PERIOD_LENGTH: { [key: string]: number } = {
+  '1': 60 * 60 * 24 * 30,
+  '42': 60,
+}
 export const getRedeemableTokens = async (
   theWeb3: Web3,
   tokenAddress: string,
@@ -12,7 +15,7 @@ export const getRedeemableTokens = async (
   const timeLockData = await tokenContract.methods
     .vestBalanceOf(userAddress)
     .call()
-
+  const networkId = await theWeb3.eth.net.getId()
   const { start, vesting: end, amount, vestedAmount, cliff } = timeLockData
   const now = await readTimeFromChain(theWeb3)
   const vestableTokensAmount = calculateVestableAmount(
@@ -21,7 +24,7 @@ export const getRedeemableTokens = async (
     parseInt(cliff, 10),
     FnBigNumber.create(amount),
     FnBigNumber.create(vestedAmount),
-    10,
+    PERIOD_LENGTH[networkId] || 60,
     now
   )
 

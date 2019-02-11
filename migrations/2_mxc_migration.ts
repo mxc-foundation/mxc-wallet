@@ -1,7 +1,12 @@
 import Web3 from 'web3'
-import { CLIFF_MONTHS, GRANTED_TOKENS, USERS, VESTING_MONTHS } from '../config'
+import {
+  CLIFF_PERIODS,
+  GRANTED_TOKENS,
+  USERS,
+  VESTING_PERIODS
+} from '../config'
 const MXCToken = artifacts.require('./MXCToken.sol')
-const ONE_THOUSAND_TOKENS = Web3.utils.toWei('1000', 'ether')
+const ONE_MILLION_TOKENS = Web3.utils.toWei('1000000', 'ether')
 
 module.exports = function migration(deployer) {
   deployer.then(async () => {
@@ -12,10 +17,10 @@ module.exports = function migration(deployer) {
         token.grantTokenStartNow(
           user,
           GRANTED_TOKENS,
-          CLIFF_MONTHS,
-          VESTING_MONTHS
+          CLIFF_PERIODS,
+          VESTING_PERIODS
         )
-      ).concat(USERS.map(user => token.transfer(user, ONE_THOUSAND_TOKENS)))
+      ).concat(USERS.map(user => token.transfer(user, ONE_MILLION_TOKENS)))
     )
   })
 }

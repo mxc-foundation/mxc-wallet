@@ -36,6 +36,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "postbuild": "cp build/index.html build/404.html",
     "test": "TS_NODE_PROJECT=tsconfig.test.json yarn tape -r ts-node/register './src/**/*.spec.tsx' | tap-spec",
     "test:single": "TS_NODE_PROJECT=tsconfig.test.json yarn tape -r ts-node/register",
     "generate:typedefs": "typechain --target=web3-1.0.0 --outDir ./src/typechain/contracts ./src/truffle-build/contracts/MXCToken.json",

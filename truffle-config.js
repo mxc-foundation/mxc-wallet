@@ -23,7 +23,7 @@ module.exports = {
     kovan: {
       network_id: 42,
       provider: () =>
-        new HDWalletProvider(mnemonic, "https://parity-kovan.hardfork.io"),
+        new HDWalletProvider(mnemonic, "https://kovan.infura.io/metamask"),
       skipDryRun: true
     }
     // Useful for testing. The `development` name is special - truffle uses it by default

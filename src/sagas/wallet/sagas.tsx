@@ -106,7 +106,10 @@ const createSaga = (blockchain: Blockchain) => {
 
   function* updateBalancesAfterRedemption() {
     yield takeLatest(
-      getType(redeemButtonActions.redeemTokens.success),
+      [
+        getType(redeemButtonActions.redeemTokens.success),
+        getType(walletActions.setAddress),
+      ],
       updateBalances
     )
   }

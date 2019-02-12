@@ -16,6 +16,7 @@ const AppContent = () => (
     <Navbar />
     <div>
       <Route exact path="/" component={Content} />
+      <Route exact path="/grant" component={Content} />
       <Route path="/transactions" component={Transactions} />
     </div>
   </div>

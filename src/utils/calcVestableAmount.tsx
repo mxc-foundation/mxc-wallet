@@ -121,13 +121,15 @@ const wrapper = (
   periodLength: number,
   now: number
 ) =>
-  calcVestableAmount(
-    start,
-    end,
-    cliff,
-    totalAmount,
-    vestedAmount,
-    roundNow(periodLength, start, now)
+  FnBigNumber.create(
+    calcVestableAmount(
+      start,
+      end,
+      cliff,
+      totalAmount,
+      vestedAmount,
+      roundNow(periodLength, start, now)
+    ).toPrecision(4)
   )
 
 export default wrapper

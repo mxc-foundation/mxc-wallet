@@ -3,20 +3,54 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@types/jest": "23.3.13",
     "@types/node": "10.12.20",
     "@types/react": "16.7.22",
     "@types/react-dom": "16.0.11",
+    "@types/reactstrap": "^7.1.1",
+    "@types/redux-form": "^7",
+    "@types/web3": "^1.0.18",
+    "bignumber.js": "^8.0.2",
+    "bn.js": "^4.11.8",
+    "connected-react-router": "^6.2.2",
+    "history": "^4.7.2",
+    "pify": "^4.0.1",
+    "postinstall": "^0.4.2",
+    "ramda": "^0.26.1",
     "react": "^16.7.0",
+    "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^16.7.0",
+    "react-redux": "^6.0.0",
+    "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.3",
-    "typescript": "3.2.4"
+    "reactstrap": "^7.1.0",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-form": "^8.1.0",
+    "redux-saga": "^1.0.1",
+    "reselect": "^4.0.0",
+    "string_decoder": "^1.2.0",
+    "styled-components": "^4.1.3",
+    "truffle": "^5.0.3",
+    "typesafe-actions": "^3.0.0",
+    "web3": "1.0.0-beta.37"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "postbuild": "cp build/index.html build/404.html",
+    "test": "TS_NODE_PROJECT=tsconfig.test.json yarn tape -r ts-node/register './src/**/*.spec.tsx' | tap-spec",
+    "test:single": "TS_NODE_PROJECT=tsconfig.test.json yarn tape -r ts-node/register",
+    "generate:typedefs": "typechain --target=web3-1.0.0 --outDir ./src/typechain/contracts ./src/truffle-build/contracts/MXCToken.json",
+    "docker": "docker-compose run --rm test yarn run",
+    "test:solidity": "TS_NODE_FILES=true TS_NODE_PROJECT=tsconfig.truffle.json truffle test",
+    "pretest:solidity": "truffle compile && yarn premigrate",
+    "docker:prepare": "docker-compose run --rm test yarn install --pure-lockfile",
+    "eject": "react-scripts eject",
+    "premigrate": "tsc -p tsconfig.truffle.json",
+    "migrate": "TS_NODE_FILES=true TS_NODE_PROJECT=tsconfig.truffle.json truffle migrate",
+    "check:code": "tsc --noEmit",
+    "lint": "tslint '{,!(node_modules)/**/}*.{ts,tsx}'",
+    "watch:tests": "onchange 'src/**/*.tsx' -- yarn test",
+    "postinstall": "yarn generate:typedefs"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -28,6 +62,31 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "tslint": "^5.12.1"
+    "@types/chai": "^4.1.7",
+    "@types/chai-as-promised": "^7.1.0",
+    "@types/ramda": "^0.25.47",
+    "@types/react-copy-to-clipboard": "^4.2.6",
+    "@types/react-redux": "^7.0.1",
+    "@types/react-router-dom": "^4.3.1",
+    "@types/redux-saga": "^0.10.5",
+    "@types/styled-components": "^4.1.8",
+    "@types/tape": "^4.2.33",
+    "@types/web3": "^1.0.18",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "dotenv": "^6.2.0",
+    "onchange": "^5.2.0",
+    "tap-spec": "^5.0.0",
+    "tape": "^4.9.2",
+    "truffle-hdwallet-provider": "1.0.2",
+    "ts-node": "^8.0.2",
+    "tslint": "^5.12.1",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-react": "^3.6.0",
+    "typechain": "^0.3.11",
+    "typescript": "^3.3.1"
+  },
+  "resolutions": {
+    "terser": "3.14.1"
   }
 }

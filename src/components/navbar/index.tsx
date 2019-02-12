@@ -1,4 +1,5 @@
-import React from "react";
+import React from 'react'
+import { NavLink } from 'react-router-dom'
 
 export default () => (
   <div className="menuRouter">
@@ -21,18 +22,18 @@ export default () => (
           </a>
         </li>
         <li>
-          <a href="" className="active">
+          <NavLink to="/" exact>
             <span>Home</span>
             <i className="icon icon-wallet" />
-          </a>
+          </NavLink>
         </li>
         <li>
-          <a href="" className="">
+          <NavLink to="/transactions">
             <span>Transactions</span>
             <i className="icon icon-arrow-right" />
-          </a>
+          </NavLink>
         </li>
       </ul>
     </div>
   </div>
-);
+)

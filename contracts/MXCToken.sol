@@ -257,7 +257,7 @@ contract MXCToken is StandardToken {
     string public constant symbol = "MXC";
     uint8 public constant decimals = 18;
 
-    uint256 constant MONTH = 3600*24*30;
+    uint256 constant MONTH = 60;
 
     struct TimeLock {
         // total amount of tokens that is granted to the user

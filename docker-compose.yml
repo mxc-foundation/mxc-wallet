@@ -1,0 +1,19 @@
+version: "3.2"
+services:
+  ganache:
+    image: trufflesuite/ganache-cli:v6.1.6
+    command: ["-h=0.0.0.0"]
+  test:
+    image: node:10
+    working_dir: /home/node
+    volumes:
+      - ./:/home/node
+      - node_modules:/home/node/node_modules
+      - yarn_cache:/usr/local/share/.cache
+      - truffle-build:/home/node/src/truffle-build
+    depends_on:
+      - ganache
+volumes:
+  node_modules:
+  yarn_cache:
+  truffle-build:

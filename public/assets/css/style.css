@@ -1,32 +1,33 @@
 /*DEV*/
-.content-wallet, .content-accounts, .content-transactions, .content-contracts {
+.content-wallet,
+.content-accounts,
+.content-transactions,
+.content-contracts {
   /*display:none;*/
 }
 
-
 /*LAYOUT*/
-body {}
+body {
+}
 .inline-block {
   display: inline-block;
 }
 p {
-  max-width:600px;
+  max-width: 600px;
 }
 hr {
-  border-color: rgba(255,255,255,0.1);
+  border-color: rgba(255, 255, 255, 0.1);
   margin: 5rem 0;
 }
 
-
-.header > .box-inner, .content > .box-inner {
+.header > .box-inner,
+.content > .box-inner {
   /* padding-right: 100px; */
 }
 
-
-
-
 /*TYPO*/
-h3, .balanceStatus {
+h3,
+.balanceStatus {
   font-size: 1.2rem;
   line-height: 1.4;
 }
@@ -40,40 +41,24 @@ h3, .balanceStatus {
   font-weight: 300;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-input,
-input[type="text"] {
+input {
   width: 100%;
   background: transparent;
   color: white;
 }
-input[type="text"] {
+input {
   border-width: 0 0 2px 0;
   padding-bottom: 0.4em;
   font-size: 1.2rem;
   font-family: Montserrat;
   margin: 1rem 0;
 }
-input[type="text"]:focus {
+
+input:focus {
   box-shadow: none;
   outline: none;
   border-bottom-color: #00ffd9;
 }
-
-
 
 table {
   width: 100%;
@@ -82,8 +67,6 @@ table {
 table.table-zebra tr:nth-child(even) {
   background-color: #222;
 }
-
-
 
 table.table-transactions tr td {
   vertical-align: middle !important;
@@ -97,17 +80,12 @@ table.table-transactions tr td:first-child {
   border-right: 1px solid white;
 }
 table.table-transactions tr td:last-child * {
-    opacity: 1;
+  opacity: 1;
 }
 
-
-
-
-
-
-
-
-table.table-accounts tr td:first-child, table.table-transactions tr td:first-child, table.table-contracts-tokens tr td:first-child {
+table.table-accounts tr td:first-child,
+table.table-transactions tr td:first-child,
+table.table-contracts-tokens tr td:first-child {
   width: calc(50px + 1.5rem);
 }
 
@@ -115,13 +93,14 @@ table.table-accounts tr td:first-child, table.table-transactions tr td:first-chi
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.1);
   display: inherit;
   position: absolute;
 }
 
 @media screen and (min-width: 1200px) {
-  .header > .box-inner, .content > .box-inner {
+  .header > .box-inner,
+  .content > .box-inner {
     width: calc(100% - 100px);
     margin: auto;
     max-width: 1000px;
@@ -140,7 +119,9 @@ table.table-accounts tr td:first-child, table.table-transactions tr td:first-chi
     font-size: 2rem;
     width: 370px;
   }
-  .menuRouter ul li a span {opacity: 0;}
+  .menuRouter ul li a span {
+    opacity: 0;
+  }
   .menuRouter ul li a#burger {
     pointer-events: all;
     opacity: 1;
@@ -151,11 +132,8 @@ table.table-accounts tr td:first-child, table.table-transactions tr td:first-chi
   .menuRouter.active span {
     opacity: 1;
   }
-  .header, .content {
+  .header,
+  .content {
     padding-left: 190px;
   }
 }
-
-
-
-

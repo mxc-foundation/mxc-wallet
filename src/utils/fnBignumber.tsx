@@ -4,7 +4,16 @@ import Web3 from 'web3'
 
 export const create: (
   value: string | number | BigNumber
-) => BigNumber = R.constructN(1, BigNumber as any)
+) => BigNumber = value => {
+  try {
+    return new BigNumber(value)
+  } catch (error) {
+    // Sometimes in production this fails. We want to recover from it.
+    // tslint:disable-next-line - Disables all rules for the following line
+    console.error(error)
+    return toWei(new BigNumber('-314'))
+  }
+}
 
 export const toString: (value: BigNumber) => string = (value: BigNumber) =>
   value.toString(10)

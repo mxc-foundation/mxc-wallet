@@ -52,10 +52,30 @@ const createSaga = (blockchain: Blockchain) => {
       yield put(walletActions.setTokenBalance(newBalance.toString(10)))
     }
   }
+
+  function* updateNetwork() {
+    const oldNetwork = yield select(selectors.getNetworkId)
+    const newNetwork = yield call(blockchain.getNetwork)
+    if (newNetwork !== oldNetwork) {
+      yield put(walletActions.setNetwork(newNetwork))
+    }
+  }
+
   function* watchEtherBalanceSaga() {
     while (true) {
       try {
         yield* updateEtherBalance()
+      } catch (error) {
+        yield spawn(handleErrors, error)
+      }
+      yield delay(1000)
+    }
+  }
+
+  function* watchNetworkSaga() {
+    while (true) {
+      try {
+        yield* updateNetwork()
       } catch (error) {
         yield spawn(handleErrors, error)
       }
@@ -135,6 +155,7 @@ const createSaga = (blockchain: Blockchain) => {
       watchTokenBalanceSaga(),
       watchLockedTokensBalanceSaga(),
       watchRedeemableTokensBalanceSaga(),
+      watchNetworkSaga(),
       updateBalancesAfterRedemption(),
     ])
   }

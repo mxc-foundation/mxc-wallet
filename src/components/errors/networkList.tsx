@@ -15,7 +15,7 @@ export const networkList: NetworkList = Object.freeze([
   { id: '42', name: 'Kovan Test Network', isSupported: true },
 ])
 
-export const idToNetwork = (id: string): Network =>
+export const idToNetwork = (id: number): Network =>
   R.find(R.propEq('id', id))(networkList)
 
 export const whiteList: NetworkList = Object.freeze(
@@ -28,7 +28,7 @@ export const isNetworkSupported = (networkId: number | null): boolean =>
     any(propEq('id', networkId))
   )(networkList)
 
-export const getNetworkName = (networkId: string | null): string =>
+export const getNetworkName = (networkId: number): string =>
   R.pipe(
     find(propEq('id', networkId)) as (networkList: NetworkList) => Network,
     prop('name')

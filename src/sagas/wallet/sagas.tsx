@@ -15,6 +15,8 @@ import * as selectors from '../../selectors'
 import { Blockchain } from '../../utils/blockchain'
 import { handleErrors } from '../errors/sagas'
 
+const UPDATE_INTERVAL = 1000
+
 const createSaga = (blockchain: Blockchain) => {
   function* updateLockedTokensBalance() {
     const oldBalance: BigNumber = yield select(selectors.getLockedTokensBalance)
@@ -59,7 +61,7 @@ const createSaga = (blockchain: Blockchain) => {
       } catch (error) {
         yield spawn(handleErrors, error)
       }
-      yield delay(1000)
+      yield delay(UPDATE_INTERVAL)
     }
   }
 
@@ -70,7 +72,7 @@ const createSaga = (blockchain: Blockchain) => {
       } catch (error) {
         yield spawn(handleErrors, error)
       }
-      yield delay(1000)
+      yield delay(UPDATE_INTERVAL)
     }
   }
 
@@ -81,7 +83,7 @@ const createSaga = (blockchain: Blockchain) => {
       } catch (error) {
         yield spawn(handleErrors, error)
       }
-      yield delay(60000)
+      yield delay(UPDATE_INTERVAL)
     }
   }
 
@@ -92,7 +94,7 @@ const createSaga = (blockchain: Blockchain) => {
       } catch (error) {
         yield spawn(handleErrors, error)
       }
-      yield delay(60000)
+      yield delay(UPDATE_INTERVAL)
     }
   }
   function* updateBalances() {
@@ -125,7 +127,7 @@ const createSaga = (blockchain: Blockchain) => {
       } catch (error) {
         yield spawn(handleErrors, error)
       }
-      yield delay(1000)
+      yield delay(UPDATE_INTERVAL)
     }
   }
   return function* defaultSaga() {

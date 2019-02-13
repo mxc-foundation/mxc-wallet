@@ -1,16 +1,14 @@
-import BigNumber from 'bignumber.js'
 import { combineReducers } from 'redux'
 import { getType } from 'typesafe-actions'
-import * as FnBigNumber from '../../../utils/fnBignumber'
 import * as actions from '../actions'
 
 export const etherBalance = (
   state: string = '0',
-  { type, payload: newBalance }: { type: any; payload: BigNumber }
+  { type, payload: newBalance }: { type: any; payload: string }
 ) => {
   switch (type) {
     case getType(actions.setEtherBalance):
-      return FnBigNumber.toString(newBalance)
+      return newBalance
     default:
       return state
   }
@@ -18,11 +16,11 @@ export const etherBalance = (
 
 export const lockedTokenBalance = (
   state: string = '0',
-  { type, payload: newBalance }: { type: any; payload: BigNumber }
+  { type, payload: newBalance }: { type: any; payload: string }
 ) => {
   switch (type) {
     case getType(actions.setLockedTokensBalance):
-      return FnBigNumber.toString(newBalance)
+      return newBalance
     default:
       return state
   }
@@ -30,11 +28,11 @@ export const lockedTokenBalance = (
 
 export const redeemableTokenBalance = (
   state: string = '0',
-  { type, payload: newBalance }: { type: any; payload: BigNumber }
+  { type, payload: newBalance }: { type: any; payload: string }
 ) => {
   switch (type) {
     case getType(actions.setRedeemableTokensBalance):
-      return FnBigNumber.toString(newBalance)
+      return newBalance
     default:
       return state
   }
@@ -42,11 +40,11 @@ export const redeemableTokenBalance = (
 
 const tokenBalance = (
   state: string = '0',
-  { type, payload: newBalance }: { type: any; payload: BigNumber }
+  { type, payload: newBalance }: { type: any; payload: string }
 ) => {
   switch (type) {
     case getType(actions.setTokenBalance):
-      return newBalance.toString()
+      return newBalance
     default:
       return state
   }

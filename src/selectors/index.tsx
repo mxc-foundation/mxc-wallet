@@ -60,4 +60,14 @@ export const getHasMainError: (state: State) => boolean = createSelector(
   fromErrors.getHasMainError
 )
 
+export const getEtherscanUrl: (state: State) => string = createSelector(
+  walletSelector,
+  fromWallet.getEtherscanUrl
+)
+
+export const getNetworkId: (state: State) => number = createSelector(
+  walletSelector,
+  fromWallet.getNetworkId
+)
+
 export const getAllMainErrors = errorSelector

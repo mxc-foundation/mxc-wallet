@@ -16,7 +16,7 @@ export const create: (
 }
 
 export const toString: (value: BigNumber) => string = (value: BigNumber) =>
-  value.toString(10)
+  value.toFixed()
 
 export const multipliedBy = R.curry(
   (value1: BigNumber, value2: BigNumber): BigNumber =>

@@ -82,7 +82,7 @@ const createBlockchain = (web3: Web3): Blockchain => {
     await token.methods
       .grantTokenStartNow(
         recipient,
-        amount.toString(),
+        FnBigNumber.toString(amount),
         cliffPeriods,
         vestingPeriods
       )

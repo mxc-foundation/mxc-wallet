@@ -1,30 +1,25 @@
 import { applySpec } from 'ramda'
 import * as React from 'react'
-import CopyToClipboard from 'react-copy-to-clipboard'
 import { connect } from 'react-redux'
 import { State } from '../../../selectors'
 import * as selectors from '../../../selectors'
 
 interface AddressProps {
   address: string
+  url: string
 }
 
-const Address = ({ address }: AddressProps) => (
+const Address = ({ address, url }: AddressProps) => (
   <span>
-    {address}
-    &nbsp; &nbsp;
-    <CopyToClipboard text={address}>
-      <a
-        href="#"
-        className="fa fa-clipboard text-success"
-        title="Copy to clipboard"
-      />
-    </CopyToClipboard>
+    <a href={url} target="_blank" title="Open on etherscan">
+      {address}
+    </a>
   </span>
 )
 
 const mapStateToProps: (state: State) => AddressProps = applySpec({
   address: selectors.getAddress,
+  url: selectors.getEtherscanUrl,
 })
 
 export default connect(mapStateToProps)(Address)

@@ -7,6 +7,7 @@ import * as FnBigNumber from '../../../utils/fnBignumber'
 import { idToNetwork, Network } from '../../errors/networkList'
 import * as actions from '../actions'
 import balances from './balances'
+import { etherscanBasePathForNetwork } from './helpers'
 export const getAddress = prop('address')
 
 export interface WalletState {
@@ -16,13 +17,13 @@ export interface WalletState {
     lockedTokens: string
   }
   address: string
-  network: string
+  network: number
 }
 
 const network = (
-  state: string | null = null,
-  { type, payload: networkId }: { type: any; payload: string }
-) => {
+  state: number = 1,
+  { type, payload: networkId }: { type: any; payload: number }
+): number => {
   switch (type) {
     case getType(actions.setNetwork):
       return networkId
@@ -32,7 +33,7 @@ const network = (
 }
 
 const address = (
-  state: string | null = null,
+  state: string = '',
   { type, payload: newAddress }: { type: any; payload: string }
 ) => {
   switch (type) {
@@ -56,8 +57,10 @@ export const selectBalance: (
 ) => (state: WalletState) => Balance = (type: BalanceType) =>
   path(['balances', type]) as (walletState: WalletState) => Balance
 
+export const getNetworkId: (state: WalletState) => number = R.prop('network')
+
 export const getNetwork: (state: WalletState) => Network = R.pipe(
-  R.prop('network'),
+  getNetworkId,
   idToNetwork
 )
 
@@ -86,5 +89,16 @@ export const getLockedTokensBalance: (
 export const getRedeemableTokensBalance: (
   state: WalletState
 ) => BigNumber = getBalance('redeemableTokens')
+
+export const getEtherscanUrl: (state: WalletState) => string = R.converge(
+  R.concat,
+  [
+    R.pipe(
+      getNetworkId,
+      etherscanBasePathForNetwork
+    ),
+    getAddress,
+  ]
+)
 
 export default reducer

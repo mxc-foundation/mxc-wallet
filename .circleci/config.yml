@@ -70,7 +70,9 @@ jobs:
       - <<: *restore_prepared_repo
       - run:
           name: Test react code
-          command: yarn run test          
+          command: yarn run test
+          environment:
+            TZ: 'Europe/Amsterdam'     
 
          
 workflows:

@@ -5,6 +5,7 @@ import { createSelector } from 'reselect'
 
 import { Network } from '../components/errors/networkList'
 import * as fromErrors from '../components/errors/reducers'
+import { TransactionProps } from '../components/Transactions'
 import * as fromWallet from '../components/wallet/reducers'
 import { WalletState } from '../components/wallet/reducers'
 const walletSelector = prop('wallet')
@@ -92,6 +93,13 @@ export const getEtherscanUrl: (state: State) => string = createSelector(
 export const getNetworkId: (state: State) => number = createSelector(
   walletSelector,
   fromWallet.getNetworkId
+)
+
+export const getTransactions: (
+  state: State
+) => TransactionProps[] = createSelector(
+  walletSelector,
+  fromWallet.getTransactions
 )
 
 export const getAllMainErrors = errorSelector

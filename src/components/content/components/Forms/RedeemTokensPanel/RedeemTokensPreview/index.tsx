@@ -1,5 +1,5 @@
 import React from 'react'
-import { VestingStatus } from '../../../../../wallet/components/'
+import { VestingStatus } from '../../../../../wallet/components/VestingStatus'
 import * as StyledComponents from '../../StyledComponents'
 
 export const RedeemableTokensPreview = () => (

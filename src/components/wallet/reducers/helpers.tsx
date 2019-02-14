@@ -16,3 +16,10 @@ export const etherscanBasePathForNetwork: (
     ),
   ],
 ])
+
+export const etherscanOriginForNetwork: (networkId: number) => string = R.cond(
+  [
+    [R.equals(1), R.always('https://etherscan.io/')],
+    [R.T, R.always('https://kovan.etherscan.io/')],
+  ]
+)

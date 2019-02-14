@@ -10,6 +10,7 @@ import {
 } from 'redux-saga/effects'
 import { getType } from 'typesafe-actions'
 import * as redeemButtonActions from '../../components/content/components/Forms/RedeemTokensPanel/actions'
+import { updateTransactions } from '../../components/Transactions/saga'
 import * as walletActions from '../../components/wallet/actions'
 import {
   Lock,
@@ -22,6 +23,8 @@ import { handleErrors } from '../errors/sagas'
 import { locksAreDifferent } from './helper/compareLocks'
 
 const UPDATE_INTERVAL = 1000
+
+const SLOW_UPDATE_INTERVAL = 60000
 
 const createSaga = (blockchain: Blockchain) => {
   function* updateLock() {
@@ -74,6 +77,17 @@ const createSaga = (blockchain: Blockchain) => {
     }
   }
 
+  function* pollTransactions() {
+    while (true) {
+      try {
+        yield put(walletActions.updateTransactions())
+      } catch (error) {
+        yield spawn(handleErrors, error)
+      }
+      yield delay(SLOW_UPDATE_INTERVAL)
+    }
+  }
+
   function* watchNetworkSaga() {
     while (true) {
       try {
@@ -107,6 +121,16 @@ const createSaga = (blockchain: Blockchain) => {
     }
   }
 
+  function* watchTheTransactions() {
+    yield takeLatest(
+      [
+        getType(walletActions.setNetwork),
+        getType(walletActions.updateTransactions),
+      ],
+      updateTransactions
+    )
+  }
+
   function* watchLock() {
     while (true) {
       try {
@@ -119,7 +143,12 @@ const createSaga = (blockchain: Blockchain) => {
   }
 
   function* updateBalances() {
-    yield all([updateLock(), updateTokenBalance(), updateEtherBalance()])
+    yield all([
+      updateLock(),
+      updateTokenBalance(),
+      updateEtherBalance(),
+      updateTransactions(),
+    ])
   }
 
   function* updateBalancesAfterRedemption() {
@@ -153,8 +182,10 @@ const createSaga = (blockchain: Blockchain) => {
       watchTokenBalanceSaga(),
       watchLock(),
       watchNetworkSaga(),
+      pollTransactions(),
       updateBalancesAfterRedemption(),
       watchNow(),
+      watchTheTransactions(),
     ])
   }
 }

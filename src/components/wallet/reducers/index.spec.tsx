@@ -33,6 +33,7 @@ const mockState: WalletState = Object.freeze({
   },
   network: 42,
   now: 0,
+  transactions: [],
 })
 
 test('Wallet reducers tests', t => {

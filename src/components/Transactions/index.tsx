@@ -1,36 +1,17 @@
 import * as R from 'ramda'
 import React from 'react'
-interface TransactionProps {
+import { connect } from 'react-redux'
+import * as selectors from '../../selectors'
+
+export interface TransactionProps {
   type: 'incoming' | 'outgoing'
   fromTo: string
-  amount: string
+  value: string
   asset: 'MXC' | 'ETH'
   date: string
+  link?: string
+  hash: string
 }
-
-const TRANSACTIONS: TransactionProps[] = [
-  {
-    amount: '0.1',
-    asset: 'ETH',
-    date: 'Jan 26',
-    fromTo: '0x35bEF8bB57BB4230FCB86Df41e8B502E96d90dD9',
-    type: 'incoming',
-  },
-  {
-    amount: '0.1',
-    asset: 'ETH',
-    date: 'Jan 26',
-    fromTo: '0x35bEF8bB57BB4230FCB86Df41e8B502E96d90dD9',
-    type: 'outgoing',
-  },
-  {
-    amount: '100',
-    asset: 'MXC',
-    date: 'Jan 26',
-    fromTo: '0x35bEF8bB57BB4230FCB86Df41e8B502E96d90dD9',
-    type: 'outgoing',
-  },
-]
 
 interface TransactionsProps {
   transactions: TransactionProps[]
@@ -49,7 +30,7 @@ const arrowClass: (type: 'incoming' | 'outgoing') => string = R.ifElse(
 )
 
 const Transaction = (
-  { type, fromTo, amount, asset, date }: TransactionProps,
+  { type, fromTo, value, asset, date, link }: TransactionProps,
   index: number
 ) => (
   <tr key={index}>
@@ -59,23 +40,23 @@ const Transaction = (
     <td>
       <h3>{heading(type)}</h3>
       <p>
-        <span>{fromTo}</span>
+        <span>
+          {type === 'incoming' ? 'From:' : 'To:'}&nbsp;{fromTo}
+        </span>
       </p>
     </td>
     <td>
-      {amount}&nbsp;{asset}
+      {value}&nbsp;{asset}
     </td>
     <td>
-      <a href="">
+      <a href={link} target="_blank">
         <i className={`icon ${arrowClass(type)}`} />
       </a>
     </td>
   </tr>
 )
 
-export const Transactions = ({
-  transactions = TRANSACTIONS,
-}: TransactionsProps) => (
+const TransactionsComponent = ({ transactions }: TransactionsProps) => (
   <div className="content">
     <div className="box-inner">
       <div className="content-box content-transactions">
@@ -88,3 +69,11 @@ export const Transactions = ({
     </div>
   </div>
 )
+
+const mapStateToProps: (
+  state: selectors.State
+) => TransactionsProps = R.applySpec({
+  transactions: selectors.getTransactions,
+})
+
+export const Transactions = connect(mapStateToProps)(TransactionsComponent)

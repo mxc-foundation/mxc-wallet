@@ -12,9 +12,14 @@ import { calculateTimeToNextVesting } from '../../../utils/calculateTimeToNextVe
 import calculateVestableAmount from '../../../utils/calcVestableAmount'
 import * as FnBigNumber from '../../../utils/fnBignumber'
 import { idToNetwork, Network } from '../../errors/networkList'
+import { TransactionProps } from '../../Transactions'
+import { transactions } from '../../Transactions/reducers'
 import * as actions from '../actions'
 import balances from './balances'
-import { etherscanBasePathForNetwork } from './helpers'
+import {
+  etherscanBasePathForNetwork,
+  etherscanOriginForNetwork
+} from './helpers'
 
 export interface LockStorage {
   totalAmount: string
@@ -48,6 +53,7 @@ export interface WalletState {
   network: number
   now: number
   lock: LockStorage
+  transactions: TransactionProps[]
 }
 
 const DEFAULT_LOCK = {
@@ -109,15 +115,13 @@ export const now: (state: number | undefined, action: any) => number = (
   }
 }
 
-const reducer: (
-  state: WalletState | undefined,
-  action: any
-) => WalletState = combineReducers({
+const reducer = combineReducers({
   address,
   balances,
   lock,
   network,
   now,
+  transactions,
 })
 
 export const getAddress = prop('address')
@@ -268,5 +272,24 @@ export const getEtherscanUrl: (state: WalletState) => string = R.converge(
     getAddress,
   ]
 )
+
+const addLink = (networkId: number) => (
+  transaction: TransactionProps
+): TransactionProps => ({
+  ...transaction,
+  link: `${etherscanOriginForNetwork(networkId)}tx/${transaction.hash}`,
+})
+
+const addLinks: (
+  network: number,
+  transactions: TransactionProps[]
+) => TransactionProps[] = (networkId, trans) => R.map(addLink(networkId))(trans)
+
+export const getTransactions: (
+  state: WalletState
+) => TransactionProps[] = R.converge(addLinks, [
+  getNetworkId,
+  R.prop('transactions'),
+])
 
 export default reducer

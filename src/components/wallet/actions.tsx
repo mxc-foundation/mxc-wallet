@@ -2,6 +2,9 @@ import { createStandardAction } from 'typesafe-actions'
 import { LockStorage } from './reducers'
 
 export const setAddress = createStandardAction('wallet/SET_ADDRESS')<string>()
+export const updateTransactions = createStandardAction(
+  'wallet/UPDATE_TRANSACTIONS'
+)<void>()
 
 export const setEtherBalance = createStandardAction('wallet/SET_ETHER_BALANCE')<
   string

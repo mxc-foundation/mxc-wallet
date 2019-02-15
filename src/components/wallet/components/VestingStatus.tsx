@@ -14,7 +14,7 @@ const allTokensAreVested: (state: State) => boolean = R.pipe(
   R.equals(-1)
 )
 
-const AllVested = () => <span>All tokens are vested.</span>
+const AllVested = () => <span>No tokens to redeem.</span>
 
 const VestingStatus = ({ allVested }: { allVested: boolean }) =>
   allVested ? <AllVested /> : <TimeLeft />

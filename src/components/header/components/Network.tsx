@@ -2,7 +2,7 @@ import * as R from 'ramda'
 import React from 'react'
 import { connect } from 'react-redux'
 import * as selectors from '../../../selectors'
-import { TestNetWarning } from '../../content/components/Forms/StyledComponents'
+import { TestNetWarning } from '../../home/components/Forms/StyledComponents'
 
 interface HeaderNetworkProps {
   onMainNet: boolean

@@ -21,3 +21,6 @@ export const Vertically = styled.div`
 export const VerticallyStretched = styled(Vertically)`
   flex-grow: 2;
 `
+export const TestNetWarning = styled.span`
+  color: #00ffd9;
+`

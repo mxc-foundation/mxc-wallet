@@ -1,5 +1,6 @@
 import React from 'react'
 import Balance from './components/Balance'
+import Network from './components/Network'
 
 export default () => (
   <div
@@ -9,6 +10,7 @@ export default () => (
     <div className="box-inner">
       <div className="t-s-bold menuStatus inline-block" />
       <Balance />
+      <Network />
     </div>
   </div>
 )

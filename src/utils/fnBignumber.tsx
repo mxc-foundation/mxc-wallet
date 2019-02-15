@@ -41,3 +41,9 @@ export const subtract = R.curry(
 export const gt = R.curry(
   (num1: BigNumber, num2: BigNumber): boolean => num2.gt(num1)
 )
+
+export const isZero = (num: BigNumber): boolean => num.isZero()
+
+export const isEqualTo = R.curry(
+  (num1: BigNumber, num2: BigNumber): boolean => num2.eq(num1)
+)

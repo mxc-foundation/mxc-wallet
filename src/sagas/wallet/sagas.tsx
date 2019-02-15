@@ -9,34 +9,27 @@ import {
   takeLatest
 } from 'redux-saga/effects'
 import { getType } from 'typesafe-actions'
-import * as redeemButtonActions from '../../components/content/components/Forms/RedeemTokensForm/actions'
+import * as redeemButtonActions from '../../components/content/components/Forms/RedeemTokensPanel/actions'
 import * as walletActions from '../../components/wallet/actions'
+import {
+  Lock,
+  LockStorage,
+  parseLockToLockStorage
+} from '../../components/wallet/reducers'
 import * as selectors from '../../selectors'
 import { Blockchain } from '../../utils/blockchain'
 import { handleErrors } from '../errors/sagas'
+import { locksAreDifferent } from './helper/compareLocks'
 
 const UPDATE_INTERVAL = 1000
 
 const createSaga = (blockchain: Blockchain) => {
-  function* updateLockedTokensBalance() {
-    const oldBalance: BigNumber = yield select(selectors.getLockedTokensBalance)
-    const newBalance: BigNumber = yield call(blockchain.getLockedTokens)
-    if (!oldBalance.eq(newBalance)) {
-      yield put(walletActions.setLockedTokensBalance(newBalance.toString(10)))
-    }
-  }
-
-  function* updateRedeemableTokensBalance() {
-    const oldBalance: BigNumber = yield select(
-      selectors.getRedeemableTokensBalance
-    )
-    const newBalance: BigNumber = yield call(
-      blockchain.getRedeemableTokensBalance
-    )
-    if (!oldBalance.eq(newBalance)) {
-      yield put(
-        walletActions.setRedeemableTokensBalance(newBalance.toString(10))
-      )
+  function* updateLock() {
+    const oldLock: Lock = yield select(selectors.getLock)
+    const newLock: Lock = yield call(blockchain.getLock)
+    const newLockStorage: LockStorage = parseLockToLockStorage(newLock)
+    if (locksAreDifferent(oldLock, newLock)) {
+      yield put(walletActions.setLock(newLockStorage))
     }
   }
 
@@ -55,6 +48,13 @@ const createSaga = (blockchain: Blockchain) => {
     }
   }
 
+  function* updateNow() {
+    const oldNow: number = yield select(selectors.getNow)
+    const newNow: number = yield call(blockchain.getNow)
+    if (oldNow !== newNow) {
+      yield put(walletActions.setNow(newNow))
+    }
+  }
   function* updateNetwork() {
     const oldNetwork = yield select(selectors.getNetworkId)
     const newNetwork = yield call(blockchain.getNetwork)
@@ -81,7 +81,7 @@ const createSaga = (blockchain: Blockchain) => {
       } catch (error) {
         yield spawn(handleErrors, error)
       }
-      yield delay(1000)
+      yield delay(UPDATE_INTERVAL)
     }
   }
 
@@ -96,10 +96,10 @@ const createSaga = (blockchain: Blockchain) => {
     }
   }
 
-  function* watchLockedTokensBalanceSaga() {
+  function* watchNow() {
     while (true) {
       try {
-        yield* updateLockedTokensBalance()
+        yield* updateNow()
       } catch (error) {
         yield spawn(handleErrors, error)
       }
@@ -107,23 +107,19 @@ const createSaga = (blockchain: Blockchain) => {
     }
   }
 
-  function* watchRedeemableTokensBalanceSaga() {
+  function* watchLock() {
     while (true) {
       try {
-        yield* updateRedeemableTokensBalance()
+        yield* updateLock()
       } catch (error) {
         yield spawn(handleErrors, error)
       }
       yield delay(UPDATE_INTERVAL)
     }
   }
+
   function* updateBalances() {
-    yield all([
-      updateLockedTokensBalance(),
-      updateRedeemableTokensBalance(),
-      updateTokenBalance(),
-      updateEtherBalance(),
-    ])
+    yield all([updateLock(), updateTokenBalance(), updateEtherBalance()])
   }
 
   function* updateBalancesAfterRedemption() {
@@ -155,10 +151,10 @@ const createSaga = (blockchain: Blockchain) => {
       watchEtherBalanceSaga(),
       watchAddressSaga(),
       watchTokenBalanceSaga(),
-      watchLockedTokensBalanceSaga(),
-      watchRedeemableTokensBalanceSaga(),
+      watchLock(),
       watchNetworkSaga(),
       updateBalancesAfterRedemption(),
+      watchNow(),
     ])
   }
 }

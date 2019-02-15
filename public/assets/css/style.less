@@ -1,19 +1,21 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800,900');
+@import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800,900");
 @font-face {
-  font-family: 'Simple-Line-Icons';
-  src: url('../fonts/Simple-Line-Icons/Simple-Line-Icons.eot');
-  src: url('../fonts/Simple-Line-Icons/Simple-Line-Icons.eot?#iefix') format('embedded-opentype'),
-       url('../fonts/Simple-Line-Icons/Simple-Line-Icons.woff2') format('woff2'),
-       url('../fonts/Simple-Line-Icons/Simple-Line-Icons.woff') format('woff'),
-       url('../fonts/Simple-Line-Icons/Simple-Line-Icons.ttf')  format('truetype'),
-       url('../fonts/Simple-Line-Icons/Simple-Line-Icons.svg#svgFontName') format('svg');
+  font-family: "Simple-Line-Icons";
+  src: url("../fonts/Simple-Line-Icons/Simple-Line-Icons.eot");
+  src: url("../fonts/Simple-Line-Icons/Simple-Line-Icons.eot?#iefix")
+      format("embedded-opentype"),
+    url("../fonts/Simple-Line-Icons/Simple-Line-Icons.woff2") format("woff2"),
+    url("../fonts/Simple-Line-Icons/Simple-Line-Icons.woff") format("woff"),
+    url("../fonts/Simple-Line-Icons/Simple-Line-Icons.ttf") format("truetype"),
+    url("../fonts/Simple-Line-Icons/Simple-Line-Icons.svg#svgFontName")
+      format("svg");
 }
 
 /*LESS*/
 @colorTurq: #00ffd9;
 @colorGray1: #222;
 
-@colorLighter: rgba(255,255,255,0.1);
+@colorLighter: rgba(255, 255, 255, 0.1);
 
 @trans: 0.2s;
 
@@ -23,7 +25,7 @@
   background-size: contain !important;
   background-position: center !important;
   image-rendering: pixelated;
-  image-rendering: -webkit-optimize-contrast
+  image-rendering: -webkit-optimize-contrast;
 }
 .centerAbs {
   left: 0;
@@ -63,7 +65,7 @@ a {
 
 /*TYPO*/
 html {
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
   font-size: 14px;
   line-height: 1.4;
 }
@@ -77,7 +79,8 @@ h2 {
 }
 
 /*ICONS*/
-.mxc-icon, .icon {
+.mxc-icon,
+.icon {
   display: inline-block;
   position: relative;
   width: 1em;
@@ -89,7 +92,7 @@ h2 {
   }
 }
 .icon {
-  font-family: 'Simple-Line-Icons';
+  font-family: "Simple-Line-Icons";
   speak: none;
   line-height: 1;
 }
@@ -120,7 +123,7 @@ h2 {
 
 /*LOGO*/
 .logo {
-  .bg-img()
+  .bg-img();
 }
 a.logo {
   display: block;
@@ -128,7 +131,7 @@ a.logo {
   margin-top: 0.9rem;
   width: 100%;
   height: 112px;
-  background-image: url('../img/logo_type.png');
+  background-image: url("../img/logo_type.png");
 }
 
 .blur-box {
@@ -137,7 +140,7 @@ a.logo {
   z-index: -1;
   width: 80px;
   height: 80px;
-  
+
   filter: blur(6px);
   mix-blend-mode: hard-light;
 
@@ -171,7 +174,8 @@ a.logo {
 }
 
 /*GRID*/
-.header, .content {
+.header,
+.content {
   padding-left: 300px;
   width: 100vw;
 }
@@ -182,9 +186,11 @@ a.logo {
   height: 80px;
   background: black;
   border-bottom: 1px solid white;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
   transition: top @trans;
-  &.headroom--unpinned {top: -50px;}
+  &.headroom--unpinned {
+    top: -50px;
+  }
 }
 
 .content {
@@ -193,7 +199,6 @@ a.logo {
   padding-bottom: 80px;
   min-height: 120vh;
 }
-
 
 /*ROUTER*/
 .menuRouter {
@@ -208,7 +213,8 @@ a.logo {
     padding: 0;
     margin-top: 100px;
   }
-  .icon, .mxc-icon {
+  .icon,
+  .mxc-icon {
     margin: 0 0 0 0.8em;
   }
   li a {
@@ -218,7 +224,8 @@ a.logo {
     text-decoration: none;
     font-weight: 600;
     transition: background-color @trans;
-    &:hover, &.active {
+    &:hover,
+    &.active {
       background-color: @colorLighter;
     }
     &.active {
@@ -239,7 +246,6 @@ a.logo {
   }
 }
 
-
 /*STATUS*/
 .menuStatus {
   .icon {
@@ -254,17 +260,15 @@ a.logo {
       display: inline-block;
     }
     &:not(:last-child):after {
-      content: '|';
+      content: "|";
       margin: 0 0.5em;
     }
   }
 }
 .header .balanceStatus {
   float: right;
-  margin: 0.5rem 50px 0; 
+  margin: 0.5rem 50px 0;
 }
-
-
 
 /*M CONTENT*/
 .menuContent {
@@ -298,7 +302,8 @@ a.logo {
 }
 
 /*TABLES*/
-table h3, table p {
+table h3,
+table p {
   margin: 0;
 }
 
@@ -312,7 +317,7 @@ table {
   &:hover {
     td:last-child * {
       opacity: 1;
-    } 
+    }
   }
 }
 table tr {
@@ -340,17 +345,16 @@ table.table-cards tr {
   border-bottom: 0.1rem solid #222;
   cursor: pointer;
   &:hover {
-    box-shadow: 0 0 2rem rgba(0,0,0,0.2);
+    box-shadow: 0 0 2rem rgba(0, 0, 0, 0.2);
   }
   td:last-child {
     vertical-align: middle;
   }
 }
 
-
 /*BTNS*/
 button {
-  cursor:pointer;
+  cursor: pointer;
   color: white;
 }
 
@@ -371,6 +375,16 @@ button {
   }
 }
 
+.btn-framed-disabled {
+  padding: 0.21em 2.3em 0.3em;
+  background: transparent;
+  color: #57726e;
+  border: 1px solid #57726e;
+  transition: background-color 0.2s, color 0.2s;
+  margin-right: 1em;
+  font-size: 0.9rem;
+}
+
 .btn-action {
   display: inline-block;
   position: relative;
@@ -383,12 +397,12 @@ button {
   overflow: hidden;
 
   transition: background-color @trans;
-  
+
   font-size: 1.4rem;
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
   font-weight: 700;
   &:after {
-    content: '';
+    content: "";
     position: absolute;
     display: block;
     width: 100%;
@@ -427,11 +441,10 @@ button {
   }
 }
 
-
 /*STATS*/
 .coinmarketcap-currency-widget {
   * {
-    font-family: 'Montserrat';
+    font-family: "Montserrat";
     font-size: 12px !important;
     text-align: left !important;
     float: none !important;
@@ -453,9 +466,3 @@ button {
     padding: 0 !important;
   }
 }
-
-
-
-
-
-

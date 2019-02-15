@@ -16,7 +16,7 @@ export interface State {
   router?: Router
 }
 
-export const getAddress: (state: State) => string = createSelector(
+export const getAddress: (state: State) => string | null = createSelector(
   walletSelector,
   fromWallet.getAddress
 )
@@ -50,6 +50,16 @@ export const getNetwork: (state: State) => Network = createSelector(
   fromWallet.getNetwork
 )
 
+export const getLock: (state: State) => fromWallet.Lock = createSelector(
+  walletSelector,
+  fromWallet.getLock
+)
+
+export const getNow: (state: State) => number = createSelector(
+  walletSelector,
+  fromWallet.getNow
+)
+
 export const getLockedMetamaskError: (state: State) => boolean = createSelector(
   errorSelector,
   fromErrors.getMetmaskLockedError
@@ -58,6 +68,20 @@ export const getLockedMetamaskError: (state: State) => boolean = createSelector(
 export const getHasMainError: (state: State) => boolean = createSelector(
   errorSelector,
   fromErrors.getHasMainError
+)
+
+export const getNetworkName: (state: State) => string = createSelector(
+  walletSelector,
+  fromWallet.getNetworkName
+)
+
+export const getOnMainNet: (state: State) => boolean = createSelector(
+  walletSelector,
+  fromWallet.onMainNet
+)
+export const getOnTestNet: (state: State) => boolean = createSelector(
+  walletSelector,
+  fromWallet.onTestNet
 )
 
 export const getEtherscanUrl: (state: State) => string = createSelector(
@@ -71,3 +95,17 @@ export const getNetworkId: (state: State) => number = createSelector(
 )
 
 export const getAllMainErrors = errorSelector
+
+export const getTimeToNextVestingEvent: (
+  state: State
+) => number = createSelector(
+  walletSelector,
+  fromWallet.getTimeToNextVestingEvent
+)
+
+export const getAmountAtNextVesting: (
+  state: State
+) => BigNumber = createSelector(
+  walletSelector,
+  fromWallet.getAmountAtNextVesting
+)

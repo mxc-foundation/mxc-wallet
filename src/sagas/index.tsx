@@ -1,6 +1,6 @@
 import { all } from 'redux-saga/effects'
 import { createGrantTokensSaga } from '../components/content/components/Forms/GrantTokensForm/sagas'
-import createRedeemTokensButtonSaga from '../components/content/components/Forms/RedeemTokensForm/sagas'
+import createRedeemTokensButtonSaga from '../components/content/components/Forms/RedeemTokensPanel/sagas'
 import { createsendEtherSaga } from '../components/content/components/Forms/SendEtherForm/sagas'
 import { createSendTokensSaga } from '../components/content/components/Forms/SendTokensForm/sagas'
 import { Blockchain } from '../utils/blockchain'

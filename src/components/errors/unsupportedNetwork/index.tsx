@@ -1,9 +1,10 @@
 import { join, map, pipe, prop } from 'ramda'
+import * as R from 'ramda'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Col, Container, Jumbotron, Row } from 'reactstrap'
-import { State } from '../../../selectors'
-import { getNetworkName, NetworkList, whiteList } from '../networkList'
+import { getNetworkName } from '../../../selectors'
+import { NetworkList, whiteList } from '../networkList'
 
 const joinNames: (whiteList: NetworkList) => string = pipe(
   map(prop('name')) as (whiteList: NetworkList) => ReadonlyArray<string>,
@@ -33,8 +34,8 @@ const UseSupportedNetwork = ({
   </Container>
 )
 
-const mapStateToProps = (state: State) => ({
-  networkDisplayName: getNetworkName(state.wallet.network),
+const mapStateToProps = R.applySpec({
+  networkDisplayName: getNetworkName,
 })
 
 export const UseSupportedNetworkCTA = connect(mapStateToProps)(

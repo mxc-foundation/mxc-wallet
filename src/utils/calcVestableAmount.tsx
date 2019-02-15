@@ -112,7 +112,17 @@ export const roundNow: (
   now: number
 ) => number = R.converge(R.subtract, [R.nthArg(2), remainder])
 
-const wrapper = (
+export type FromTimeLock<ReturnType> = (
+  start: number,
+  end: number,
+  cliff: number,
+  totalAmount: BigNumber,
+  vestedAmount: BigNumber,
+  periodLength: number,
+  now: number
+) => ReturnType
+
+const wrapper: FromTimeLock<BigNumber> = (
   start: number,
   end: number,
   cliff: number,

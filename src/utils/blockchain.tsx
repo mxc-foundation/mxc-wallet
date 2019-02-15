@@ -1,13 +1,12 @@
 import BigNumber from 'bignumber.js'
-import * as R from 'ramda'
 import Web3 from 'web3'
 import { isNetworkSupported } from '../components/errors/networkList'
+import { Lock } from '../components/wallet/reducers'
 import tokenJSON from '../truffle-build/contracts/MXCToken.json'
 import TokenJson from '../truffle-build/contracts/MXCToken.json'
 import { MXCToken } from '../typechain/contracts/MXCToken'
 import * as errors from '../utils/errors'
 import * as FnBigNumber from '../utils/fnBignumber'
-import { getRedeemableTokens } from './getRedeemableTokens'
 
 export type SendTokens = (amount: BigNumber, recipient: string) => Promise<void>
 export type BuyTokens = (amount: BigNumber) => Promise<void>
@@ -43,14 +42,14 @@ export interface Blockchain {
   getTokenBalance(): Promise<BigNumber>
   getNetwork(): Promise<number>
   redeemTokens(): Promise<void>
-  getLockedTokens(): Promise<BigNumber>
-  getRedeemableTokensBalance(): Promise<BigNumber>
   grantTokens(
     recipient: string,
     amount: BigNumber,
     cliffPeriods: number,
     vestingPeriods: number
   ): Promise<void>
+  getLock(): Promise<Lock>
+  getNow(): Promise<number>
   sendTokens(amount: BigNumber, recipient: string): Promise<void>
   sendEther(amount: BigNumber, recipient: string): Promise<void>
 }
@@ -71,6 +70,9 @@ const createBlockchain = (web3: Web3): Blockchain => {
     }
     return address
   }
+
+  const getNow = async () => readTimeFromChain(web3)
+
   const grantTokens = async (
     recipient: string,
     amount: BigNumber,
@@ -100,33 +102,29 @@ const createBlockchain = (web3: Web3): Blockchain => {
     return FnBigNumber.create(balanceString)
   }
 
-  const getRedeemableTokensBalance = async () => {
+  const getLock = async () => {
     const address = await getAddress()
     const token = await createToken(web3)
-    const balanceString = await getRedeemableTokens(
-      web3,
-      token._address,
-      address
-    )
-    return FnBigNumber.create(balanceString)
+    const {
+      amount: totalAmount,
+      vestedAmount,
+      start,
+      cliff,
+      vesting: end,
+    } = await token.methods.vestBalanceOf(address).call()
+    return {
+      cliff: parseInt(cliff, 10),
+      end: parseInt(end, 10),
+      start: parseInt(start, 10),
+      totalAmount: FnBigNumber.create(totalAmount),
+      vestedAmount: FnBigNumber.create(vestedAmount),
+    }
   }
 
   const redeemTokens = async () => {
     const token = await createToken(web3)
     const address = await getAddress()
     await token.methods.redeemVestableToken(address).send({ from: address })
-  }
-
-  const getLockedTokens = async () => {
-    const token = await createToken(web3)
-    const address = await getAddress()
-    const { amount, vestedAmount } = await token.methods
-      .vestBalanceOf(address)
-      .call()
-    return R.useWith(FnBigNumber.subtract, [
-      FnBigNumber.create,
-      FnBigNumber.create,
-    ])(vestedAmount, amount)
   }
 
   const sendTokens = async (amount: BigNumber, recipient: string) => {
@@ -150,9 +148,9 @@ const createBlockchain = (web3: Web3): Blockchain => {
     checkNetwork,
     getAddress,
     getEtherBalance,
-    getLockedTokens,
+    getLock,
     getNetwork: web3.eth.net.getId,
-    getRedeemableTokensBalance,
+    getNow,
     getTokenBalance,
     grantTokens,
     redeemTokens,

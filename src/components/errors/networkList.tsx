@@ -1,7 +1,7 @@
 import { any, filter, find, prop, propEq } from 'ramda'
 import * as R from 'ramda'
 export interface Network {
-  id: string | null
+  id: string
   name: string
   isSupported: boolean
 }
@@ -22,7 +22,7 @@ export const whiteList: NetworkList = Object.freeze(
   filter(prop('isSupported'), networkList)
 )
 
-export const isNetworkSupported = (networkId: number | null): boolean =>
+export const isNetworkSupported = (networkId: number): boolean =>
   R.pipe(
     filter(prop('isSupported')) as (networkList: NetworkList) => NetworkList,
     any(propEq('id', networkId))

@@ -1,15 +1,14 @@
 import React from 'react'
-
 import { connect } from 'react-redux'
-import { RedeemableBalance } from '../../../../wallet/components/Balances'
-import * as StyledComponents from '../StyledComponents'
-import * as actions from './actions'
+import { RedeemableBalance } from '../../../../../wallet/components/'
+import * as StyledComponents from '../../StyledComponents'
+import * as actions from '../actions'
 
 interface RedeemTokensButtonProps {
   onClick: () => void
 }
 
-const RedeemTokensButton = ({ onClick }: RedeemTokensButtonProps) => (
+const RedeemTokensFormComponent = ({ onClick }: RedeemTokensButtonProps) => (
   <StyledComponents.SpreadHorizontally>
     <RedeemableBalance />
     <button className="btn-framed" onClick={onClick}>
@@ -25,4 +24,4 @@ const mapDispatchToProps = {
 export const RedeemTokensForm = connect(
   null,
   mapDispatchToProps
-)(RedeemTokensButton)
+)(RedeemTokensFormComponent)

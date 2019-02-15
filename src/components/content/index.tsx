@@ -2,7 +2,7 @@ import React from 'react'
 import { Route } from 'react-router'
 import { Address, EtherBalance, TokenBalance } from '../wallet/components'
 import { GrantTokensForm } from './components/Forms/GrantTokensForm'
-import { RedeemTokensForm } from './components/Forms/RedeemTokensForm'
+import { RedeemTokensPanel } from './components/Forms/RedeemTokensPanel'
 import { SendEtherForm } from './components/Forms/SendEtherForm'
 import { SendTokensForm } from './components/Forms/SendTokensForm'
 import LockedMxcTokens from './components/LockedMxcTokens'
@@ -33,7 +33,7 @@ export default () => (
             <Row caption="Ether Balance:" Content={EtherBalance} />
             <Row caption="MXC Tokens:" Content={TokenBalance} />
             <Row caption="Locked MXC Tokens:" Content={LockedMxcTokens} />
-            <Row caption="Redeemable MXC Tokens:" Content={RedeemTokensForm} />
+            <Row caption="Redeemable MXC Tokens:" Content={RedeemTokensPanel} />
             <Row caption="Send Tokens:" Content={SendTokensForm} />
             <Route path="/grant" component={GrantTokensFormRow} />
             <Row caption="Send Ether:" Content={SendEtherForm} />

@@ -14,30 +14,6 @@ export const etherBalance = (
   }
 }
 
-export const lockedTokenBalance = (
-  state: string = '0',
-  { type, payload: newBalance }: { type: any; payload: string }
-) => {
-  switch (type) {
-    case getType(actions.setLockedTokensBalance):
-      return newBalance
-    default:
-      return state
-  }
-}
-
-export const redeemableTokenBalance = (
-  state: string = '0',
-  { type, payload: newBalance }: { type: any; payload: string }
-) => {
-  switch (type) {
-    case getType(actions.setRedeemableTokensBalance):
-      return newBalance
-    default:
-      return state
-  }
-}
-
 const tokenBalance = (
   state: string = '0',
   { type, payload: newBalance }: { type: any; payload: string }
@@ -52,7 +28,5 @@ const tokenBalance = (
 
 export default combineReducers({
   ether: etherBalance,
-  lockedTokens: lockedTokenBalance,
-  redeemableTokens: redeemableTokenBalance,
   token: tokenBalance,
 })

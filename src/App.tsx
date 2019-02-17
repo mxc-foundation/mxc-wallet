@@ -3,9 +3,10 @@ import { History } from 'history'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Route } from 'react-router'
-import Content from './components/content'
 import Error from './components/errors'
+import GrantTokens from './components/grant'
 import Header from './components/header'
+import Home from './components/home'
 import Navbar from './components/navbar'
 import { Transactions } from './components/Transactions'
 import { getHasMainError, State } from './selectors'
@@ -15,8 +16,8 @@ const AppContent = () => (
     <Header />
     <Navbar />
     <div>
-      <Route exact path="/" component={Content} />
-      <Route exact path="/grant" component={Content} />
+      <Route exact path="/" component={Home} />
+      <Route path="/grant" component={GrantTokens} />
       <Route path="/transactions" component={Transactions} />
     </div>
   </div>

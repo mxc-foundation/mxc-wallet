@@ -33,6 +33,12 @@ export default () => (
             <i className="icon icon-arrow-right" />
           </NavLink>
         </li>
+        <li>
+          <NavLink to="/grant" exact>
+            <span>Grant</span>
+            <i className="icon icon-arrow-up" />
+          </NavLink>
+        </li>
       </ul>
     </div>
   </div>

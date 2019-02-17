@@ -9,7 +9,7 @@ import {
   takeLatest
 } from 'redux-saga/effects'
 import { getType } from 'typesafe-actions'
-import * as redeemButtonActions from '../../components/content/components/Forms/RedeemTokensPanel/actions'
+import * as redeemButtonActions from '../../components/home/components/Forms/RedeemTokensPanel/actions'
 import { updateTransactions } from '../../components/Transactions/saga'
 import * as walletActions from '../../components/wallet/actions'
 import {

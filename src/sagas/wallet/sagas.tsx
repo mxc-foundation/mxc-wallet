@@ -10,7 +10,10 @@ import {
 } from 'redux-saga/effects'
 import { getType } from 'typesafe-actions'
 import * as redeemButtonActions from '../../components/home/components/Forms/RedeemTokensPanel/actions'
-import { updateTransactions } from '../../components/Transactions/saga'
+import {
+  fetchTransactions,
+  refreshTransactions
+} from '../../components/Transactions/saga'
 import * as walletActions from '../../components/wallet/actions'
 import {
   Lock,
@@ -77,10 +80,10 @@ const createSaga = (blockchain: Blockchain) => {
     }
   }
 
-  function* pollTransactions() {
+  function* keepTransactionsSynched() {
     while (true) {
       try {
-        yield put(walletActions.updateTransactions())
+        yield* refreshTransactions()
       } catch (error) {
         yield spawn(handleErrors, error)
       }
@@ -121,13 +124,10 @@ const createSaga = (blockchain: Blockchain) => {
     }
   }
 
-  function* watchTheTransactions() {
+  function* fetchTransactionsOnAddressOrNetworkChange() {
     yield takeLatest(
-      [
-        getType(walletActions.setNetwork),
-        getType(walletActions.updateTransactions),
-      ],
-      updateTransactions
+      [getType(walletActions.setNetwork), getType(walletActions.setAddress)],
+      fetchTransactions
     )
   }
 
@@ -147,7 +147,7 @@ const createSaga = (blockchain: Blockchain) => {
       updateLock(),
       updateTokenBalance(),
       updateEtherBalance(),
-      updateTransactions(),
+      refreshTransactions(),
     ])
   }
 
@@ -182,10 +182,10 @@ const createSaga = (blockchain: Blockchain) => {
       watchTokenBalanceSaga(),
       watchLock(),
       watchNetworkSaga(),
-      pollTransactions(),
+      keepTransactionsSynched(),
       updateBalancesAfterRedemption(),
       watchNow(),
-      watchTheTransactions(),
+      fetchTransactionsOnAddressOrNetworkChange(),
     ])
   }
 }

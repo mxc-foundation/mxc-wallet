@@ -117,3 +117,10 @@ export const getAmountAtNextVesting: (
   walletSelector,
   fromWallet.getAmountAtNextVesting
 )
+
+export const getFetchingTransactions: (
+  state: State
+) => boolean = createSelector(
+  walletSelector,
+  fromWallet.getFetchingTransactions
+)

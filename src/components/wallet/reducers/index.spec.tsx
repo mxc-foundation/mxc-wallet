@@ -24,6 +24,7 @@ const mockState: WalletState = Object.freeze({
     ether: FnBigNumber.toWei(FnBigNumber.create(2)).toString(),
     token: FnBigNumber.toWei(FnBigNumber.create(100)).toString(),
   },
+  fetchingTransactions: false,
   lock: {
     cliff: 0,
     end: 0,

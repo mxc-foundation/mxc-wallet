@@ -9,5 +9,12 @@ const returnPayload = R.pipe(
 )
 
 export const transactions = createReducer([], {
-  [getType(actions.setTransactions)]: returnPayload,
+  [getType(actions.refreshTransactions.success)]: returnPayload,
+  [getType(actions.fetchTransactions.success)]: returnPayload,
+})
+
+export const fetchingTransactions = createReducer(false, {
+  [getType(actions.fetchTransactions.request)]: R.T,
+  [getType(actions.fetchTransactions.success)]: R.F,
+  [getType(actions.fetchTransactions.failure)]: R.F,
 })

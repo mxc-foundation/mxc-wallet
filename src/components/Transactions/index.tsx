@@ -15,6 +15,7 @@ export interface TransactionProps {
 
 interface TransactionsProps {
   transactions: TransactionProps[]
+  fetching: boolean
 }
 
 const heading: (type: 'incoming' | 'outgoing') => string = R.ifElse(
@@ -56,13 +57,18 @@ const Transaction = (
   </tr>
 )
 
-const TransactionsComponent = ({ transactions }: TransactionsProps) => (
+const TransactionsComponent = ({
+  transactions,
+  fetching,
+}: TransactionsProps) => (
   <div className="content">
     <div className="box-inner">
       <div className="content-box content-transactions">
         <table className="table-cards table-zebra table-transactions">
           <tbody>
-            {R.addIndex<TransactionProps>(R.map)(Transaction)(transactions)}
+            {fetching
+              ? 'Fetching transactions'
+              : R.addIndex<TransactionProps>(R.map)(Transaction)(transactions)}
           </tbody>
         </table>
       </div>
@@ -73,6 +79,7 @@ const TransactionsComponent = ({ transactions }: TransactionsProps) => (
 const mapStateToProps: (
   state: selectors.State
 ) => TransactionsProps = R.applySpec({
+  fetching: selectors.getFetchingTransactions,
   transactions: selectors.getTransactions,
 })
 

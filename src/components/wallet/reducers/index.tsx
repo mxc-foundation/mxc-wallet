@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js'
-import { path, pipe, prop } from 'ramda'
 import * as R from 'ramda'
+import { path, pipe, prop } from 'ramda'
 import { combineReducers } from 'redux'
 import { getType } from 'typesafe-actions'
 import {
@@ -13,7 +13,7 @@ import calculateVestableAmount from '../../../utils/calcVestableAmount'
 import * as FnBigNumber from '../../../utils/fnBignumber'
 import { idToNetwork, Network } from '../../errors/networkList'
 import { TransactionProps } from '../../Transactions'
-import { transactions } from '../../Transactions/reducers'
+import { fetchingTransactions, transactions } from '../../Transactions/reducers'
 import * as actions from '../actions'
 import balances from './balances'
 import {
@@ -54,6 +54,7 @@ export interface WalletState {
   now: number
   lock: LockStorage
   transactions: TransactionProps[]
+  fetchingTransactions: boolean
 }
 
 const DEFAULT_LOCK = {
@@ -118,6 +119,7 @@ export const now: (state: number | undefined, action: any) => number = (
 const reducer = combineReducers({
   address,
   balances,
+  fetchingTransactions,
   lock,
   network,
   now,
@@ -291,5 +293,9 @@ export const getTransactions: (
   getNetworkId,
   R.prop('transactions'),
 ])
+
+export const getFetchingTransactions: (state: WalletState) => boolean = R.prop(
+  'fetchingTransactions'
+)
 
 export default reducer

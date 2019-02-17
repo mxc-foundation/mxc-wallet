@@ -4,11 +4,29 @@ import * as selectors from '../../selectors'
 import * as actions from './actions'
 import { getTransactions } from './helpers'
 
-export function* updateTransactions() {
+export function* refreshTransactions() {
   const address = yield select(selectors.getAddress)
   const network = yield select(selectors.getNetworkId)
   if (address) {
     const transactions = yield call(getTransactions, address, network)
-    yield put(actions.setTransactions(transactions))
+    yield put(actions.refreshTransactions.success(transactions))
+  }
+}
+
+export function* fetchTransactions() {
+  yield put(actions.fetchTransactions.request())
+  try {
+    const address = yield select(selectors.getAddress)
+    const network = yield select(selectors.getNetworkId)
+    if (address) {
+      const transactions = yield call(getTransactions, address, network)
+      yield put(actions.fetchTransactions.success(transactions))
+    } else {
+      yield put(
+        actions.fetchTransactions.failure(new Error('No address found.'))
+      )
+    }
+  } catch (error) {
+    yield put(actions.refreshTransactions.failure(error))
   }
 }

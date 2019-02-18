@@ -144,4 +144,24 @@ test('getTimeToNextVesting', t => {
       assert.end()
     }
   )
+  t.test(
+    'Current time before cliff and cliff not a vesting period end.',
+    assert => {
+      const NOW = 10
+      const CLIFF = 25
+      assert.equal(
+        calculateTimeToNextVesting(
+          DEFAULT_START,
+          DEFAULT_END,
+          CLIFF,
+          TOTAL_AMOUNT,
+          VESTED_AMOUNT,
+          DEFAULT_PERIOD_LENGTH,
+          NOW
+        ),
+        20
+      )
+      assert.end()
+    }
+  )
 })

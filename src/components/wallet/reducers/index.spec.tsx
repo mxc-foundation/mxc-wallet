@@ -129,15 +129,15 @@ test('Wallet selectors tests', t => {
     const TEST_WALLET_STATE = {
       ...mockState,
       lock: {
-        cliff: 5,
-        end: 10,
+        cliff: 290,
+        end: 600,
         start: 0,
         totalAmount: '10',
         vestedAmount: '0',
       },
-      now: 3,
+      now: 200,
     }
-    assert.deepEqual(getTimeToNextVestingEvent(TEST_WALLET_STATE), 2)
+    assert.deepEqual(getTimeToNextVestingEvent(TEST_WALLET_STATE), 100)
   })
 
   t.test('Amount at next vesting event, now is before cliff', assert => {

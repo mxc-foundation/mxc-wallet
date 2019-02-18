@@ -12,6 +12,7 @@ const DEFAULT_CLIFF = 2
 const DEFAULT_END = 10
 const DEFAULT_START = 0
 const DEFAULT_PERIOD_LENGTH = 1
+const MONTH = 60 * 60 * 24 * 30
 
 test('Calculation of vestable tokens', t => {
   t.test('Current time is before cliff', assert => {
@@ -254,6 +255,19 @@ test('Calculation of vestable tokens', t => {
       FnBigNumber.create(20).toString()
     )
     assert.end()
+  })
+  t.test('Real world example', assert => {
+    assert.plan(1)
+    const vestedAmount = calcVestableAmount(
+      1506859200,
+      1633089600,
+      1569931200,
+      FnBigNumber.create('170588000000000000000000'),
+      FnBigNumber.create('0'),
+      MONTH,
+      1569931200
+    )
+    assert.deepEqual(vestedAmount, FnBigNumber.create(0))
   })
 })
 

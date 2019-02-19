@@ -1,7 +1,7 @@
 import Web3 from 'web3'
 import { PERIOD_LENGTH_ON_KOVAN } from '../config'
 import { createMXCToken, readTimeFromChain } from './blockchain'
-import { calculateTimeToNextVesting } from './calculateTimeToNextVesting'
+import { timeUntilNextVestingPossible } from './calculateTimeToNextVesting'
 import * as FnBigNumber from './fnBignumber'
 
 export const getTimeToNextVesting = async (
@@ -16,7 +16,7 @@ export const getTimeToNextVesting = async (
 
   const { start, vesting: end, amount, vestedAmount, cliff } = timeLockData
   const now = await readTimeFromChain(theWeb3)
-  const timeToNextVesting = calculateTimeToNextVesting(
+  const timeToNextVesting = timeUntilNextVestingPossible(
     parseInt(start, 10),
     parseInt(end, 10),
     parseInt(cliff, 10),

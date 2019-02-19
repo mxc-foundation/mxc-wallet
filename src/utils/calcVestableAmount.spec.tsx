@@ -1,10 +1,5 @@
 import test from 'tape'
-import calcVestableAmount, {
-  getVestedAmount,
-  remainder,
-  roundNow,
-  timeSinceStart
-} from './calcVestableAmount'
+import calcVestableAmount, { timeSinceStart } from './calcVestableAmount'
 import * as FnBigNumber from './fnBignumber'
 
 const DEFAULT_TOTAL_AMOUNT = FnBigNumber.create(100)
@@ -265,57 +260,11 @@ test('Calculation of vestable tokens', t => {
       FnBigNumber.create('170588000000000000000000'),
       FnBigNumber.create('0'),
       MONTH,
-      1569931200
+      1569931201
     )
-    assert.deepEqual(vestedAmount, FnBigNumber.create(0))
-  })
-})
-
-test('Helpers', t => {
-  t.test(
-    'Calculate the time difference between start and beginning',
-    assert => {
-      const NOW = 17
-      const PERIOD_LENGTH = 3
-      assert.equal(timeSinceStart(PERIOD_LENGTH, 0, NOW), 17)
-      assert.equal(timeSinceStart(PERIOD_LENGTH, 1, NOW), 16)
-      assert.equal(timeSinceStart(75, 1549527448, 1549527648), 200)
-      assert.end()
-    }
-  )
-  t.test('Calculate the remainder', assert => {
-    const NOW = 17
-    const PERIOD_LENGTH = 3
-    assert.equal(remainder(PERIOD_LENGTH, 0, NOW), 2)
-    assert.equal(remainder(PERIOD_LENGTH, 1, NOW), 1)
-    assert.end()
-  })
-
-  t.test('Round the current now to a fraction of the period length', assert => {
-    const PERIOD_LENGTH = 3
-    let START = 0
-    const NOW = 17
-    assert.equal(roundNow(PERIOD_LENGTH, START, NOW), 15)
-    START = 1
-    assert.equal(roundNow(PERIOD_LENGTH, START, NOW), 16)
-    START = 15
-    assert.equal(roundNow(PERIOD_LENGTH, START, NOW), 15)
-    assert.equal(roundNow(13, 53, 77), 66)
-    assert.end()
-  })
-
-  t.test('Get the amount of vested tokens', assert => {
-    const VESTED_AMOUNT = FnBigNumber.create(20)
-    const NOW = 17
-    const vestedAmount = getVestedAmount(
-      DEFAULT_START,
-      DEFAULT_END,
-      DEFAULT_CLIFF,
-      DEFAULT_TOTAL_AMOUNT,
-      VESTED_AMOUNT,
-      NOW
+    assert.deepEqual(
+      vestedAmount,
+      FnBigNumber.create('85294000000000000000008')
     )
-    assert.deepEqual(vestedAmount, FnBigNumber.create(20))
-    assert.end()
   })
 })

@@ -6,10 +6,10 @@ import { PERIOD_LENGTH_ON_KOVAN } from '../config'
 import { assert } from './tools/chai'
 
 const INITIAL_AMOUNT = 1000000
-const BALANCE_AFTER_2_PERIODS = 2
-const BALANCE_AFTER_4_PERIODS = 4
+const BALANCE_AFTER_2_PERIODS = '20000'
+const BALANCE_AFTER_4_PERIODS_AND_30_SECONDS = '40000'
 const CLIFF_PERIODS = 1
-const VESTING_PERIODS = 1000000
+const VESTING_PERIODS = 100
 
 contract('MXCToken', ([deployer, user]) => {
   it('should unlock tokens after vesting time', async () => {
@@ -25,10 +25,12 @@ contract('MXCToken', ([deployer, user]) => {
     await timeTravel(2 * PERIOD_LENGTH_ON_KOVAN, web3)
     await token.redeemVestableToken(user, { from: user })
     const unlockedBalance2Months = await token.balanceOf(user)
-    assert.equal(unlockedBalance2Months, BALANCE_AFTER_2_PERIODS)
-    await timeTravel(2 * PERIOD_LENGTH_ON_KOVAN, web3)
+    assert.equal(unlockedBalance2Months.toString(), BALANCE_AFTER_2_PERIODS)
+    await timeTravel(2 * PERIOD_LENGTH_ON_KOVAN + 30, web3)
     await token.redeemVestableToken(user, { from: user })
     const unlockedBalance4Months = await token.balanceOf(user)
-    assert.equal(unlockedBalance4Months, BALANCE_AFTER_4_PERIODS)
+    assert.equal(unlockedBalance4Months, BALANCE_AFTER_4_PERIODS_AND_30_SECONDS)
+    await timeTravel(6, web3)
+    await assert.isRejected(token.redeemVestableToken(user, { from: user }))
   })
 })

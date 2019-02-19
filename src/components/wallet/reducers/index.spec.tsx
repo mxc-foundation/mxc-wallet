@@ -137,7 +137,7 @@ test('Wallet selectors tests', t => {
       },
       now: 200,
     }
-    assert.deepEqual(getTimeToNextVestingEvent(TEST_WALLET_STATE), 100)
+    assert.deepEqual(getTimeToNextVestingEvent(TEST_WALLET_STATE), 91)
   })
 
   t.test('Amount at next vesting event, now is before cliff', assert => {

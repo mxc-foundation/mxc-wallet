@@ -8,7 +8,7 @@ import {
   PERIOD_LENGTH_ON_MAIN_NET
 } from '../../../config'
 import { amountAtNextVesting } from '../../../utils/amountAtNextVesting'
-import { calculateTimeToNextVesting } from '../../../utils/calculateTimeToNextVesting'
+import { timeUntilNextVestingPossible } from '../../../utils/calculateTimeToNextVesting'
 import calculateVestableAmount from '../../../utils/calcVestableAmount'
 import * as FnBigNumber from '../../../utils/fnBignumber'
 import { idToNetwork, Network } from '../../errors/networkList'
@@ -199,7 +199,7 @@ const getPeriodLength: (state: WalletState) => number = R.cond([
 
 export const getTimeToNextVestingEvent: (
   state: WalletState
-) => number = R.converge(calculateTimeToNextVesting, [
+) => number = R.converge(timeUntilNextVestingPossible, [
   getStart,
   getEnd,
   getCliff,

@@ -1,8 +1,8 @@
 import test from 'tape'
 import {
-  calculateTimeToNextVesting,
   nowLowerOrEqualCliff,
-  nowLowerOrEqualEnd
+  nowLowerOrEqualEnd,
+  timeUntilNextVestingPossible
 } from './calculateTimeToNextVesting'
 import * as FnBigNumber from './fnBignumber'
 
@@ -26,7 +26,8 @@ test('getTimeToNextVesting', t => {
         DEFAULT_PERIOD_LENGTH,
         NOW
       ),
-      true
+      true,
+      'Should return true for a now which is before the cliff.'
     )
     assert.equal(
       nowLowerOrEqualCliff(
@@ -53,7 +54,7 @@ test('getTimeToNextVesting', t => {
       true
     )
     assert.equal(
-      calculateTimeToNextVesting(
+      timeUntilNextVestingPossible(
         DEFAULT_START,
         DEFAULT_END,
         DEFAULT_CLIFF,
@@ -62,7 +63,8 @@ test('getTimeToNextVesting', t => {
         DEFAULT_PERIOD_LENGTH,
         NOW
       ),
-      16
+      17,
+      'Next vesting will be in 17 seconds.'
     )
     assert.end()
   })
@@ -71,7 +73,7 @@ test('getTimeToNextVesting', t => {
     const NOW = 20
 
     assert.equal(
-      calculateTimeToNextVesting(
+      timeUntilNextVestingPossible(
         DEFAULT_START,
         DEFAULT_END,
         DEFAULT_CLIFF,
@@ -80,16 +82,33 @@ test('getTimeToNextVesting', t => {
         DEFAULT_PERIOD_LENGTH,
         NOW
       ),
-      0
+      1
     )
     assert.end()
   })
 
+  t.test('Current time is one second after cliff', assert => {
+    const NOW = 21
+
+    assert.equal(
+      timeUntilNextVestingPossible(
+        DEFAULT_START,
+        DEFAULT_END,
+        DEFAULT_CLIFF,
+        TOTAL_AMOUNT,
+        VESTED_AMOUNT,
+        DEFAULT_PERIOD_LENGTH,
+        NOW
+      ),
+      9
+    )
+    assert.end()
+  })
   t.test('Current time is after end', assert => {
     const NOW = 120
 
     assert.equal(
-      calculateTimeToNextVesting(
+      timeUntilNextVestingPossible(
         DEFAULT_START,
         DEFAULT_END,
         DEFAULT_CLIFF,
@@ -109,7 +128,7 @@ test('getTimeToNextVesting', t => {
       const NOW = 26
 
       assert.equal(
-        calculateTimeToNextVesting(
+        timeUntilNextVestingPossible(
           DEFAULT_START,
           DEFAULT_END,
           DEFAULT_CLIFF,
@@ -130,7 +149,7 @@ test('getTimeToNextVesting', t => {
       const NOW = 30
 
       assert.equal(
-        calculateTimeToNextVesting(
+        timeUntilNextVestingPossible(
           DEFAULT_START,
           DEFAULT_END,
           DEFAULT_CLIFF,
@@ -139,7 +158,7 @@ test('getTimeToNextVesting', t => {
           DEFAULT_PERIOD_LENGTH,
           NOW
         ),
-        0
+        10
       )
       assert.end()
     }
@@ -150,7 +169,7 @@ test('getTimeToNextVesting', t => {
       const NOW = 10
       const CLIFF = 25
       assert.equal(
-        calculateTimeToNextVesting(
+        timeUntilNextVestingPossible(
           DEFAULT_START,
           DEFAULT_END,
           CLIFF,
@@ -159,7 +178,7 @@ test('getTimeToNextVesting', t => {
           DEFAULT_PERIOD_LENGTH,
           NOW
         ),
-        20
+        16
       )
       assert.end()
     }

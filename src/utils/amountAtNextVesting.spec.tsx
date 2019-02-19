@@ -21,7 +21,7 @@ test('Calculation of next vestable tokens', t => {
       DEFAULT_PERIOD_LENGTH,
       NOW
     )
-    assert.equal(vestableTokens.toString(), FnBigNumber.create(20).toString())
+    assert.equal(vestableTokens.toString(), FnBigNumber.create(30).toString())
     assert.end()
   })
   t.test('Current time is at cliff, no tokens redeemed', assert => {
@@ -36,7 +36,7 @@ test('Calculation of next vestable tokens', t => {
       DEFAULT_PERIOD_LENGTH,
       NOW
     )
-    assert.equal(vestableTokens.toString(), FnBigNumber.create(20).toString())
+    assert.equal(vestableTokens.toString(), FnBigNumber.create(30).toString())
     assert.end()
   })
   t.test('Current time is after cliff, 10 tokens redeemed', assert => {
@@ -100,10 +100,7 @@ test('Calculation of next vestable tokens', t => {
         MONTH,
         NOW
       )
-      assert.equal(
-        vestableTokens.toFixed(),
-        FnBigNumber.create('87570000000000000000000').toFixed()
-      )
+      assert.equal(vestableTokens.toFixed(), '85294000000000000000008')
       assert.end()
     }
   )

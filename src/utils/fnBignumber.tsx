@@ -47,3 +47,7 @@ export const isZero = (num: BigNumber): boolean => num.isZero()
 export const isEqualTo = R.curry(
   (num1: BigNumber, num2: BigNumber): boolean => num2.eq(num1)
 )
+
+export const dp = R.curry(
+  (precision: number, num1: BigNumber): BigNumber => num1.dp(precision)
+)

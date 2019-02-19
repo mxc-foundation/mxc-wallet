@@ -32349,7 +32349,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.1",
-  "updatedAt": "2019-02-11T10:31:56.567Z",
+  "updatedAt": "2019-02-19T10:50:31.020Z",
   "devdoc": {
     "methods": {
       "allowance(address,address)": {

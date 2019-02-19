@@ -32772,12 +32772,12 @@
         }
       },
       "links": {},
-      "address": "0xaEd023EC19031e1004304eA7ef36852A87Db5f67",
-      "transactionHash": "0xd76f36bfbc136dc844a28df0522d5aa6a442172435ba2afe26746fd98a40392e"
+      "address": "0x27dA64984b8b18e8B807BB15205534F45bfE6955",
+      "transactionHash": "0xee4e1fd1d22256d57ad0867f70486d730b89fa533ad9ec3317b7d4ad0d8f0232"
     }
   },
   "schemaVersion": "3.0.1",
-  "updatedAt": "2019-02-11T10:38:13.194Z",
+  "updatedAt": "2019-02-19T10:51:19.248Z",
   "devdoc": {
     "methods": {
       "allowance(address,address)": {

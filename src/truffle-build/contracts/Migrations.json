@@ -35,8 +35,7 @@
       "inputs": [],
       "payable": false,
       "stateMutability": "nonpayable",
-      "type": "constructor",
-      "signature": "constructor"
+      "type": "constructor"
     },
     {
       "constant": false,
@@ -1394,7 +1393,7 @@
     }
   },
   "schemaVersion": "3.0.1",
-  "updatedAt": "2019-02-11T11:03:53.083Z",
+  "updatedAt": "2019-02-19T10:51:19.234Z",
   "devdoc": {
     "methods": {}
   },

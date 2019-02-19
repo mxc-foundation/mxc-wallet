@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js'
 import * as R from 'ramda'
-import { calculateTimeToNextVesting } from './calculateTimeToNextVesting'
+import { timeUntilNextVestingPossible } from './calculateTimeToNextVesting'
 import calcVestableAmount, { FromTimeLock } from './calcVestableAmount'
 
 const getStart = R.nthArg(0)
@@ -20,6 +20,6 @@ export const amountAtNextVesting: FromTimeLock<BigNumber> = R.converge(
     getTotalAmount,
     getVestedAmount,
     getPeriodLength,
-    R.converge(R.add, [getNow, calculateTimeToNextVesting]),
+    R.converge(R.add, [getNow, timeUntilNextVestingPossible]),
   ]
 )

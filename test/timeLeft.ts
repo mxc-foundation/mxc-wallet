@@ -1,16 +1,17 @@
 const MXCToken = artifacts.require('./MXCToken.sol')
 import Web3 from 'web3'
 declare var web3: Web3
+import { PERIOD_LENGTH_ON_KOVAN } from '../config'
 import { getTimeToNextVesting } from '../src/utils/getTimeLeftToNextVesting'
 import { timeTravel } from './tools/blockchain'
 import { assert } from './tools/chai'
 
-const INITIAL_AMOUNT = 1000000
+const INITIAL_AMOUNT = 100
 const CLIFF_MONTHS = 1
-const VESTING_MONTHS = 1000000
+const VESTING_MONTHS = 2
 
 contract('Calculate the time left to the next vesting', ([deployer, user]) => {
-  it('Grant some tokens, jump in time to the cliff. Get the time left', async () => {
+  it('Grant some tokens, jump in time to the second after cliff. Get the time until the end of the period', async () => {
     const token = await MXCToken.new({ from: deployer })
     await token.grantTokenStartNow(
       user,
@@ -21,14 +22,14 @@ contract('Calculate the time left to the next vesting', ([deployer, user]) => {
         from: deployer,
       }
     )
-    await timeTravel(60, web3)
+    await timeTravel(PERIOD_LENGTH_ON_KOVAN + 1, web3)
 
     const timeToNextVesting = await getTimeToNextVesting(
       web3,
       token.address,
       user
     )
-    assert.equal(timeToNextVesting, 0)
+    assert.equal(timeToNextVesting, 59)
   })
   it('Grant some tokens, jump in time. Get the time left', async () => {
     const token = await MXCToken.new({ from: deployer })
@@ -41,13 +42,13 @@ contract('Calculate the time left to the next vesting', ([deployer, user]) => {
         from: deployer,
       }
     )
-    await timeTravel(125, web3)
+    await timeTravel(PERIOD_LENGTH_ON_KOVAN / 2, web3)
 
     const timeToNextVesting = await getTimeToNextVesting(
       web3,
       token.address,
       user
     )
-    assert.equal(timeToNextVesting, 55)
+    assert.equal(timeToNextVesting, 31)
   })
 })

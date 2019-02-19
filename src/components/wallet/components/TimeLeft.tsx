@@ -19,6 +19,7 @@ const mapStateToTimeLeftProps: (state: State) => TimeLeftProps = R.applySpec({
   nextAmount: R.pipe(
     selectors.getAmountAtNextVesting,
     FnBigNumber.fromWei,
+    FnBigNumber.dp(2),
     FnBigNumber.toString
   ),
   timeToNextVestingEvent: timeToNextVestingEventWithCorrectUnits,

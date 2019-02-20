@@ -12,14 +12,12 @@ export const etherscanBasePathForNetwork: (
   [
     R.T,
     R.always(
-      'https://kovan.etherscan.io/token/0xaed023ec19031e1004304ea7ef36852a87db5f67?a='
+      'https://kovan.etherscan.io/token/0x27dA64984b8b18e8B807BB15205534F45bfE6955?a='
     ),
   ],
 ])
 
-export const etherscanOriginForNetwork: (networkId: number) => string = R.cond(
-  [
-    [R.equals(1), R.always('https://etherscan.io/')],
-    [R.T, R.always('https://kovan.etherscan.io/')],
-  ]
-)
+export const etherscanOriginForNetwork: (networkId: number) => string = R.cond([
+  [R.equals(1), R.always('https://etherscan.io/')],
+  [R.T, R.always('https://kovan.etherscan.io/')],
+])

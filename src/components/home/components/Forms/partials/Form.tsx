@@ -15,7 +15,7 @@ export const Form = ({ valid, handleSubmit }: SendFormProps) => (
           <Field
             type="text"
             name="recipient"
-            placeholder="Recieving address"
+            placeholder="Receiving address"
             component={InputField}
           />
           <Field

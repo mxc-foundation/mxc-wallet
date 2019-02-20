@@ -10,12 +10,16 @@ export const isEnough = (
   etherBalance: BigNumber,
   asset: string = 'ether'
 ): string => {
-  const etherInWei = FnBigNumber.toWei(FnBigNumber.create(etherToSend))
-  if (etherInWei.isZero() || etherInWei.isNegative()) {
-    return 'Only positive values are allowed.'
-  }
-  if (etherInWei.gt(etherBalance)) {
-    return `You do not have enough ${asset}.`
+  try {
+    const etherInWei = FnBigNumber.toWei(FnBigNumber.create(etherToSend))
+    if (etherInWei.isZero() || etherInWei.isNegative()) {
+      return 'Amount is too small.'
+    }
+    if (etherInWei.gt(etherBalance)) {
+      return `You do not have enough ${asset}.`
+    }
+  } catch (error) {
+    return 'Illegal value.'
   }
   return ''
 }

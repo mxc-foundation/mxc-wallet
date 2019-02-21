@@ -2,6 +2,8 @@
   "name": "mxc-wallet",
   "version": "0.1.0",
   "private": true,
+  "author": "MXC Foundation",
+  "license": "Apache-2.0",
   "dependencies": {
     "@types/node": "10.12.20",
     "@types/react": "16.7.22",

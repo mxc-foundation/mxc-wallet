@@ -228,7 +228,7 @@ test('Wallet selectors tests', t => {
 
     assert.equal(
       getEtherscanUrl(mockState),
-      `https://kovan.etherscan.io/token/0xaed023ec19031e1004304ea7ef36852a87db5f67?a=${ADDRESS}`
+      `https://kovan.etherscan.io/token/0x27dA64984b8b18e8B807BB15205534F45bfE6955?a=${ADDRESS}`
     )
   })
 })

@@ -1,15 +1,28 @@
-.blur-ball:nth-child(1) {
-	opacity: 1;
+.logo .blur-ball:nth-child(1) {
+	background-color: #ff0080;
+	right: 23px;
+	top: 18px;
+	transform: scale(0.7);
 	animation: bb1 30s infinite;
 }
-.blur-ball:nth-child(2) {
-	opacity: 1;
+.logo .blur-ball:nth-child(2) {
+	background-color: #00ffd9;
+	right: 27px;
 	animation: bb2 30s infinite;
 }
-.blur-ball:nth-child(3) {
-	opacity: 1;
+.logo .blur-ball:nth-child(3) {
+	background-color: #ff9841;
+	right: 20px;
+	top: 36px;
 	animation: bb3 30s infinite;
 }
+.logo .blur-ball:nth-child(4) {
+	background-color: #ff9841;
+	right: 43px;
+	top: 15px;
+}
+
+
 @keyframes bb1 {
 	3% {
 		top: 0;
@@ -50,5 +63,45 @@
 	10%{
 		right: 20px;
 		top: 36px;
+	}
+}
+
+.chat-box .blur-box {
+    transition: transform 0.2s;
+}
+.chat-box:hover {
+	color: #00ffd9;
+}
+.chat-box:hover .blur-box{
+    transform: scale(1.2);
+}
+.chat-icon .blur-ball:nth-child(1) {
+	background-color: #ff4141;
+	right: 43px;
+	top: 15px;
+}
+.chat-icon .blur-ball:nth-child(2) {
+	background-color: #00ffd9;
+	right: 27px;
+	animation: bb4 30s infinite;
+}
+.chat-icon .blur-ball:nth-child(3) {
+	background-color: #00ffd9;
+	right: 20px;
+	top: 35px;
+	transform: scale(1.2);
+}
+@keyframes bb4 {
+	3% {
+		transform: scale(0.2);
+	}
+	4% {
+		transform: scale(1.2);
+	}
+	5% {
+		transform: scale(0.2);
+	}
+	7%{
+		transform: scale(1);
 	}
 }

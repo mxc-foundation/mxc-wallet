@@ -10,7 +10,7 @@ interface SendFormProps {
 export const Form = ({ valid, handleSubmit }: SendFormProps) => (
   <StyledComponents.Wrapper>
     <form onSubmit={handleSubmit}>
-      <StyledComponents.Container>
+      
         <StyledComponents.VerticallyStretched>
           <Field
             type="text"
@@ -27,22 +27,26 @@ export const Form = ({ valid, handleSubmit }: SendFormProps) => (
           <Field
             type="number"
             name="cliffPeriods"
-            placeholder="Cliff periods"
+            placeholder="Cliff periods (Months)"
             component={InputField}
           />
           <Field
             type="number"
             name="vestingPeriods"
-            placeholder="Vesting Periods"
+            placeholder="Vesting Periods (Months)"
             component={InputField}
           />
         </StyledComponents.VerticallyStretched>
-        <StyledComponents.Vertically>
-          <button disabled={!valid} type="submit" className="btn-framed">
-            Send
-          </button>
-        </StyledComponents.Vertically>
-      </StyledComponents.Container>
+
+        <button disabled={!valid} type="submit" className="btn-action">
+          <div className="i-box">
+            <div className="box-inner">
+              <i className="mxc-icon-t icon icon-t-grant"></i>
+            </div>
+          </div>
+          Grant
+        </button>
+        
     </form>
   </StyledComponents.Wrapper>
 )

@@ -1,5 +1,5 @@
 import React from 'react'
-import { GrantTokensForm } from '../home/components/Forms/GrantTokensForm'
+import { SendEtherForm } from '../home/components/Forms/SendEtherForm'
 import { Address } from '../wallet/components'
 
 const Row = ({ caption, Content }: { caption: string; Content: any }) => (
@@ -12,6 +12,7 @@ const Row = ({ caption, Content }: { caption: string; Content: any }) => (
     </td>
   </tr>
 )
+
 const Heading = ({ caption, Content }: { caption: string; Content: any }) => (
   <div>
     <h1>{caption}</h1>
@@ -26,13 +27,15 @@ export default () => (
   <div className="content">
     <div className="box-inner">
       <div className="content-box content-transactions">
-        <Heading caption="Grant Tokens" Content={Address} />
 
+        <Heading caption="Send ETH" Content={Address} />
+        
         <table className="table-layout">
           <tbody>
-            <Row caption="Grant Tokens Now:" Content={GrantTokensForm} />
+            <Row caption="Send ETH:" Content={SendEtherForm} />
           </tbody>
         </table>
+
       </div>
     </div>
   </div>

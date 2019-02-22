@@ -5,6 +5,8 @@ import { connect } from 'react-redux'
 import { Route } from 'react-router'
 import Error from './components/errors'
 import GrantTokens from './components/grant'
+import SendTokens from './components/send-tokens'
+import SendEther from './components/send-ether'
 import Header from './components/header'
 import Home from './components/home'
 import Navbar from './components/navbar'
@@ -19,6 +21,8 @@ const AppContent = () => (
       <Route exact path="/" component={Home} />
       <Route path="/grant" component={GrantTokens} />
       <Route path="/transactions" component={Transactions} />
+      <Route path="/send-tokens" component={SendTokens} />
+      <Route path="/send-ether" component={SendEther} />
     </div>
   </div>
 )

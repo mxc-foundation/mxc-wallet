@@ -16,27 +16,34 @@ export default () => (
       </a>
 
       <ul>
-        <li className="burger-box">
-          <a id="burger" href="" className="">
-            <i className="mxc-icon" />
-          </a>
-        </li>
         <li>
           <NavLink to="/" exact>
-            <span>Home</span>
+            <span>Wallet</span>
             <i className="icon icon-wallet" />
           </NavLink>
         </li>
         <li>
           <NavLink to="/transactions">
             <span>Transactions</span>
-            <i className="icon icon-arrow-right" />
+            <i className="mxc-icon-t icon icon-t-trans"></i>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/send-tokens">
+            <span>Send MXC</span>
+            <i className="mxc-icon-t icon icon-t-arrowNE"></i>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/send-ether">
+            <span>Send ETH</span>
+            <i className="mxc-icon-t icon icon-t-arrowNE"></i>
           </NavLink>
         </li>
         <li>
           <NavLink to="/grant" exact>
             <span>Grant</span>
-            <i className="icon icon-arrow-up" />
+            <i className="mxc-icon-t icon icon-t-grant"></i>
           </NavLink>
         </li>
       </ul>

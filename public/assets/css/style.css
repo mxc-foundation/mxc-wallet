@@ -24,6 +24,14 @@ hr {
 .content > .box-inner {
   /* padding-right: 100px; */
 }
+.header > .box-inner {
+  display: flex;
+  align-items: flex-end;
+  padding-right: 0;
+}
+
+.header .balanceStatus > span {
+}
 
 /*TYPO*/
 h3,
@@ -35,11 +43,26 @@ h3,
 .t-s-bold {
   font-size: 0.9rem;
   font-weight: 700;
-  margin-top: 4rem;
+  /* margin-top: 5rem; */
 }
 .t-light {
   font-weight: 300;
 }
+
+
+
+.t-s {
+  font-size: 0.9rem;
+}
+.t-bold {
+  font-weight: 700;
+}
+.t-light {
+  font-weight: 300;
+}
+
+
+
 
 input {
   width: 100%;
@@ -53,11 +76,14 @@ input {
   font-family: Montserrat;
   margin: 1rem 0;
 }
-
 input:focus {
   box-shadow: none;
   outline: none;
   border-bottom-color: #00ffd9;
+}
+input[name="cliffPeriods"], input[name="vestingPeriods"] {
+  /* display: inline-block; */
+  /* width: 50%; */
 }
 
 table {
@@ -68,10 +94,16 @@ table.table-zebra tr:nth-child(even) {
   background-color: #222;
 }
 
+table.table-transactions tr {
+  cursor: pointer;
+}
+table.table-transactions tr > a {
+  display: block;
+}
 table.table-transactions tr td {
-  vertical-align: middle !important;
-  padding-top: 0.1rem;
-  padding-bottom: 0.15rem;
+  vertical-align: bottom !important;
+  padding-top: 0.8rem;
+  padding-bottom: 0.7rem;
 }
 table.table-transactions tr td:first-child {
   text-align: center;
@@ -82,11 +114,26 @@ table.table-transactions tr td:first-child {
 table.table-transactions tr td:last-child * {
   opacity: 1;
 }
+.cell-fromto {
+  width: 50%;
+}
+.cell-asset {
+  width: 25%;
+}
 
-table.table-accounts tr td:first-child,
-table.table-transactions tr td:first-child,
-table.table-contracts-tokens tr td:first-child {
-  width: calc(50px + 1.5rem);
+table tr td:first-child {
+  width: 150px;
+  min-width: 150px;
+}
+table form > div {
+  margin: 0 !important;
+}
+
+table.table-layout, table.table-layout tr:hover {
+  background: transparent;
+}
+table.table-layout tr td:last-child * {
+  opacity: 1;
 }
 
 .identicon {
@@ -98,25 +145,48 @@ table.table-contracts-tokens tr td:first-child {
   position: absolute;
 }
 
+.chat-box {
+  position: fixed;
+  width: 15rem;
+  cursor: pointer;
+  bottom: 2rem;
+  right: 1rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+.chat-icon {
+  width: 7rem;
+  height: 7rem;
+  margin-bottom: -1.2rem;
+  margin-left: -2rem;
+  background-image: url('../img/AXS_icon-chat.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+
+
+
 @media screen and (min-width: 1200px) {
   .header > .box-inner,
   .content > .box-inner {
-    width: calc(100% - 100px);
+    width: calc(100% - 150px);
     margin: auto;
-    max-width: 1000px;
-    padding-right: 100px;
+    max-width: none;
+    padding-right: calc(100% - 1000px);
+    padding-left: 100px;
   }
 
   table {
-    width: calc(100% + 100px);
-    transform: translateX(calc(-50px - 3rem));
+    width: calc(100% + 150px + 1.5rem);
+    transform: translateX(calc(-150px - 1.5rem));
   }
 }
 
 @media screen and (max-width: 980px) {
   .menuRouter {
     left: -255px;
-    font-size: 2rem;
+    font-size: 1.6rem;
     width: 370px;
   }
   .menuRouter ul li a span {
@@ -135,5 +205,33 @@ table.table-contracts-tokens tr td:first-child {
   .header,
   .content {
     padding-left: 190px;
+  }
+  .logo {
+    margin-left: 128px;
+  }
+  .cell-fromto {
+    width: 50%;
+  }
+  .cell-asset {
+    width: 25%;
+  }
+}
+@media screen and (max-width: 775px) {
+  .header > .box-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding-bottom: 0.2rem;
+  }
+  .content {
+    min-width: 800px;
+  }
+  table tr td:first-child {
+    width: 125px;
+    min-width: 0;
+  }
+  .divider {
+    opacity: 0;
+    margin-left: -9px;
   }
 }

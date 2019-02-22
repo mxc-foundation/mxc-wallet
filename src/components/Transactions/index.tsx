@@ -3,6 +3,17 @@ import React from 'react'
 import { connect } from 'react-redux'
 import * as selectors from '../../selectors'
 
+import { Address } from '../wallet/components'
+const Heading = ({ caption, Content }: { caption: string; Content: any }) => (
+  <div>
+    <h1>{caption}</h1>
+    <h2>
+      <Content />
+      <i className="icon icon-contracts"></i>
+    </h2>
+  </div>
+)
+
 export interface TransactionProps {
   type: 'incoming' | 'outgoing'
   fromTo: string
@@ -34,27 +45,32 @@ const Transaction = (
   { type, fromTo, value, asset, date, link }: TransactionProps,
   index: number
 ) => (
-  <tr key={index}>
-    <td className="">
-      <h2>{date}</h2>
-    </td>
-    <td>
-      <h3>{heading(type)}</h3>
-      <p>
-        <span>
-          {type === 'incoming' ? 'From:' : 'To:'}&nbsp;{fromTo}
-        </span>
-      </p>
-    </td>
-    <td>
-      {value}&nbsp;{asset}
-    </td>
-    <td>
+    
+
+    <tr key={index}>
       <a href={link} target="_blank">
-        <i className={`icon ${arrowClass(type)}`} />
+
+        <td className="cell-date">
+          <span className="t-s t-bold">{date}</span>
+        </td>
+        <td className="cell-fromto">
+          <span className="t-s t-bold">{heading(type)}&nbsp;{type === 'incoming' ? 'From:' : 'To:'}</span>
+          <br/>
+          <span>
+            {fromTo}
+          </span>
+        </td>
+        <td className="cell-asset">
+          <span className="t-s t-bold">
+            {value}&nbsp;{asset}
+          </span>
+        </td>
+        <td className="cell-icon">
+          <i className={`icon ${arrowClass(type)}`} />
+        </td>
+
       </a>
-    </td>
-  </tr>
+    </tr>  
 )
 
 const TransactionsComponent = ({
@@ -64,6 +80,9 @@ const TransactionsComponent = ({
   <div className="content">
     <div className="box-inner">
       <div className="content-box content-transactions">
+
+        <Heading caption="Latest Transactions" Content={Address} />
+
         <table className="table-cards table-zebra table-transactions">
           <tbody>
             {fetching

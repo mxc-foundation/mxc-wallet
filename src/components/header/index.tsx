@@ -25,10 +25,10 @@ export default () => (
           <div className="box-inner">
             <div className="blur-box">
               <div className="box-inner">
-                  <div className="blur-ball"></div>
-                  <div className="blur-ball"></div>
-                  <div className="blur-ball"></div>
-                  <div className="blur-ball"></div>
+                  <div className="blur-ball/>
+                  <div className="blur-ball/>
+                  <div className="blur-ball/>
+                  <div className="blur-ball/>
               </div>
             </div>
           </div>

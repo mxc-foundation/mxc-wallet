@@ -25,25 +25,25 @@ export default () => (
         <li>
           <NavLink to="/transactions">
             <span>Transactions</span>
-            <i className="mxc-icon-t icon icon-t-trans"></i>
+            <i className="mxc-icon-t icon icon-t-trans"/>
           </NavLink>
         </li>
         <li>
           <NavLink to="/send-tokens">
             <span>Send MXC</span>
-            <i className="mxc-icon-t icon icon-t-arrowNE"></i>
+            <i className="mxc-icon-t icon icon-t-arrowNE"/>
           </NavLink>
         </li>
         <li>
           <NavLink to="/send-ether">
             <span>Send ETH</span>
-            <i className="mxc-icon-t icon icon-t-arrowNE"></i>
+            <i className="mxc-icon-t icon icon-t-arrowNE"/>
           </NavLink>
         </li>
         <li>
           <NavLink to="/grant" exact>
             <span>Grant</span>
-            <i className="mxc-icon-t icon icon-t-grant"></i>
+            <i className="mxc-icon-t icon icon-t-grant"/>
           </NavLink>
         </li>
       </ul>

@@ -18,7 +18,7 @@ const Heading = ({ caption, Content }: { caption: string; Content: any }) => (
     <h1>{caption}</h1>
     <h2>
       <Content />
-      <i className="icon icon-contracts"></i>
+      <i className="icon icon-contracts"/>
     </h2>
   </div>
 )

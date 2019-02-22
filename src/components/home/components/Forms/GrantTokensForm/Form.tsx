@@ -41,7 +41,7 @@ export const Form = ({ valid, handleSubmit }: SendFormProps) => (
         <button disabled={!valid} type="submit" className="btn-action">
           <div className="i-box">
             <div className="box-inner">
-              <i className="mxc-icon-t icon icon-t-grant"></i>
+              <i className="mxc-icon-t icon icon-t-grant"/>
             </div>
           </div>
           Grant

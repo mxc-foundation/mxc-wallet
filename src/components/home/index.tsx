@@ -19,7 +19,7 @@ const Heading = ({ caption, Content }: { caption: string; Content: any }) => (
     <h1>{caption}</h1>
     <h2>
       <Content />
-      <i className="icon icon-contracts"></i>
+      <i className="icon icon-contracts"/>
     </h2>
   </div>
 )
@@ -29,7 +29,7 @@ const BtnAction = ({ caption, Content }: { caption: string; Content: any }) => (
     <button className="btn-action">
       <div className="i-box">
         <div className="box-inner">
-          <i className="mxc-icon-t icon icon-t-arrowNE"></i>
+          <i className="mxc-icon-t icon icon-t-arrowNE"/>
         </div>
       </div>
       {Content}

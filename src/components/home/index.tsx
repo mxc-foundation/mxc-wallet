@@ -1,6 +1,7 @@
 import React from 'react'
 import { Address, EtherBalance, TokenBalance } from '../wallet/components'
 import { RedeemTokensPanel } from './components/Forms/RedeemTokensPanel'
+import { M2MPanel } from './components/Forms/M2MPanel'
 import LockedMxcTokens from './components/LockedMxcTokens'
 
 const Row = ({ caption, Content }: { caption: string; Content: any }) => (
@@ -48,6 +49,7 @@ export default () => (
             <Row caption="MXC Tokens:" Content={TokenBalance} />
             <Row caption="Locked MXC Tokens:" Content={LockedMxcTokens} />
             <Row caption="Redeemable MXC Tokens:" Content={RedeemTokensPanel} />
+            <Row caption="M2M Wallet" Content={M2MPanel} />
           </tbody>
         </table>
         

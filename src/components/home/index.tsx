@@ -1,7 +1,7 @@
 import React from 'react'
 import { Address, EtherBalance, TokenBalance } from '../wallet/components'
-import { RedeemTokensPanel } from './components/Forms/RedeemTokensPanel'
 import { M2MPanel } from './components/Forms/M2MPanel'
+import { RedeemTokensPanel } from './components/Forms/RedeemTokensPanel'
 import LockedMxcTokens from './components/LockedMxcTokens'
 
 const Row = ({ caption, Content }: { caption: string; Content: any }) => (

@@ -1,17 +1,7 @@
 import React from 'react'
 import { SendEtherForm } from '../home/components/Forms/SendEtherForm'
+import { TblRow } from '../ui'
 import { Heading } from '../wallet/components'
-
-const Row = ({ caption, Content }: { caption: string; Content: any }) => (
-  <tr>
-    <td>
-      <span className="t-s t-bold">{caption}</span>
-    </td>
-    <td>
-      <Content />
-    </td>
-  </tr>
-)
 
 export default () => (
   <div className="content">
@@ -22,7 +12,7 @@ export default () => (
         
         <table className="table-layout">
           <tbody>
-            <Row caption="Send ETH:" Content={SendEtherForm} />
+            <TblRow caption="Send ETH:" Content={SendEtherForm} />
           </tbody>
         </table>
 

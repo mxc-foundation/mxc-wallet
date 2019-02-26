@@ -1,18 +1,7 @@
 import React from 'react'
 import { SendTokensForm } from '../home/components/Forms/SendTokensForm'
+import { TblRow } from '../ui'
 import { Heading } from '../wallet/components'
-
-
-const Row = ({ caption, Content }: { caption: string; Content: any }) => (
-  <tr>
-    <td>
-      <span className="t-s t-bold">{caption}</span>
-    </td>
-    <td>
-      <Content />
-    </td>
-  </tr>
-)
 
 export default () => (
   <div className="content">
@@ -23,7 +12,7 @@ export default () => (
         
         <table className="table-layout">
           <tbody>
-            <Row caption="Send Tokens:" Content={SendTokensForm} />
+            <TblRow caption="Send Tokens:" Content={SendTokensForm} />
           </tbody>
         </table>
 

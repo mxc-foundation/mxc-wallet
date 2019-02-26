@@ -1,5 +1,6 @@
 import React from 'react'
 import { Field } from 'redux-form'
+import { BtnAction } from '../../../../ui'
 import InputField from '../partials/inputField'
 import * as StyledComponents from '../StyledComponents'
 
@@ -38,14 +39,7 @@ export const Form = ({ valid, handleSubmit }: SendFormProps) => (
           />
         </StyledComponents.VerticallyStretched>
 
-        <button disabled={!valid} type="submit" className="btn-action">
-          <div className="i-box">
-            <div className="box-inner">
-              <i className="mxc-icon-t icon icon-t-grant"/>
-            </div>
-          </div>
-          Grant
-        </button>
+        <BtnAction Content="Grant Tokens" disabled={!valid} type="submit" icon="icon-t-grant"/>
         
     </form>
   </StyledComponents.Wrapper>

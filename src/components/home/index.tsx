@@ -1,4 +1,5 @@
 import React from 'react'
+import { BtnAction } from '../ui'
 import { EtherBalance, Heading, TokenBalance } from '../wallet/components'
 import { M2MPanel } from './components/Forms/M2MPanel'
 import { RedeemTokensPanel } from './components/Forms/RedeemTokensPanel'
@@ -16,20 +17,6 @@ const Row = ({ caption, Content }: { caption: string; Content: any }) => (
   </tr>
 )
 
-
-const BtnAction = ({ caption, Content }: { caption: string; Content: any }) => (
-  <a href={caption}>
-    <button className="btn-action">
-      <div className="i-box">
-        <div className="box-inner">
-          <i className="mxc-icon-t icon icon-t-arrowNE"/>
-        </div>
-      </div>
-      {Content}
-    </button>
-  </a>
-)
-
 export default () => (
   <div className="content">
     <div className="box-inner">
@@ -45,8 +32,12 @@ export default () => (
           </tbody>
         </table>
         
-        <BtnAction caption="/send-tokens" Content="Send Tokens" />
-        <BtnAction caption="/send-ether" Content="Send Ether" />
+        <a href="/send-tokens">
+          <BtnAction Content="Send Tokens" disabled={false} type="" icon="icon-t-arrowNE"/>
+        </a>
+        <a href="/send-ether">
+          <BtnAction Content="Send Ether" disabled={false} type="" icon="icon-t-arrowNE"/>
+        </a>
 
       </div>
     </div>

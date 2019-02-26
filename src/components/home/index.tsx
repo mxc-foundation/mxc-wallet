@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 import { BtnAction } from '../ui'
 import { EtherBalance, Heading, TokenBalance } from '../wallet/components'
 import { M2MPanel } from './components/Forms/M2MPanel'
@@ -32,12 +33,12 @@ export default () => (
           </tbody>
         </table>
         
-        <a href="/send-tokens">
+        <NavLink to="/send-tokens" exact>
           <BtnAction Content="Send Tokens" disabled={false} type="" icon="icon-t-arrowNE"/>
-        </a>
-        <a href="/send-ether">
+        </NavLink>
+        <NavLink to="/send-ether" exact>
           <BtnAction Content="Send Ether" disabled={false} type="" icon="icon-t-arrowNE"/>
-        </a>
+        </NavLink>
 
       </div>
     </div>

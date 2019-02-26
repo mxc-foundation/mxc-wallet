@@ -1,5 +1,5 @@
 import React from 'react'
-import { Address, EtherBalance, TokenBalance } from '../wallet/components'
+import { EtherBalance, Heading, TokenBalance } from '../wallet/components'
 import { M2MPanel } from './components/Forms/M2MPanel'
 import { RedeemTokensPanel } from './components/Forms/RedeemTokensPanel'
 import LockedMxcTokens from './components/LockedMxcTokens'
@@ -15,15 +15,7 @@ const Row = ({ caption, Content }: { caption: string; Content: any }) => (
     <td />
   </tr>
 )
-const Heading = ({ caption, Content }: { caption: string; Content: any }) => (
-  <div>
-    <h1>{caption}</h1>
-    <h2>
-      <Content />
-      <i className="icon icon-contracts"/>
-    </h2>
-  </div>
-)
+
 
 const BtnAction = ({ caption, Content }: { caption: string; Content: any }) => (
   <a href={caption}>
@@ -42,7 +34,7 @@ export default () => (
   <div className="content">
     <div className="box-inner">
       <div className="content-box content-transactions">
-        <Heading caption="Your AXS Wallet" Content={Address} />
+        <Heading routeHeading="Your AXS Wallet" />
         <table className="table-cards">
           <tbody>
             <Row caption="Ether Balance:" Content={EtherBalance} />

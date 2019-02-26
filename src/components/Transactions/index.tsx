@@ -2,17 +2,7 @@ import * as R from 'ramda'
 import React from 'react'
 import { connect } from 'react-redux'
 import * as selectors from '../../selectors'
-
-import { Address } from '../wallet/components'
-const Heading = ({ caption, Content }: { caption: string; Content: any }) => (
-  <div>
-    <h1>{caption}</h1>
-    <h2>
-      <Content />
-      <i className="icon icon-contracts"/>
-    </h2>
-  </div>
-)
+import { Heading } from '../wallet/components'
 
 export interface TransactionProps {
   type: 'incoming' | 'outgoing'
@@ -28,7 +18,7 @@ interface TransactionsProps {
   transactions: TransactionProps[]
   fetching: boolean
 }
-
+  
 const heading: (type: 'incoming' | 'outgoing') => string = R.ifElse(
   R.equals('incoming'),
   R.always('Received'),
@@ -81,7 +71,7 @@ const TransactionsComponent = ({
     <div className="box-inner">
       <div className="content-box content-transactions">
 
-        <Heading caption="Latest Transactions" Content={Address} />
+        <Heading routeHeading="Latest Transactions" />
 
         <table className="table-cards table-zebra table-transactions">
           <tbody>

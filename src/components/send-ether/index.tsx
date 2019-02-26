@@ -1,6 +1,6 @@
 import React from 'react'
 import { SendEtherForm } from '../home/components/Forms/SendEtherForm'
-import { Address } from '../wallet/components'
+import { Heading } from '../wallet/components'
 
 const Row = ({ caption, Content }: { caption: string; Content: any }) => (
   <tr>
@@ -13,22 +13,12 @@ const Row = ({ caption, Content }: { caption: string; Content: any }) => (
   </tr>
 )
 
-const Heading = ({ caption, Content }: { caption: string; Content: any }) => (
-  <div>
-    <h1>{caption}</h1>
-    <h2>
-      <Content />
-      <i className="icon icon-contracts"/>
-    </h2>
-  </div>
-)
-
 export default () => (
   <div className="content">
     <div className="box-inner">
       <div className="content-box content-transactions">
 
-        <Heading caption="Send ETH" Content={Address} />
+        <Heading routeHeading="Send Ether" />
         
         <table className="table-layout">
           <tbody>

@@ -1,6 +1,6 @@
 import React from 'react'
 import { GrantTokensForm } from '../home/components/Forms/GrantTokensForm'
-import { Address } from '../wallet/components'
+import { Heading } from '../wallet/components'
 
 const Row = ({ caption, Content }: { caption: string; Content: any }) => (
   <tr>
@@ -12,21 +12,12 @@ const Row = ({ caption, Content }: { caption: string; Content: any }) => (
     </td>
   </tr>
 )
-const Heading = ({ caption, Content }: { caption: string; Content: any }) => (
-  <div>
-    <h1>{caption}</h1>
-    <h2>
-      <Content />
-      <i className="icon icon-contracts"/>
-    </h2>
-  </div>
-)
 
 export default () => (
   <div className="content">
     <div className="box-inner">
       <div className="content-box content-transactions">
-        <Heading caption="Grant Tokens" Content={Address} />
+        <Heading routeHeading="Grant Tokens" />
 
         <table className="table-layout">
           <tbody>

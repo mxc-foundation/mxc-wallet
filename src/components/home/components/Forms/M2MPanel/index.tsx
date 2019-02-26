@@ -2,7 +2,7 @@ import React from 'react'
 
 const M2M = () => (
 	<div className="sc-bwzfXH MKmUa">
-		<span>0 LPWAN Nodes</span>
+		<span>Coming Soon</span>
 		<button className="btn-framed-disabled">Connect</button>
 	</div>
 )

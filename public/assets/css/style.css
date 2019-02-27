@@ -59,6 +59,11 @@ h3,
   font-weight: 300;
 }
 
+/*COLOR*/
+.invalid-feedback {
+  color: #e6398e;
+}
+
 /*ICONS*/
 .identicon {
   width: 50px;
@@ -105,9 +110,8 @@ input:focus {
   outline: none;
   border-bottom-color: #00ffd9;
 }
-input[name="cliffPeriods"], input[name="vestingPeriods"] {
-  /* display: inline-block; */
-  /* width: 50%; */
+label {
+  margin-top: 1rem;
 }
 
 

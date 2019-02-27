@@ -25,12 +25,26 @@ export const Form = ({ valid, handleSubmit }: SendFormProps) => (
             placeholder="Amount"
             component={InputField}
           />
+          <label>
+            <span className="t-s t-bold">
+              Cliff Periods
+            </span>
+            &nbsp;
+            <span className="t-s">
+              can't be longer than or same as Vesting Periods
+            </span>
+          </label>
           <Field
             type="number"
             name="cliffPeriods"
             placeholder="Cliff periods (Months)"
             component={InputField}
           />
+          <label>
+            <span className="t-s t-bold">
+              Vesting Periods
+            </span>
+          </label>
           <Field
             type="number"
             name="vestingPeriods"

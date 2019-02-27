@@ -13,10 +13,12 @@ export default () => (
           <tbody>
             <tr>
               <td>
-                <i className="icon icon-exclamation"></i>
+                <span className="t-s t-bold">
+                  <i className="icon icon-exclamation"></i>Warning:
+                </span>
               </td>
               <td>
-                Make sure receiving address doesn't have not redeemed tokens
+                If the recipient wallet has an MXC Smart Contract with tokens that are not redeemed, they will be unable to receive additional MXC grant. If you are in doubt, ask for another wallet address
               </td>
             </tr>
             <TblRow caption="Grant Tokens Now:" Content={GrantTokensForm} />

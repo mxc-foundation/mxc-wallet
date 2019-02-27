@@ -11,6 +11,14 @@ export default () => (
 
         <table className="table-layout">
           <tbody>
+            <tr>
+              <td>
+                <i className="icon icon-exclamation"></i>
+              </td>
+              <td>
+                Make sure receiving address doesn't have not redeemed tokens
+              </td>
+            </tr>
             <TblRow caption="Grant Tokens Now:" Content={GrantTokensForm} />
           </tbody>
         </table>

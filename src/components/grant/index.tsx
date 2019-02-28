@@ -14,7 +14,7 @@ export default () => (
             <tr>
               <td>
                 <span className="t-s t-bold">
-                  <i className="icon icon-exclamation"></i>Warning:
+                  <i className="icon icon-exclamation"/>Warning:
                 </span>
               </td>
               <td>

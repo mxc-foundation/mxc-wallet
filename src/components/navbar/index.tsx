@@ -46,6 +46,12 @@ export default () => (
             <i className="mxc-icon-t icon icon-t-grant"/>
           </NavLink>
         </li>
+        <li>
+          <a className="inactive">
+            <span>M2M</span>
+            <i className="icon icon-organization"/>
+          </a>
+        </li>
       </ul>
     </div>
   </div>

@@ -16,9 +16,15 @@ const MainNet = () => <span>Main Net</span>
 
 const HeaderNetworkComponent = ({ onMainNet }: HeaderNetworkProps) => (
   <div className="balanceStatus inline-block">
-    <span className="t-s-bold">Network</span>
-    <br />
+    <span className="t-s-bold">
+    	<i className="icon icon-feed"/>
+    	Network &nbsp;
+    </span>
+    <span className="t-s">
     {onMainNet ? <MainNet /> : <TestNet />}
+    &nbsp;
+    &nbsp;
+    </span>
   </div>
 )
 

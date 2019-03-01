@@ -8,6 +8,8 @@ import GrantTokens from './components/grant'
 import Header from './components/header'
 import Home from './components/home'
 import Navbar from './components/navbar'
+import SendEther from './components/send-ether'
+import SendTokens from './components/send-tokens'
 import { Transactions } from './components/Transactions'
 import { getHasMainError, State } from './selectors'
 
@@ -19,6 +21,8 @@ const AppContent = () => (
       <Route exact path="/" component={Home} />
       <Route path="/grant" component={GrantTokens} />
       <Route path="/transactions" component={Transactions} />
+      <Route path="/send-tokens" component={SendTokens} />
+      <Route path="/send-ether" component={SendEther} />
     </div>
   </div>
 )

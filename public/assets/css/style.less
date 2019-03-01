@@ -76,11 +76,15 @@ h1 {
 h2 {
   font-weight: 600;
   font-size: 1.4rem;
+  a {
+    text-decoration: none;
+  }
 }
 
 /*ICONS*/
 .mxc-icon,
-.icon {
+.icon,
+[class^='icon-t-'] {
   display: inline-block;
   position: relative;
   width: 1em;
@@ -119,6 +123,41 @@ h2 {
 }
 .icon-clock:before {
   content: "\e081";
+}
+
+.icon-exclamation:before {
+  content: "\e617";
+}
+.icon-fire:before {
+  content: "\e01c";
+}
+.icon-bell:before {
+  content: "\e027";
+}
+.icon-target:before {
+  content: "\e09e";
+}
+
+.mxc-icon-t, [class^='icon-t-'] {
+  height: 1.4em;
+  width: 1.4em;
+  margin-bottom: -0.4em;
+  background-size: cover;
+}
+.icon-t-burger {
+  background-image: url('../img/icons-t/AXS_icon_t-burger.png');
+}
+.icon-t-wallet {
+  background-image: url('../img/icons-t/AXS_icon_t-wallet.png');
+}
+.icon-t-trans {
+  background-image: url('../img/icons-t/AXS_icon_t-trans.png');
+}
+.icon-t-arrowNE {
+  background-image: url('../img/icons-t/AXS_icon_t-arrowNE.png');
+}
+.icon-t-grant {
+  background-image: url('../img/icons-t/AXS_icon_t-grant.png');
 }
 
 /*LOGO*/
@@ -197,7 +236,7 @@ a.logo {
   padding-top: 110px;
   padding-right: 50px;
   padding-bottom: 80px;
-  min-height: 120vh;
+  min-height: 99vh;
 }
 
 /*ROUTER*/
@@ -227,12 +266,6 @@ a.logo {
     &:hover,
     &.active {
       background-color: @colorLighter;
-    }
-    &.active {
-      color: #00ffd9;
-      svg * {
-        stroke: #00ffd9;
-      }
     }
     &#burger {
       pointer-events: none;
@@ -266,8 +299,8 @@ a.logo {
   }
 }
 .header .balanceStatus {
-  float: right;
-  margin: 0.5rem 50px 0;
+  /*float: right;*/
+  /*margin: 0.5rem 50px 0;*/
 }
 
 /*M CONTENT*/
@@ -314,11 +347,6 @@ table {
   a {
     text-decoration: none;
   }
-  &:hover {
-    td:last-child * {
-      opacity: 1;
-    }
-  }
 }
 table tr {
   transition: background-color @trans;
@@ -335,9 +363,6 @@ table tr {
       font-weight: 700;
       text-align: right;
     }
-    &:last-child * {
-      opacity: 0;
-    }
   }
 }
 
@@ -351,6 +376,9 @@ table.table-cards tr {
     vertical-align: middle;
   }
 }
+
+
+
 
 /*BTNS*/
 button {
@@ -401,6 +429,10 @@ button {
   font-size: 1.4rem;
   font-family: "Montserrat";
   font-weight: 700;
+  text-shadow: 0 0 24px rgba(0, 0, 0, 0.65);
+
+  cursor: pointer !important;
+  outline: none !important;
   &:after {
     content: "";
     position: absolute;
@@ -411,7 +443,7 @@ button {
     left: 0;
     background-repeat: no-repeat;
     background-size: cover;
-    background-image: url(../img/btn_gr_005.png);
+    background-image: url(../img/btn_gr_006.png);
     background-position: center 0%;
     mix-blend-mode: hue;
     transition: background-position 1.2s;
@@ -428,15 +460,24 @@ button {
     position: absolute;
     height: 3.4rem;
     width: 3.4rem;
-    left: 0.2rem;
+    left: 0.3rem;
     top: 0.2rem;
     padding: 0.6rem;
     border-radius: 50%;
     overflow: hidden;
     background-color: @colorTurq;
+    font-size: 2.3rem;
     svg {
       width: 100%;
       height: 100%;
+    }
+    .mxc-icon-t, [class^='icon-t-'] {
+      position: absolute;
+      left: -999px;
+      right: -991px;
+      top: -1010px;
+      bottom: -999px;
+      margin: auto;
     }
   }
 }

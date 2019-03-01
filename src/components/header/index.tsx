@@ -9,8 +9,33 @@ export default () => (
   >
     <div className="box-inner">
       <div className="t-s-bold menuStatus inline-block" />
-      <Balance />
-      <Network />
+        <Network />
+        <Balance />
     </div>
+
+    <a target="_blank" href="https://discord.gg/6nENvRN" className="chat-box">
+      <div className="box-inner">
+        <div className="inline-block t-bold">
+          Need Help? 
+          <br/>
+          Chat with us now
+        </div>
+        <div className="inline-block chat-icon">
+
+          <div className="box-inner">
+            <div className="blur-box">
+              <div className="box-inner">
+                  <div className="blur-ball"/>
+                  <div className="blur-ball"/>
+                  <div className="blur-ball"/>
+                  <div className="blur-ball"/>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </a>
+
   </div>
 )

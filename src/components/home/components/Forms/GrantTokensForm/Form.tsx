@@ -1,5 +1,6 @@
 import React from 'react'
 import { Field } from 'redux-form'
+import { BtnAction } from '../../../../ui'
 import InputField from '../partials/inputField'
 import * as StyledComponents from '../StyledComponents'
 
@@ -10,7 +11,7 @@ interface SendFormProps {
 export const Form = ({ valid, handleSubmit }: SendFormProps) => (
   <StyledComponents.Wrapper>
     <form onSubmit={handleSubmit}>
-      <StyledComponents.Container>
+      
         <StyledComponents.VerticallyStretched>
           <Field
             type="text"
@@ -24,25 +25,36 @@ export const Form = ({ valid, handleSubmit }: SendFormProps) => (
             placeholder="Amount"
             component={InputField}
           />
+          <label>
+            <span className="t-s t-bold">
+              Cliff Periods
+            </span>
+            &nbsp;
+            <span className="t-s">
+              can't be longer than or same as Vesting Periods
+            </span>
+          </label>
           <Field
             type="number"
             name="cliffPeriods"
-            placeholder="Cliff periods"
+            placeholder="Cliff periods (Months)"
             component={InputField}
           />
+          <label>
+            <span className="t-s t-bold">
+              Vesting Periods
+            </span>
+          </label>
           <Field
             type="number"
             name="vestingPeriods"
-            placeholder="Vesting Periods"
+            placeholder="Vesting Periods (Months)"
             component={InputField}
           />
         </StyledComponents.VerticallyStretched>
-        <StyledComponents.Vertically>
-          <button disabled={!valid} type="submit" className="btn-framed">
-            Send
-          </button>
-        </StyledComponents.Vertically>
-      </StyledComponents.Container>
+
+        <BtnAction Content="Grant Tokens" disabled={!valid} type="submit" icon="icon-t-grant"/>
+        
     </form>
   </StyledComponents.Wrapper>
 )

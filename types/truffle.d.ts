@@ -1,5 +1,8 @@
 declare type _contractTest = (accounts: string[]) => void
-declare function contract(name: string, test: _contractTest): void
+declare var contract: {
+  (name: string, test: _contractTest): any
+  only: any
+}
 declare function it(name: string, test: _contractTest): void
 
 declare interface TransactionMeta {

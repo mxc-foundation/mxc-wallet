@@ -66,6 +66,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "@types/bluebird": "^3.5.26",
     "@types/chai": "^4.1.7",
     "@types/chai-as-promised": "^7.1.0",
     "@types/ramda": "^0.25.47",
@@ -77,6 +78,7 @@
     "@types/superagent": "^3.8.6",
     "@types/tape": "^4.2.33",
     "@types/web3": "^1.0.18",
+    "bluebird": "^3.5.3",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "dotenv": "^6.2.0",

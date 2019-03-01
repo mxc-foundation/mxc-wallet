@@ -2,9 +2,9 @@ const MXCToken = artifacts.require('./MXCToken.sol')
 import Web3 from 'web3'
 declare var web3: Web3
 import { PERIOD_LENGTH_ON_KOVAN } from '../config'
-import { getTimeToNextVesting } from '../src/utils/getTimeLeftToNextVesting'
 import { timeTravel } from './tools/blockchain'
 import { assert } from './tools/chai'
+import { getTimeToNextVestingOnKovan } from './tools/getTimeLeftToNextVesting'
 
 const INITIAL_AMOUNT = 100
 const CLIFF_MONTHS = 1
@@ -23,8 +23,9 @@ contract('Calculate the time left to the next vesting', ([deployer, user]) => {
       }
     )
     await timeTravel(PERIOD_LENGTH_ON_KOVAN + 1, web3)
+    await token.redeemVestableToken(user)
 
-    const timeToNextVesting = await getTimeToNextVesting(
+    const timeToNextVesting = await getTimeToNextVestingOnKovan(
       web3,
       token.address,
       user
@@ -44,7 +45,7 @@ contract('Calculate the time left to the next vesting', ([deployer, user]) => {
     )
     await timeTravel(PERIOD_LENGTH_ON_KOVAN / 2, web3)
 
-    const timeToNextVesting = await getTimeToNextVesting(
+    const timeToNextVesting = await getTimeToNextVestingOnKovan(
       web3,
       token.address,
       user

@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js'
 import * as R from 'ramda'
-import * as FnBigNumber from './fnBignumber'
+import * as FnBigNumber from '../fnBignumber'
 
 export type FromTimeLock<ReturnType> = (
   start: number,
@@ -22,14 +22,15 @@ const takeVestedAmount = R.nthArg(4)
 
 const cliffNotYetReached = R.converge(R.lt, [takeNow, takeCliff])
 
-const allVested = R.converge(R.gte, [takeNow, takeEnd])
+const endPassed = R.converge(R.gte, [takeNow, takeEnd])
 
 const totalTimeOfVestingPhase = R.converge(R.subtract, [takeEnd, takeStart])
 
 const totalPeriods = R.converge(
   R.pipe(
     R.divide,
-    Math.floor
+    Math.floor,
+    R.ifElse(R.equals(0), R.always(1), R.identity)
   ),
   [totalTimeOfVestingPhase, takePeriodLength]
 )
@@ -47,15 +48,16 @@ export const timeSinceStart: FromTimeLock<number> = R.converge(R.subtract, [
   takeStart,
 ])
 
-const periodsPassed: FromTimeLock<number> = R.converge(
+const periodsPassed: FromTimeLock<BigNumber> = R.converge(
   R.pipe(
     R.divide,
-    Math.floor
+    Math.floor,
+    FnBigNumber.create
   ),
   [timeSinceStart, takePeriodLength]
 )
 
-const allRedeemableTokens: FromTimeLock<BigNumber> = R.converge(
+export const allRedeemableTokens: FromTimeLock<BigNumber> = R.converge(
   FnBigNumber.multipliedBy,
   [periodsPassed, tokensPerPeriod]
 )
@@ -65,9 +67,15 @@ const remainingAmount = R.converge(FnBigNumber.subtract, [
   takeTotalAmount,
 ])
 
-const calcVestableAmount: FromTimeLock<BigNumber> = R.cond([
+export const allRedeemed = R.converge(FnBigNumber.isEqualTo, [
+  takeTotalAmount,
+  takeVestedAmount,
+])
+
+const redeemableTokens: FromTimeLock<BigNumber> = R.cond([
   [cliffNotYetReached, R.always(FnBigNumber.create(0))],
-  [allVested, remainingAmount],
+  [allRedeemed, R.always(FnBigNumber.create(0))],
+  [endPassed, remainingAmount],
   [
     R.T,
     R.pipe(
@@ -77,4 +85,4 @@ const calcVestableAmount: FromTimeLock<BigNumber> = R.cond([
   ],
 ])
 
-export default calcVestableAmount
+export default redeemableTokens

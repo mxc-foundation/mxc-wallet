@@ -159,24 +159,28 @@ test('Wallet selectors tests', t => {
     )
   })
 
-  t.test('Amount at next vesting event, now is at cliff', assert => {
-    assert.plan(1)
-    const TEST_WALLET_STATE = {
-      ...mockState,
-      lock: {
-        cliff: 63,
-        end: 603,
-        start: 3,
-        totalAmount: '10',
-        vestedAmount: '0',
-      },
-      now: 63,
+  t.test(
+    'Amount at next vesting event, now is one second after cliff and 1 token has been redeemed',
+    assert => {
+      assert.plan(2)
+      const TEST_WALLET_STATE = {
+        ...mockState,
+        lock: {
+          cliff: 63,
+          end: 603,
+          start: 3,
+          totalAmount: '10',
+          vestedAmount: '1',
+        },
+        now: 64,
+      }
+      assert.equal(getTimeToNextVestingEvent(TEST_WALLET_STATE), 59)
+      assert.deepEqual(
+        getAmountAtNextVesting(TEST_WALLET_STATE),
+        FnBigNumber.create(1)
+      )
     }
-    assert.deepEqual(
-      getAmountAtNextVesting(TEST_WALLET_STATE),
-      FnBigNumber.create(2)
-    )
-  })
+  )
   t.test('Amount at next vesting event, now is after cliff', assert => {
     assert.plan(1)
     const TEST_WALLET_STATE = {
@@ -192,7 +196,7 @@ test('Wallet selectors tests', t => {
     }
     assert.deepEqual(
       getAmountAtNextVesting(TEST_WALLET_STATE),
-      FnBigNumber.create(2)
+      FnBigNumber.create(1)
     )
   })
   t.test(

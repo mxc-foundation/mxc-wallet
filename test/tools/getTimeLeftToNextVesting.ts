@@ -1,10 +1,10 @@
 import Web3 from 'web3'
-import { PERIOD_LENGTH_ON_KOVAN } from '../config'
-import { createMXCToken, readTimeFromChain } from './blockchain'
-import { timeUntilNextVestingPossible } from './calculateTimeToNextVesting'
-import * as FnBigNumber from './fnBignumber'
+import { PERIOD_LENGTH_ON_KOVAN } from '../../src/config'
+import { createMXCToken, readTimeFromChain } from '../../src/utils/blockchain'
+import * as FnBigNumber from '../../src/utils/fnBignumber'
+import { timeUntilNextRedemptionPossible } from '../../src/utils/locks/nextTimeRedemptionPossible'
 
-export const getTimeToNextVesting = async (
+export const getTimeToNextVestingOnKovan = async (
   theWeb3: Web3,
   tokenAddress: string,
   userAddress: string
@@ -13,10 +13,9 @@ export const getTimeToNextVesting = async (
   const timeLockData = await tokenContract.methods
     .vestBalanceOf(userAddress)
     .call()
-
   const { start, vesting: end, amount, vestedAmount, cliff } = timeLockData
   const now = await readTimeFromChain(theWeb3)
-  const timeToNextVesting = timeUntilNextVestingPossible(
+  const timeToNextVesting = timeUntilNextRedemptionPossible(
     parseInt(start, 10),
     parseInt(end, 10),
     parseInt(cliff, 10),

@@ -183,4 +183,109 @@ test('getTimeToNextVesting', t => {
       assert.end()
     }
   )
+  t.test('Current time at start and cliff.', assert => {
+    const NOW = 10
+    const START = 10
+    const CLIFF = 10
+    const END = 70
+    const PERIOD_LENGTH = 30
+    assert.equal(
+      timeUntilNextVestingPossible(
+        START,
+        END,
+        CLIFF,
+        TOTAL_AMOUNT,
+        VESTED_AMOUNT,
+        PERIOD_LENGTH,
+        NOW
+      ),
+      30,
+      'Can redeem after one period which is 30 seconds'
+    )
+    assert.end()
+  })
+  t.test('Current time shortly after start and cliff.', assert => {
+    const NOW = 12
+    const START = 10
+    const CLIFF = 10
+    const END = 70
+    const PERIOD_LENGTH = 30
+    assert.equal(
+      timeUntilNextVestingPossible(
+        START,
+        END,
+        CLIFF,
+        TOTAL_AMOUNT,
+        VESTED_AMOUNT,
+        PERIOD_LENGTH,
+        NOW
+      ),
+      28,
+      'Can redeem after 28 seconds'
+    )
+    assert.end()
+  })
+  t.test('Cliff is somewhen in the first period.', assert => {
+    const NOW = 12
+    const START = 10
+    const CLIFF = 14
+    const END = 73
+    const PERIOD_LENGTH = 30
+    assert.equal(
+      timeUntilNextVestingPossible(
+        START,
+        END,
+        CLIFF,
+        TOTAL_AMOUNT,
+        VESTED_AMOUNT,
+        PERIOD_LENGTH,
+        NOW
+      ),
+      28,
+      'Can redeem after 28 seconds'
+    )
+    assert.end()
+  })
+  t.test('Cliff is somewhen in the second period.', assert => {
+    const NOW = 12
+    const START = 10
+    const CLIFF = 44
+    const END = 73
+    const PERIOD_LENGTH = 30
+    assert.equal(
+      timeUntilNextVestingPossible(
+        START,
+        END,
+        CLIFF,
+        TOTAL_AMOUNT,
+        VESTED_AMOUNT,
+        PERIOD_LENGTH,
+        NOW
+      ),
+      33,
+      'Can redeem after 33 seconds'
+    )
+    assert.end()
+  })
+  t.test('Cliff is somewhen in the second period.', assert => {
+    const NOW = 46
+    const START = 10
+    const CLIFF = 44
+    const END = 73
+    const PERIOD_LENGTH = 30
+    assert.equal(
+      timeUntilNextVestingPossible(
+        START,
+        END,
+        CLIFF,
+        TOTAL_AMOUNT,
+        VESTED_AMOUNT,
+        PERIOD_LENGTH,
+        NOW
+      ),
+      24,
+      'Can redeem after 24 seconds'
+    )
+    assert.end()
+  })
 })

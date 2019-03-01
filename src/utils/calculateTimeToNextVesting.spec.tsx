@@ -288,4 +288,88 @@ test('getTimeToNextVesting', t => {
     )
     assert.end()
   })
+  t.test('End is in the first period.', assert => {
+    const NOW = 0
+    const START = 0
+    const CLIFF = 0
+    const END = 1
+    const PERIOD_LENGTH = 30
+    assert.equal(
+      timeUntilNextVestingPossible(
+        START,
+        END,
+        CLIFF,
+        TOTAL_AMOUNT,
+        VESTED_AMOUNT,
+        PERIOD_LENGTH,
+        NOW
+      ),
+      1,
+      'Can redeem after 1 seconds'
+    )
+    assert.end()
+  })
+  t.test('Cliff is in the second period.', assert => {
+    const NOW = 12
+    const START = 0
+    const CLIFF = 34
+    const END = 68
+    const PERIOD_LENGTH = 30
+    assert.equal(
+      timeUntilNextVestingPossible(
+        START,
+        END,
+        CLIFF,
+        TOTAL_AMOUNT,
+        VESTED_AMOUNT,
+        PERIOD_LENGTH,
+        NOW
+      ),
+      23,
+      'Can redeem after 23 seconds'
+    )
+    assert.end()
+  })
+  t.test('Cliff is at the end of first period.', assert => {
+    const NOW = 17
+    const START = 15
+    const CLIFF = 45
+    const END = 8383
+    const PERIOD_LENGTH = 30
+    assert.equal(
+      timeUntilNextVestingPossible(
+        START,
+        END,
+        CLIFF,
+        TOTAL_AMOUNT,
+        VESTED_AMOUNT,
+        PERIOD_LENGTH,
+        NOW
+      ),
+      29,
+      'Can redeem after 29 seconds'
+    )
+    assert.end()
+  })
+  t.test('Cliff is at the end of first period.', assert => {
+    const NOW = 1551442103
+    const START = 1551442103
+    const CLIFF = 1551442163
+    const END = 1551442223
+    const PERIOD_LENGTH = 60
+    assert.equal(
+      timeUntilNextVestingPossible(
+        START,
+        END,
+        CLIFF,
+        TOTAL_AMOUNT,
+        VESTED_AMOUNT,
+        PERIOD_LENGTH,
+        NOW
+      ),
+      61,
+      'Can redeem after 61 seconds'
+    )
+    assert.end()
+  })
 })

@@ -33,9 +33,11 @@ const cliffPlusOne = R.pipe(
 
 const startPlusPeriodLenth = R.converge(R.add, [takeStart, takePeriodLength])
 
-const firstTimeRedemptionPossible = R.converge(R.max, [
-  cliffPlusOne,
-  startPlusPeriodLenth,
+const timeToEnd = R.converge(R.subtract, [takeEnd, takeNow])
+
+const firstTimeRedemptionPossible = R.converge(R.min, [
+  R.converge(R.max, [cliffPlusOne, startPlusPeriodLenth]),
+  takeEnd,
 ])
 
 const firstTimeRedemptionPossibleMinusNow = R.converge(R.subtract, [
@@ -53,16 +55,6 @@ export const timeUntilNextVestingPossible: FromTimeLock<number> = R.cond([
     nowLowerThanFirstTimeRedemptionPossible,
     firstTimeRedemptionPossibleMinusNow,
   ],
-  [
-    nowLowerOrEqualEnd,
-    R.ifElse(
-      R.pipe(
-        timeToNextPeriod,
-        R.lt(0)
-      ),
-      timeToNextPeriod,
-      takePeriodLength
-    ),
-  ],
+  [nowLowerOrEqualEnd, R.converge(R.min, [timeToNextPeriod, timeToEnd])],
   [R.T, R.always(-1)],
 ])

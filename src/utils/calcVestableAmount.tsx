@@ -22,14 +22,15 @@ const takeVestedAmount = R.nthArg(4)
 
 const cliffNotYetReached = R.converge(R.lt, [takeNow, takeCliff])
 
-const allVested = R.converge(R.gte, [takeNow, takeEnd])
+const endPassed = R.converge(R.gte, [takeNow, takeEnd])
 
 const totalTimeOfVestingPhase = R.converge(R.subtract, [takeEnd, takeStart])
 
 const totalPeriods = R.converge(
   R.pipe(
     R.divide,
-    Math.floor
+    Math.floor,
+    R.ifElse(R.equals(0), R.always(1), R.identity)
   ),
   [totalTimeOfVestingPhase, takePeriodLength]
 )
@@ -65,9 +66,15 @@ const remainingAmount = R.converge(FnBigNumber.subtract, [
   takeTotalAmount,
 ])
 
+const allRedeemed = R.converge(FnBigNumber.isEqualTo, [
+  takeTotalAmount,
+  takeVestedAmount,
+])
+
 const calcVestableAmount: FromTimeLock<BigNumber> = R.cond([
   [cliffNotYetReached, R.always(FnBigNumber.create(0))],
-  [allVested, remainingAmount],
+  [allRedeemed, R.always(FnBigNumber.create(0))],
+  [endPassed, remainingAmount],
   [
     R.T,
     R.pipe(

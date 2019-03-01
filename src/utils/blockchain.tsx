@@ -71,7 +71,7 @@ const createBlockchain = (web3: Web3): Blockchain => {
     return address
   }
 
-  const getNow = async () => readTimeFromChain(web3)
+  const getNow = async () => 222 // readTimeFromChain(web3)
 
   const grantTokens = async (
     recipient: string,
@@ -103,6 +103,7 @@ const createBlockchain = (web3: Web3): Blockchain => {
   }
 
   const getLock = async () => {
+    /*
     const address = await getAddress()
     const token = await createToken(web3)
     const {
@@ -111,13 +112,13 @@ const createBlockchain = (web3: Web3): Blockchain => {
       start,
       cliff,
       vesting: end,
-    } = await token.methods.vestBalanceOf(address).call()
+    } = await token.methods.vestBalanceOf(address).call()*/
     return {
-      cliff: parseInt(cliff, 10),
-      end: parseInt(end, 10),
-      start: parseInt(start, 10),
-      totalAmount: FnBigNumber.create(totalAmount),
-      vestedAmount: FnBigNumber.create(vestedAmount),
+      cliff: 83,
+      end: 234,
+      start: 23,
+      totalAmount: FnBigNumber.toWei(FnBigNumber.create('200')),
+      vestedAmount: FnBigNumber.toWei(FnBigNumber.create('200')),
     }
   }
 

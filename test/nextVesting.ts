@@ -5,9 +5,9 @@ import { PERIOD_LENGTH_ON_KOVAN } from '../config'
 import { readTimeFromChain } from '../src/utils/blockchain'
 import * as FnBigNumber from '../src/utils/fnBignumber'
 import { getAmountAtNextVesting } from '../src/utils/getAmountAtNextVesting'
-import { getTimeToNextVesting } from '../src/utils/getTimeLeftToNextVesting'
 import { timeTravel } from './tools/blockchain'
 import { assert } from './tools/chai'
+import { getTimeToNextVestingOnKovan } from './tools/getTimeLeftToNextVesting'
 
 const getLock = async (token: any, address: string) => {
   const {
@@ -42,7 +42,7 @@ contract('Vestable token calculation', ([deployer, user]) => {
       }
     )
 
-    const timeToNextVesting = await getTimeToNextVesting(
+    const timeToNextVesting = await getTimeToNextVestingOnKovan(
       web3,
       token.address,
       user

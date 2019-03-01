@@ -10,6 +10,7 @@ import Home from './components/home'
 import Navbar from './components/navbar'
 import SendEther from './components/send-ether'
 import SendTokens from './components/send-tokens'
+import terms from './components/terms'
 import { Transactions } from './components/Transactions'
 import { getHasMainError, State } from './selectors'
 
@@ -23,6 +24,7 @@ const AppContent = () => (
       <Route path="/transactions" component={Transactions} />
       <Route path="/send-tokens" component={SendTokens} />
       <Route path="/send-ether" component={SendEther} />
+      <Route path="/terms-and-conditions" component={terms} />
     </div>
   </div>
 )

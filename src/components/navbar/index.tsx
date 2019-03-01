@@ -46,6 +46,15 @@ export default () => (
             <i className="mxc-icon-t icon icon-t-grant"/>
           </NavLink>
         </li>
+        <li>
+          <br/>
+        </li>
+        <li>
+          <NavLink to="/terms-and-conditions" exact>
+            <span>Imprint</span>
+            <i className="icon icon-briefcase" />
+          </NavLink>
+        </li>
       </ul>
     </div>
   </div>

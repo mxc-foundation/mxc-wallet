@@ -222,6 +222,7 @@ i.address-icon:hover {
 .popup-card .box-txt {height: calc(100% - 110px);overflow: scroll;margin-bottom: 1rem;}
 .txt-center {border-top: 1px solid white;text-align: center;}
 
+.jumbotron, .jumbotron p {max-width: none;text-align: center;}
 
 
 @media screen and (min-width: 1200px) {

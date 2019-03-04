@@ -1,6 +1,6 @@
 import test from 'tape'
-import { amountAtNextVesting } from './amountAtNextVesting'
-import * as FnBigNumber from './fnBignumber'
+import * as FnBigNumber from '../fnBignumber'
+import { redeemableTokensAtNextVesting } from './redeemableTokensAtNextVesting'
 
 const DEFAULT_TOTAL_AMOUNT = FnBigNumber.create(100)
 const DEFAULT_CLIFF = 2
@@ -12,7 +12,7 @@ test('Calculation of next vestable tokens', t => {
   t.test('Current time is before cliff', assert => {
     const VESTED_AMOUNT = FnBigNumber.create(0)
     const NOW = 1
-    const vestableTokens = amountAtNextVesting(
+    const vestableTokens = redeemableTokensAtNextVesting(
       DEFAULT_START,
       DEFAULT_END,
       DEFAULT_CLIFF,
@@ -27,7 +27,7 @@ test('Calculation of next vestable tokens', t => {
   t.test('Current time is at cliff, no tokens redeemed', assert => {
     const VESTED_AMOUNT = FnBigNumber.create(0)
     const NOW = 2
-    const vestableTokens = amountAtNextVesting(
+    const vestableTokens = redeemableTokensAtNextVesting(
       DEFAULT_START,
       DEFAULT_END,
       DEFAULT_CLIFF,
@@ -42,7 +42,7 @@ test('Calculation of next vestable tokens', t => {
   t.test('Current time is after cliff, 10 tokens redeemed', assert => {
     const VESTED_AMOUNT = FnBigNumber.create(10)
     const NOW = 2.5
-    const vestableTokens = amountAtNextVesting(
+    const vestableTokens = redeemableTokensAtNextVesting(
       DEFAULT_START,
       DEFAULT_END,
       DEFAULT_CLIFF,
@@ -57,7 +57,7 @@ test('Calculation of next vestable tokens', t => {
   t.test('Current time is after end', assert => {
     const VESTED_AMOUNT = FnBigNumber.create(0)
     const NOW = 11
-    const vestableTokens = amountAtNextVesting(
+    const vestableTokens = redeemableTokensAtNextVesting(
       DEFAULT_START,
       DEFAULT_END,
       DEFAULT_CLIFF,
@@ -74,7 +74,7 @@ test('Calculation of next vestable tokens', t => {
     assert => {
       const VESTED_AMOUNT = FnBigNumber.create(50)
       const NOW = 11
-      const vestableTokens = amountAtNextVesting(
+      const vestableTokens = redeemableTokensAtNextVesting(
         DEFAULT_START,
         DEFAULT_END,
         DEFAULT_CLIFF,
@@ -91,7 +91,7 @@ test('Calculation of next vestable tokens', t => {
     'Real world example with cliff not on end of vesting period',
     assert => {
       const NOW = 1550508761
-      const vestableTokens = amountAtNextVesting(
+      const vestableTokens = redeemableTokensAtNextVesting(
         1506859200,
         1633089600,
         1569931200,

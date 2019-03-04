@@ -4,14 +4,14 @@ const TxtTerms = () => (
 	<div className="box-txt">
 		<h1>MXC Foundation AXS Wallet Interface Terms of Uses</h1>
 
-		<p>These terms of use (also known as “terms”) are applicable to the MXC Foundation "AXS Wallet", the AXS Wallet is available as a web Interface found exclusively at www.wallet.mxc.org, the wallet is provided by the MXC Foundation Alexander Straße. 7, Berlin 10178. Germany.
+		<p>These terms of use (also known as “terms”) are applicable to the MXC Foundation "AXS Wallet", the AXS Wallet is available as a web Interface found exclusively at wallet.mxc.org, the wallet is provided by the MXC Foundation Alexander Straße. 7, Berlin 10178. Germany.
 BY USING THE MXC AXS WALLET INTERFACE AND THE WEB INTERFACE, YOU DECLARE THAT YOU AGREE AND UNEQUIVOCALLY ABIDE TO THESE CONDITIONS.</p>
 
 		<br/><h2>I. General</h2>
 
 		<p>
 			The interface (hereinafter referred to as "web Interface", “AXS Wallet Interface”, "AXS Wallet" or “Wallet”) is offered by the MXC Foundation gGmbH (hereinafter referred to as "MXC", “us” or "we") and enables access to the user's respective Online-Wallet.
-			<br/><br/>The AXS Wallet Interface is a web wallet interface which can be exclusively accessed via the website www.wallet.mxc.org. The AXS Wallet Interface is not a “typical” account meaning MXC or other third parties do not and cannot act as a typical “FIAT currency” intermediaries or as typical financial intermediaries or safekeepers of the AXS wallet users' tokens. Transactions are accepted to be between two independent parties. 
+			<br/><br/>The AXS Wallet Interface is a web wallet interface which can be exclusively accessed via the website wallet.mxc.org. The AXS Wallet Interface is not a “typical” account meaning MXC or other third parties do not and cannot act as a typical “FIAT currency” intermediaries or as typical financial intermediaries or safekeepers of the AXS wallet users' tokens. Transactions are accepted to be between two independent parties. 
 			<br/><br/>MXC acts, in association with the AXS Wallet Interface, as a technical software provider, the AXS Wallet is not a crypto-exchange nor a token-exchange nor a place for buying, selling or trading tokens or cryptocurrencies, additionally it is not another form of payment service in terms of § 1 of the German Payment Services Supervision Act. The web interface solely enables the user to access their respective web Wallet Interface by mobile telephone or other mobile or desktop devices, the AXS Wallet Interface is intended to be used as a storage interface for MXC tokens.
 			<br/><br/>MXC offers the MXC AXS Wallet as a purely decentralised wallet, we do not have the power, nor can we retrieve private codes or passwords if you have lost them or forgotten them. Additionally MXC cannot guarantee a transaction confirmation because MXC does not have any control over the user's respective wallet or the wallet Interface.
 			<br/><br/>You are not allowed to transfer or surrender any rights or duties from these conditions without prior written permission from MXC. You are not permitted to transfer your Wallet to a third party. MXC reserves the right to transfer or surrender contractual relationships or rights and duties resulting from contractual relationships with you, without your prior permission. This does not affect your right to close the Wallet.
@@ -29,7 +29,7 @@ BY USING THE MXC AXS WALLET INTERFACE AND THE WEB INTERFACE, YOU DECLARE THAT YO
 		<br/><h2>III. Your Use of the AXS Wallet Interface</h2>
 
 		<p>
-			The AXS Wallet Interface must only be accessed at www.wallet.mxc.org in order to use the AXS Wallet.
+			The AXS Wallet Interface must only be accessed at wallet.mxc.org in order to use the AXS Wallet.
 			<br/><br/>The AXS Wallet Interface may only be used for the purposes agreed herein.
 			<br/><br/>You assure that you have sufficient experience, knowledge and understanding of how our AXS Wallet Interface works, that you fully understand the associated risks and that you are using the AXS Wallet Interface at your own risk, that you are using our AXS Wallet Interface for yourself, and that you are not acting on behalf of and/or in the interests of another person;
 			<br/><br/>You guarantee that you do not use our services or will immediately stop use if the valid law in your country prohibits use;
@@ -46,7 +46,7 @@ BY USING THE MXC AXS WALLET INTERFACE AND THE WEB INTERFACE, YOU DECLARE THAT YO
 
 		<br/><h2>V. Grant of Licence</h2>
 		<p>
-			In the event that you use the AXS Wallet found exclusively on www.wallet.mxc.org, on your computer, your electronic device or another platform, or access it in any other way, the MXC Foundation gGmbH shall grant you a revocable, non-exclusive, non-sublicensable, non-transferrable, limited licence for personal use of, and access to, the MXC AXS Waller Interface software purposely built for use within the AXS Wallet Interface (including all updates, upgrades, new versions and replacement software). You are not permitted to lend or pledge these usage rights or transfer them in any other way to a third party.
+			In the event that you use the AXS Wallet found exclusively on wallet.mxc.org, on your computer, your electronic device or another platform, or access it in any other way, the MXC Foundation gGmbH shall grant you a revocable, non-exclusive, non-sublicensable, non-transferrable, limited licence for personal use of, and access to, the MXC AXS Waller Interface software purposely built for use within the AXS Wallet Interface (including all updates, upgrades, new versions and replacement software). You are not permitted to lend or pledge these usage rights or transfer them in any other way to a third party.
 			<br/><br/>Should you fail to comply with the instructions of MXC, you shall be responsible for all damages suffered by yourself, the MXC Foundation gGmbH or a third party. MXC can at its free will carry out software updates or end the provision of software.
 			<br/><br/>The following are either protected by copyrights or are brands, services or trademarks of the MXC Foundation gGmbH or licensers of the MXC Foundation:
 		</p>

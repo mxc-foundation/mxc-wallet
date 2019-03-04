@@ -4,27 +4,10 @@ declare var web3: Web3
 import { PERIOD_LENGTH_ON_KOVAN } from '../config'
 import { readTimeFromChain } from '../src/utils/blockchain'
 import * as FnBigNumber from '../src/utils/fnBignumber'
-import { getAmountAtNextVesting } from '../src/utils/getAmountAtNextVesting'
-import { getTimeToNextVesting } from '../src/utils/getTimeLeftToNextVesting'
 import { timeTravel } from './tools/blockchain'
 import { assert } from './tools/chai'
-
-const getLock = async (token: any, address: string) => {
-  const {
-    amount: totalAmount,
-    vestedAmount,
-    start,
-    cliff,
-    vesting: end,
-  } = await token.vestBalanceOf(address)
-  return {
-    cliff: parseInt(cliff, 10),
-    end: parseInt(end, 10),
-    start: parseInt(start, 10),
-    totalAmount: FnBigNumber.create(totalAmount),
-    vestedAmount: FnBigNumber.create(vestedAmount),
-  }
-}
+import { getAmountAtNextVesting } from './tools/getAmountAtNextVesting'
+import { getTimeToNextVestingOnKovan } from './tools/getTimeLeftToNextVesting'
 
 contract('Vestable token calculation', ([deployer, user]) => {
   it('Calculate time and amount of next vesting event. Jump to event an vest.', async () => {
@@ -42,7 +25,7 @@ contract('Vestable token calculation', ([deployer, user]) => {
       }
     )
 
-    const timeToNextVesting = await getTimeToNextVesting(
+    const timeToNextVesting = await getTimeToNextVestingOnKovan(
       web3,
       token.address,
       user

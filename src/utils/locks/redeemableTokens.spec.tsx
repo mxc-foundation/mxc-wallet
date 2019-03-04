@@ -1,6 +1,6 @@
 import test from 'tape'
-import calcVestableAmount, { timeSinceStart } from './calcVestableAmount'
-import * as FnBigNumber from './fnBignumber'
+import * as FnBigNumber from '../fnBignumber'
+import redeemableTokens from './redeemableTokens'
 
 const DEFAULT_TOTAL_AMOUNT = FnBigNumber.create(100)
 const DEFAULT_CLIFF = 2
@@ -14,7 +14,7 @@ test('Calculation of vestable tokens', t => {
     assert.plan(1)
     const VESTED_AMOUNT = FnBigNumber.create(0)
     const NOW = 1
-    const vestableTokens = calcVestableAmount(
+    const vestableTokens = redeemableTokens(
       DEFAULT_START,
       DEFAULT_END,
       DEFAULT_CLIFF,
@@ -30,7 +30,7 @@ test('Calculation of vestable tokens', t => {
     assert.plan(1)
     const VESTED_AMOUNT = FnBigNumber.create(0)
     const NOW = DEFAULT_CLIFF
-    const vestableTokens = calcVestableAmount(
+    const vestableTokens = redeemableTokens(
       DEFAULT_START,
       DEFAULT_END,
       DEFAULT_CLIFF,
@@ -48,7 +48,7 @@ test('Calculation of vestable tokens', t => {
       assert.plan(1)
       const VESTED_AMOUNT = FnBigNumber.create(0)
       const NOW = 11
-      const vestableTokens = calcVestableAmount(
+      const vestableTokens = redeemableTokens(
         DEFAULT_START,
         DEFAULT_END,
         DEFAULT_CLIFF,
@@ -67,7 +67,7 @@ test('Calculation of vestable tokens', t => {
       assert.plan(1)
       const VESTED_AMOUNT = FnBigNumber.create(50)
       const NOW = 11
-      const vestableTokens = calcVestableAmount(
+      const vestableTokens = redeemableTokens(
         DEFAULT_START,
         DEFAULT_END,
         DEFAULT_CLIFF,
@@ -86,7 +86,7 @@ test('Calculation of vestable tokens', t => {
       assert.plan(1)
       const VESTED_AMOUNT = FnBigNumber.create(0)
       const NOW = 5
-      const vestableTokens = calcVestableAmount(
+      const vestableTokens = redeemableTokens(
         DEFAULT_START,
         DEFAULT_END,
         DEFAULT_CLIFF,
@@ -105,7 +105,7 @@ test('Calculation of vestable tokens', t => {
       assert.plan(1)
       const VESTED_AMOUNT = FnBigNumber.create(0)
       const NOW = 5.5
-      const vestableTokens = calcVestableAmount(
+      const vestableTokens = redeemableTokens(
         DEFAULT_START,
         DEFAULT_END,
         DEFAULT_CLIFF,
@@ -122,7 +122,7 @@ test('Calculation of vestable tokens', t => {
     assert.plan(1)
     const VESTED_AMOUNT = FnBigNumber.create(20)
     const NOW = 5
-    const vestableTokens = calcVestableAmount(
+    const vestableTokens = redeemableTokens(
       DEFAULT_START,
       DEFAULT_END,
       DEFAULT_CLIFF,
@@ -144,7 +144,7 @@ test('Calculation of vestable tokens', t => {
       const END = 110
       const NOW = 120
       assert.equal(
-        calcVestableAmount(
+        redeemableTokens(
           START,
           END,
           CLIFF,
@@ -168,7 +168,7 @@ test('Calculation of vestable tokens', t => {
     const END = 100110
     const NOW = 100020
     assert.equal(
-      calcVestableAmount(
+      redeemableTokens(
         START,
         END,
         CLIFF,
@@ -192,7 +192,7 @@ test('Calculation of vestable tokens', t => {
       const NOW = 100130
       const PERIOD_LENGTH = 60
       assert.equal(
-        calcVestableAmount(
+        redeemableTokens(
           START,
           END,
           CLIFF,
@@ -215,7 +215,7 @@ test('Calculation of vestable tokens', t => {
     const NOW = 30
     const PERIOD_LENGTH = 20
     assert.equal(
-      calcVestableAmount(
+      redeemableTokens(
         START,
         END,
         CLIFF,
@@ -238,7 +238,7 @@ test('Calculation of vestable tokens', t => {
     const NOW = 1549527648
     const PERIOD_LENGTH = 10
     assert.equal(
-      calcVestableAmount(
+      redeemableTokens(
         START,
         END,
         CLIFF,
@@ -253,7 +253,7 @@ test('Calculation of vestable tokens', t => {
   })
   t.test('Real world example', assert => {
     assert.plan(1)
-    const vestedAmount = calcVestableAmount(
+    const vestedAmount = redeemableTokens(
       1506859200,
       1633089600,
       1569931200,

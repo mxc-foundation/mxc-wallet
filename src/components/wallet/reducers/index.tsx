@@ -7,10 +7,10 @@ import {
   PERIOD_LENGTH_ON_KOVAN,
   PERIOD_LENGTH_ON_MAIN_NET
 } from '../../../config'
-import { amountAtNextVesting } from '../../../utils/amountAtNextVesting'
-import { timeUntilNextVestingPossible } from '../../../utils/calculateTimeToNextVesting'
-import calculateVestableAmount from '../../../utils/calcVestableAmount'
 import * as FnBigNumber from '../../../utils/fnBignumber'
+import { timeUntilNextRedemptionPossible } from '../../../utils/locks/nextTimeRedemptionPossible'
+import calculateVestableAmount from '../../../utils/locks/redeemableTokens'
+import { redeemableTokensAtNextVesting } from '../../../utils/locks/redeemableTokensAtNextVesting'
 import { idToNetwork, Network } from '../../errors/networkList'
 import { TransactionProps } from '../../Transactions'
 import { fetchingTransactions, transactions } from '../../Transactions/reducers'
@@ -199,7 +199,7 @@ const getPeriodLength: (state: WalletState) => number = R.cond([
 
 export const getTimeToNextVestingEvent: (
   state: WalletState
-) => number = R.converge(timeUntilNextVestingPossible, [
+) => number = R.converge(timeUntilNextRedemptionPossible, [
   getStart,
   getEnd,
   getCliff,
@@ -246,7 +246,7 @@ export const getRedeemableTokensBalance: (
 
 export const getAmountAtNextVesting: (
   state: WalletState
-) => BigNumber = R.converge(amountAtNextVesting, [
+) => BigNumber = R.converge(redeemableTokensAtNextVesting, [
   getStart,
   getEnd,
   getCliff,

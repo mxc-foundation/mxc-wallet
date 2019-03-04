@@ -2,9 +2,9 @@ const MXCToken = artifacts.require('./MXCToken.sol')
 import Web3 from 'web3'
 declare var web3: Web3
 import { PERIOD_LENGTH_ON_KOVAN } from '../config'
-import { getRedeemableTokens } from '../src/utils/getRedeemableTokens'
 import { timeTravel } from './tools/blockchain'
 import { assert } from './tools/chai'
+import { getRedeemableTokens } from './tools/getRedeemableTokens'
 
 const INITIAL_AMOUNT = 1000000
 const BALANCE_AFTER_2_PERIODS = '2'

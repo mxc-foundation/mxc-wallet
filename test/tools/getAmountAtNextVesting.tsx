@@ -1,9 +1,9 @@
 import BigNumber from 'bignumber.js'
 import Web3 from 'web3'
-import { PERIOD_LENGTH_ON_KOVAN } from '../config'
-import { amountAtNextVesting } from './amountAtNextVesting'
-import { createMXCToken, readTimeFromChain } from './blockchain'
-import * as FnBigNumber from './fnBignumber'
+import { PERIOD_LENGTH_ON_KOVAN } from '../../src/config'
+import { createMXCToken, readTimeFromChain } from '../../src/utils/blockchain'
+import * as FnBigNumber from '../../src/utils/fnBignumber'
+import { redeemableTokensAtNextVesting } from '../../src/utils/locks/redeemableTokensAtNextVesting'
 
 export const getAmountAtNextVesting = async (
   theWeb3: Web3,
@@ -17,7 +17,7 @@ export const getAmountAtNextVesting = async (
 
   const { start, vesting: end, amount, vestedAmount, cliff } = timeLockData
   const now = await readTimeFromChain(theWeb3)
-  const amountAtNextVestingEvent = amountAtNextVesting(
+  const amountAtNextVestingEvent = redeemableTokensAtNextVesting(
     parseInt(start, 10),
     parseInt(end, 10),
     parseInt(cliff, 10),

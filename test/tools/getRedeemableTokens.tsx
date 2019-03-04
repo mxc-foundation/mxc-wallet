@@ -1,7 +1,7 @@
 import Web3 from 'web3'
-import { createMXCToken, readTimeFromChain } from './blockchain'
-import calculateVestableAmount from './calcVestableAmount'
-import * as FnBigNumber from './fnBignumber'
+import { createMXCToken, readTimeFromChain } from '../../src/utils/blockchain'
+import * as FnBigNumber from '../../src/utils/fnBignumber'
+import calculateVestableAmount from '../../src/utils/locks/redeemableTokens'
 
 const PERIOD_LENGTH: { [key: string]: number } = {
   '1': 60 * 60 * 24 * 30,

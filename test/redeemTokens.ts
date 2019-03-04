@@ -33,4 +33,24 @@ contract('MXCToken', ([deployer, user]) => {
     await timeTravel(6, web3)
     await assert.isRejected(token.redeemVestableToken(user, { from: user }))
   })
+  it('It is impossible to redeem before the end of the first period when cliff periods is 0 .', async () => {
+    const token = await MXCToken.new({ from: deployer })
+    await token.grantTokenStartNow(user, INITIAL_AMOUNT, 0, VESTING_PERIODS, {
+      from: deployer,
+    })
+
+    await timeTravel(PERIOD_LENGTH_ON_KOVAN / 2, web3)
+    await assert.isRejected(token.redeemVestableToken(user, { from: user }))
+  })
+  it('It is possible to redeem after the end of the first period when cliff periods is 0.', async () => {
+    const token = await MXCToken.new({ from: deployer })
+    await token.grantTokenStartNow(user, INITIAL_AMOUNT, 0, VESTING_PERIODS, {
+      from: deployer,
+    })
+
+    await timeTravel(PERIOD_LENGTH_ON_KOVAN, web3)
+    await token.redeemVestableToken(user, { from: user })
+    const unlockedBalance = await token.balanceOf(user)
+    assert.equal(unlockedBalance.toString(), '10000')
+  })
 })

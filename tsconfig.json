@@ -18,5 +18,10 @@
     "downlevelIteration": true,
     "typeRoots": ["node_modules/@types"] //                       /* List of folders to include type definitions from. */
   },
-  "include": ["src"]
+  "include": [
+    "src",
+    "test/tools/getTimeLeftToNextVesting.tsx",
+    "test/tools/getAmountAtNextVesting.tsx",
+    "test/tools/getRedeemableTokens.tsx"
+  ]
 }

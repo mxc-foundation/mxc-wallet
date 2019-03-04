@@ -47,13 +47,19 @@ export default () => (
           </NavLink>
         </li>
         <li>
+          <a className="inactive">
+            <span>M2M</span>
+            <i className="icon icon-organization"/>
+          </a>
+        </li>
+        <li>
           <br/>
         </li>
         <li>
           <NavLink to="/terms-and-conditions" exact>
             <span>Imprint</span>
             <i className="icon icon-briefcase" />
-          </NavLink>
+          </NavLink>          
         </li>
       </ul>
     </div>

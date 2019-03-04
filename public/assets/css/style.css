@@ -223,6 +223,10 @@ i.address-icon:hover {
 .txt-center {border-top: 1px solid white;text-align: center;}
 
 .jumbotron, .jumbotron p {max-width: none;text-align: center;}
+.jumbotron img {
+  width: 400px;
+  max-width: calc(100% - 100px);
+}
 
 
 @media screen and (min-width: 1200px) {

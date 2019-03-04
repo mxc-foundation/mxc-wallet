@@ -115,7 +115,7 @@ BY USING THE MXC AXS WALLET INTERFACE AND THE WEB INTERFACE, YOU DECLARE THAT YO
 
 		<br/><h2>XII. Final Provisions /Provision Severability Clause</h2>
 		<p>
-			<br/><br/>Should individual clauses of this contract be or become ineffective or infeasible, then this shall not affect the effectiveness and feasibility of the remaining clauses. The ineffective clause shall be replaced by a clause that comes as close as possible to the original intention of the contract parties.
+			Should individual clauses of this contract be or become ineffective or infeasible, then this shall not affect the effectiveness and feasibility of the remaining clauses. The ineffective clause shall be replaced by a clause that comes as close as possible to the original intention of the contract parties.
 			<br/><br/>The MXC Foundation is free and entitled to adapt, change or edit these conditions at any time.
 			<br/><br/>If you have any concerns or queries regarding any element of these terms of use you are welcomed to contact the MXC Foundation via email at: hello@mxc.org
 		</p>

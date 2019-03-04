@@ -31,7 +31,6 @@ $(document).ready(function(){
 
 	function waitForUpdate(){
 		terms.update = $('.display-4')
-		console.log(0)
 		if (terms.update.length == 0) {
 			setTimeout(function(){
 				waitForUpdate()	
@@ -45,7 +44,6 @@ $(document).ready(function(){
 
 	function waitForLogin() {
 		terms.update = $('.display-4')
-		console.log(1)
 		if (terms.update.length == 1) {
 			setTimeout(function(){
 				waitForLogin()	

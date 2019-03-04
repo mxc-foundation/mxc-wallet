@@ -7,15 +7,11 @@ export const InstallMetamaskCTA = () => (
     <Row>
       <Col>
         <Jumbotron className="text-center">
-          <h1 className="display-4">Metamask not found!</h1>
+          <h1 className="display-4">You're missing Metamask!</h1>
           <p className="lead">
-            In order to use this app to participate in the Fundament ICO you
-            need to have Metamask installed and configured.
-          </p>
-          <hr className="my-4" />
-          <p>
-            Please klick the banner below to visit the Metamask website and
-            follow the installation instructions.
+            This applications requires you to install Metamask.
+            <br/>
+            Please install Metamask, then reload this page.
           </p>
           <a href="https://metamask.io" target="_blank">
             <img

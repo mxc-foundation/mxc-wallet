@@ -52,6 +52,15 @@ export default () => (
             <i className="icon icon-organization"/>
           </a>
         </li>
+        <li>
+          <br/>
+        </li>
+        <li>
+          <NavLink to="/terms-and-conditions" exact>
+            <span>Imprint</span>
+            <i className="icon icon-briefcase" />
+          </NavLink>          
+        </li>
       </ul>
     </div>
   </div>

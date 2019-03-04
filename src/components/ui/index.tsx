@@ -1,3 +1,4 @@
 import { BtnAction } from './BtnAction'
 import { TblRow } from './TblRow'
-export { BtnAction, TblRow }
+import { TxtTerms } from './TxtTerms'
+export { BtnAction, TblRow, TxtTerms }

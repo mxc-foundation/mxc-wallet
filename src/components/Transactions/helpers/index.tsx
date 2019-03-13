@@ -4,7 +4,7 @@ import * as R from 'ramda'
 import request from 'superagent'
 import Web3 from 'web3'
 import * as FnBigNumber from '../../../utils/fnBignumber'
-import { TransactionProps } from '../index'
+import { TransactionProps, transactionTypes } from '../index'
 
 const format = (formatString: string) => (timestamp: number) =>
   formatBad(timestamp, formatString)
@@ -41,11 +41,14 @@ const fromTo = R.curry(
   }
 )
 
+const isContractInteraction = (transaction: EtherscanTransaction): boolean =>
+  transaction.value === '0' && transaction.input !== '0x'
+
 const type = R.curry(
-  (
-    address: string,
-    transaction: EtherscanTransaction
-  ): 'incoming' | 'outgoing' => {
+  (address: string, transaction: EtherscanTransaction): transactionTypes => {
+    if (isContractInteraction(transaction)) {
+      return 'contract-interaction'
+    }
     if (addressesEqual(transaction.from, address)) {
       return 'outgoing'
     }
@@ -92,10 +95,10 @@ export const getTransactions = async (
   address: string,
   network: number
 ): Promise<TransactionProps[]> => {
-  const { body: etherscanReply } = await request(
+  const response = await request(
     `https://api${
       network === 42 ? '-kovan' : ''
     }.etherscan.io/api?module=account&action=txlist&address=${address}&sort=desc&apikey=GKBJXUY561Q8URUJPXQKAGPACWQU1D1GEN`
   )
-  return parseEtherscanReply(address, etherscanReply.result)
+  return parseEtherscanReply(address, R.path(['body', 'result'])(response))
 }

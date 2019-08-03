@@ -40,12 +40,6 @@ export function* fetchTransactions() {
         return tx
       }))
 
-      // const newTxsWithoutDups = newTxs.filter((value: any, index: number, array: any) => {
-      //   // Always keep the 0th element as there is nothing before it
-      //   // Then check if each element is different than the one before it
-      //   return value.hash !== (array[index-1] && array[index-1].hash
-      // })
-
       yield put(actions.fetchTransactions.success(newTxs))
     } else {
       yield put(

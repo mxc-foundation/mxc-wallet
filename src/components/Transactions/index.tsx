@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import * as selectors from '../../selectors'
 import { Heading } from '../wallet/components'
 
-export type transactionTypes = 'incoming' | 'outgoing' | 'contract-interaction'
+export type transactionTypes = 'incoming' | 'outgoing' | 'contract-interaction' | 'self-interaction'
 export interface TransactionProps {
   type: transactionTypes
   fromTo: string
@@ -21,15 +21,10 @@ interface TransactionsProps {
 }
 
 const heading: (type: transactionTypes) => string = R.cond([
-  [R.equals('incoming'), R.always('Received')],
-  [R.equals('outgoing'), R.always('Sent')],
-  [R.T, R.always('Contract interaction')],
-])
-
-const direction: (type: transactionTypes) => string = R.cond([
-  [R.equals('incoming'), R.always('from:')],
-  [R.equals('outgoing'), R.always('to:')],
-  [R.T, R.always('with:')],
+  [R.equals('incoming'), R.always('Received from:')],
+  [R.equals('outgoing'), R.always('Sent to:')],
+  [R.equals('self-interaction'), R.always('Sent to yourself:')],
+  [R.T, R.always('Contract interaction with:')],
 ])
 
 const takeAsset = R.nthArg(0)
@@ -77,7 +72,7 @@ const Transaction = (
       </td>
       <td className="cell-fromto">
         <span className="t-s t-bold">
-          {heading(type)}&nbsp;{direction(type)}
+          {heading(type)}
         </span>
         <br />
         <span>{fromTo}</span>
@@ -97,25 +92,34 @@ const Transaction = (
 const TransactionsComponent = ({
   transactions,
   fetching,
-}: TransactionsProps) => (
-  <div className="content">
-    <div className="box-inner">
-      <div className="content-box content-transactions">
-        <Heading routeHeading="Latest Transactions" />
+}: TransactionsProps) => {
+  // Find any consecutive transactions hashes. These represent transactions where the
+  // sender address is also the recipient address. Remove one of the two so that a link
+  // to the transaction is not shown in the transaction list twice.
+  const txsWithoutDuplicatesToSelf = transactions.filter((value, index, array) => {
+    return value.hash !== (array[index-1] && array[index-1].hash)
+  })
 
-        {fetching ? (
-          'Fetching transactions'
-        ) : (
-          <table className="table-cards table-zebra table-transactions">
-            <tbody>
-              {R.addIndex<TransactionProps>(R.map)(Transaction)(transactions)}
-            </tbody>
-          </table>
-        )}
+  return (
+    <div className="content">
+      <div className="box-inner">
+        <div className="content-box content-transactions">
+          <Heading routeHeading="Latest Transactions" />
+
+          {fetching ? (
+            'Fetching transactions'
+          ) : (
+            <table className="table-cards table-zebra table-transactions">
+              <tbody>
+                {R.addIndex<TransactionProps>(R.map)(Transaction)(txsWithoutDuplicatesToSelf)}
+              </tbody>
+            </table>
+          )}
+        </div>
       </div>
     </div>
-  </div>
-)
+  )
+}
 
 const mapStateToProps: (
   state: selectors.State

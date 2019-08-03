@@ -139,3 +139,34 @@ export const isRecipientContract = async (
   )
   return etherscanReply.status === '1' ? true : false
 }
+
+/*
+ * Modify the transaction properties if transaction sent to yourself or if recipient is a contract.
+ *
+ * If the transaction recipient is found to be a contract address then the transaction is labelled
+ * as a contract interaction by setting the transaction's `isRecipientContract` property value to true.
+ * If the transaction recipient is found to be the sender's address then the transaction's
+ * `isRecipientSender` property value is set to true.
+ *
+ * @param txs     Transactions list
+ * @param address Account or contract address
+ * @param network Ethereum network ID
+ */
+export const tweakTxs = async (
+  txs: any[],
+  address: string,
+  network: number
+): Promise<any> => {
+  return Promise.all(txs.map(async (tx: TransactionProps) => {
+    if (!tx || !tx.fromTo) {
+      return tx
+    }
+    if (await isRecipientContract(tx.fromTo, network)) {
+      tx.isRecipientContract = true
+    }
+    if (address === tx.fromTo) {
+      tx.isRecipientSender = true
+    }
+    return tx
+  }))
+}

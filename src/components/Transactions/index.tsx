@@ -85,13 +85,17 @@ const TransactionsComponent = ({
 
           <Heading routeHeading="Latest Transactions" />
 
-          <table className="table-cards table-zebra table-transactions">
-            <tbody>
-              {fetching
-                ? 'Fetching transactions'
-                : R.addIndex<TransactionProps>(R.map)(Transaction)(txsWithoutDuplicatesToSelf)}
-            </tbody>
-          </table>
+          {
+            fetching
+            ? 'Fetching transactions'
+            : (
+              <table className="table-cards table-zebra table-transactions">
+                <tbody>
+                  {R.addIndex<TransactionProps>(R.map)(Transaction)(txsWithoutDuplicatesToSelf)}
+                </tbody>
+              </table>
+            )
+          }
         </div>
       </div>
     </div>

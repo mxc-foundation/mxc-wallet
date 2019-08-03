@@ -37,34 +37,34 @@ const Transaction = (
   { type, isRecipientContract, isRecipientSender, fromTo, value, asset, date, link }: TransactionProps,
   index: number
 ) => (
-    <tr key={index}>
-      <a href={link} target="_blank">
-        <td className="cell-date">
-          <span className="t-s t-bold">{date}</span>
-        </td>
-        <td className="cell-fromto">
-          <span className="t-s t-bold">
-          {
-            isRecipientContract ? (
-              'Contract Interaction:'
-            ) : `${heading(type)} ${type === 'incoming' ? 'From:' : `To${isRecipientSender ? ' Yourself' : ''}:`}`
-          }
-          </span>
-          <br/>
-          <span>
-            {fromTo}
-          </span>
-        </td>
-        <td className="cell-asset">
-          <span className="t-s t-bold">
-            {value}&nbsp;{asset}
-          </span>
-        </td>
-        <td className="cell-icon">
-          <i className={`icon ${arrowClass(type)}`} />
-        </td>
-      </a>
-    </tr>
+  <tr key={index}>
+    <a href={link} target="_blank">
+      <td className="cell-date">
+        <span className="t-s t-bold">{date}</span>
+      </td>
+      <td className="cell-fromto">
+        <span className="t-s t-bold">
+        {
+          isRecipientContract ? (
+            'Contract Interaction:'
+          ) : `${heading(type)} ${type === 'incoming' ? 'From:' : `To${isRecipientSender ? ' Yourself' : ''}:`}`
+        }
+        </span>
+        <br/>
+        <span>
+          {fromTo}
+        </span>
+      </td>
+      <td className="cell-asset">
+        <span className="t-s t-bold">
+          {value}&nbsp;{asset}
+        </span>
+      </td>
+      <td className="cell-icon">
+        <i className={`icon ${arrowClass(type)}`} />
+      </td>
+    </a>
+  </tr>
 )
 
 const TransactionsComponent = ({

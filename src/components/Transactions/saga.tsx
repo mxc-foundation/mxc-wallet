@@ -17,6 +17,8 @@ export function* refreshTransactions() {
  * Return the result of fetching and modifying all transactions for a given address and network.
  * If the transaction recipient is found to be a contract address then the transaction is labelled
  * as a contract interaction by setting the transaction's `isRecipientContract` property value to true.
+ * If the transaction recipient is found to be the sender's address then the transaction's
+ * `isRecipientSender` property value is set to true.
  */
 export function* fetchTransactions() {
   yield put(actions.fetchTransactions.request())
@@ -32,8 +34,17 @@ export function* fetchTransactions() {
         if (await isRecipientContract(tx.fromTo, network)) {
           tx.isRecipientContract = true
         }
+        if (address === tx.fromTo) {
+          tx.isRecipientSender = true
+        }
         return tx
       }))
+
+      // const newTxsWithoutDups = newTxs.filter((value: any, index: number, array: any) => {
+      //   // Always keep the 0th element as there is nothing before it
+      //   // Then check if each element is different than the one before it
+      //   return value.hash !== (array[index-1] && array[index-1].hash
+      // })
 
       yield put(actions.fetchTransactions.success(newTxs))
     } else {

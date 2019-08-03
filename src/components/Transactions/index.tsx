@@ -8,6 +8,7 @@ export interface TransactionProps {
   type: 'incoming' | 'outgoing'
   fromTo: string
   isRecipientContract?: boolean
+  isRecipientSender?: boolean
   value: string
   asset: 'MXC' | 'ETH'
   date: string
@@ -33,7 +34,7 @@ const arrowClass: (type: 'incoming' | 'outgoing') => string = R.ifElse(
 )
 
 const Transaction = (
-  { type, isRecipientContract, fromTo, value, asset, date, link }: TransactionProps,
+  { type, isRecipientContract, isRecipientSender, fromTo, value, asset, date, link }: TransactionProps,
   index: number
 ) => (
     <tr key={index}>
@@ -46,7 +47,7 @@ const Transaction = (
           {
             isRecipientContract ? (
               'Contract Interaction:'
-            ) : `${heading(type)} ${type === 'incoming' ? 'From:' : 'To:'}`
+            ) : `${heading(type)} ${type === 'incoming' ? 'From:' : `To${isRecipientSender ? ' Yourself' : ''}:`}`
           }
           </span>
           <br/>
@@ -69,24 +70,33 @@ const Transaction = (
 const TransactionsComponent = ({
   transactions,
   fetching,
-}: TransactionsProps) => (
-  <div className="content">
-    <div className="box-inner">
-      <div className="content-box content-transactions">
+}: TransactionsProps) => {
+  // Find any consecutive transactions hashes. These represent transactions where the
+  // sender address is also the recipient address. Remove one of the two so that a link
+  // to the transaction is not shown in the transaction list twice.
+  const txsWithoutDuplicatesToSelf = transactions.filter((value: any, index: number, array: any) => {
+    return value.hash !== (array[index-1] && array[index-1].hash)
+  })
 
-        <Heading routeHeading="Latest Transactions" />
+  return (
+    <div className="content">
+      <div className="box-inner">
+        <div className="content-box content-transactions">
 
-        <table className="table-cards table-zebra table-transactions">
-          <tbody>
-            {fetching
-              ? 'Fetching transactions'
-              : R.addIndex<TransactionProps>(R.map)(Transaction)(transactions)}
-          </tbody>
-        </table>
+          <Heading routeHeading="Latest Transactions" />
+
+          <table className="table-cards table-zebra table-transactions">
+            <tbody>
+              {fetching
+                ? 'Fetching transactions'
+                : R.addIndex<TransactionProps>(R.map)(Transaction)(txsWithoutDuplicatesToSelf)}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
-  </div>
-)
+  )
+}
 
 const mapStateToProps: (
   state: selectors.State

@@ -53,6 +53,21 @@ const type = R.curry(
   }
 )
 
+// const isRecipientSender = R.curry(
+//   (
+//     address: string,
+//     transaction: EtherscanTransaction
+//   ): boolean => {
+//     if (
+//       addressesEqual(transaction.from, address) &&
+//       addressesEqual(transaction.from, transaction.to)
+//     ) {
+//       return true
+//     }
+//     return false
+//   }
+// )
+
 const addressesEqual = (address1: string, address2: string) =>
   Web3.utils.toChecksumAddress(address1) ===
   Web3.utils.toChecksumAddress(address2)
@@ -73,7 +88,6 @@ export const parseEtherscanTransaction = R.curry(
         R.nthArg(1),
         R.prop('hash')
       ),
-      isRecipientContract: R.prop('contractAddress'),
       type,
       value: R.pipe(
         R.nthArg(1),

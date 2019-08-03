@@ -73,6 +73,7 @@ export const parseEtherscanTransaction = R.curry(
         R.nthArg(1),
         R.prop('hash')
       ),
+      isRecipientContract: R.prop('contractAddress'),
       type,
       value: R.pipe(
         R.nthArg(1),
@@ -88,14 +89,54 @@ export const parseEtherscanReply = R.curry(
     R.map(parseEtherscanTransaction(address))(etherscanResult)
 )
 
+const ETHERSCAN_API_KEY = 'GKBJXUY561Q8URUJPXQKAGPACWQU1D1GEN';
+
+/**
+ * Return all transactions for a given address and network
+ *
+ * Example: https://api-kovan.etherscan.io/api?module=account&action=txlist&address=0x6b9b2c4f6f92cc37cfe61f910c80e40b37206306&sort=desc&apikey=GKBJXUY561Q8URUJPXQKAGPACWQU1D1GEN
+ * Reference: Etherscan Accounts API https://etherscan.io/apis#accounts
+ *
+ * @param address Account or contract address
+ * @param network Ethereum network ID
+ */
 export const getTransactions = async (
   address: string,
   network: number
 ): Promise<TransactionProps[]> => {
+  const moduleKind = 'account'
+  const actionKind = 'txlist'
   const { body: etherscanReply } = await request(
     `https://api${
       network === 42 ? '-kovan' : ''
-    }.etherscan.io/api?module=account&action=txlist&address=${address}&sort=desc&apikey=GKBJXUY561Q8URUJPXQKAGPACWQU1D1GEN`
+    }.etherscan.io/api?module=${moduleKind}&action=${actionKind}&address=${
+      address
+    }&sort=desc&apikey=${ETHERSCAN_API_KEY}`
   )
   return parseEtherscanReply(address, etherscanReply.result)
+}
+
+/**
+ * Return whether the given recipient of a transaction is a contract address (not an account address)
+ *
+ * Example: https://api-kovan.etherscan.io/api?module=contract&action=getabi&address=0x17a92021aA6304C05E3f6D7D45969C0B73E3516B&apikey=GKBJXUY561Q8URUJPXQKAGPACWQU1D1GEN
+ * Reference: Etherscan Contracts API https://etherscan.io/apis#contracts
+ *
+ * @param address Account or contract address
+ * @param network Ethereum network ID
+ */
+export const isRecipientContract = async (
+  address: string,
+  network: number
+): Promise<any> => {
+  const moduleKind = 'contract'
+  const actionKind = 'getabi'
+  const { body: etherscanReply } = await request(
+    `https://api${
+      network === 42 ? '-kovan' : ''
+    }.etherscan.io/api?module=${moduleKind}&action=${actionKind}&address=${
+      address
+    }&apikey=${ETHERSCAN_API_KEY}`
+  )
+  return etherscanReply.status === '1' ? true : false
 }

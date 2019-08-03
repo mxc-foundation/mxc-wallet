@@ -7,6 +7,7 @@ import { Heading } from '../wallet/components'
 export interface TransactionProps {
   type: 'incoming' | 'outgoing'
   fromTo: string
+  isRecipientContract?: boolean
   value: string
   asset: 'MXC' | 'ETH'
   date: string
@@ -32,19 +33,22 @@ const arrowClass: (type: 'incoming' | 'outgoing') => string = R.ifElse(
 )
 
 const Transaction = (
-  { type, fromTo, value, asset, date, link }: TransactionProps,
+  { type, isRecipientContract, fromTo, value, asset, date, link }: TransactionProps,
   index: number
 ) => (
-    
-
     <tr key={index}>
       <a href={link} target="_blank">
-
         <td className="cell-date">
           <span className="t-s t-bold">{date}</span>
         </td>
         <td className="cell-fromto">
-          <span className="t-s t-bold">{heading(type)}&nbsp;{type === 'incoming' ? 'From:' : 'To:'}</span>
+          <span className="t-s t-bold">
+          {
+            isRecipientContract ? (
+              'Contract Interaction:'
+            ) : `${heading(type)} ${type === 'incoming' ? 'From:' : 'To:'}`
+          }
+          </span>
           <br/>
           <span>
             {fromTo}
@@ -58,9 +62,8 @@ const Transaction = (
         <td className="cell-icon">
           <i className={`icon ${arrowClass(type)}`} />
         </td>
-
       </a>
-    </tr>  
+    </tr>
 )
 
 const TransactionsComponent = ({

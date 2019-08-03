@@ -74,7 +74,7 @@ const TransactionsComponent = ({
   // Find any consecutive transactions hashes. These represent transactions where the
   // sender address is also the recipient address. Remove one of the two so that a link
   // to the transaction is not shown in the transaction list twice.
-  const txsWithoutDuplicatesToSelf = transactions.filter((value: any, index: number, array: any) => {
+  const txsWithoutDuplicatesToSelf = transactions.filter((value, index, array) => {
     return value.hash !== (array[index-1] && array[index-1].hash)
   })
 
